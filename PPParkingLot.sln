@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPParkingLot", "PPParkingLot\PPParkingLot.csproj", "{10482709-6FA9-40F7-94F6-DC7B7D94FC49}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10482709-6FA9-40F7-94F6-DC7B7D94FC49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10482709-6FA9-40F7-94F6-DC7B7D94FC49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10482709-6FA9-40F7-94F6-DC7B7D94FC49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10482709-6FA9-40F7-94F6-DC7B7D94FC49}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EBA1B0B1-F332-4278-B436-98ACC97AE67E}
+	EndGlobalSection
+EndGlobal
