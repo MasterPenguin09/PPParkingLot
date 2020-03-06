@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrandDTO.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Enums\PayForm.cs" />
     <Compile Include="LocationDTO.cs" />
+    <Compile Include="ModelDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VehicleDTO.cs" />
   </ItemGroup>
