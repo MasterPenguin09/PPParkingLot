@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\EAccessLevel.cs" />
+    <Compile Include="FlowControl\DataResponse.cs" />
+    <Compile Include="FlowControl\Response.cs" />
     <Compile Include="UserPattern.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
