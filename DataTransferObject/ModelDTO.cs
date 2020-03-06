@@ -10,8 +10,10 @@ namespace DataTransferObject
     {
         public int ID { get; set; }
         public string Name { get; set; }
+
+
         public BrandDTO BrandDTO { get; set; }
-        public string BrandDTOName { get; set; }
+        public int BrandID { get; set; }
 
 
     }

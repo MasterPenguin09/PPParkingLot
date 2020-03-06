@@ -4,9 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer
+namespace DataTransferObject.Enums
 {
-    public class Class1
+    public enum EVehicleType 
     {
+    Car,
+    Bus,
+    Bike,
+    Motorcycle,
+    MicroBus
+
     }
 }
