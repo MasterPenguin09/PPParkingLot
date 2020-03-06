@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common
+namespace Common.Enums
 {
-    public class Class1
-    {
+    public enum EAccessLevel{
+    DefaultUser,
+    Employee,
+    Administrator,
     }
 }
