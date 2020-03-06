@@ -10,7 +10,9 @@ namespace DataTransferObject
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public virtual BrandDTO BrandDTO { get; set; }
+        public BrandDTO BrandDTO { get; set; }
+        public string BrandDTOName { get; set; }
+
 
     }
 }
