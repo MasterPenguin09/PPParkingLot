@@ -8,12 +8,20 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject
 {
-    class LocationDTO : UserPattern
+    public class LocationDTO
     {
         public int ID { get; set; }
         public DateTime EntryTime { get; set; }
         public DateTime ExitTime { get; set; }
         public PayForm PayForm { get; set; }
+        public int Value { get; set; }
+
+        //
+        public VehicleDTO Vehicle { get; set; }
+        public int VehicleID { get; set; }
+
+
+
 
     }
 }
