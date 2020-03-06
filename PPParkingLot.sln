@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAcce
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTransferObject", "DataTransferObject\DataTransferObject.csproj", "{45C5A359-0A37-40E5-A717-5A0064D414F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{22C3E818-77DE-47D0-B2C7-B1448ACD33C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{45C5A359-0A37-40E5-A717-5A0064D414F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45C5A359-0A37-40E5-A717-5A0064D414F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45C5A359-0A37-40E5-A717-5A0064D414F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22C3E818-77DE-47D0-B2C7-B1448ACD33C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22C3E818-77DE-47D0-B2C7-B1448ACD33C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22C3E818-77DE-47D0-B2C7-B1448ACD33C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22C3E818-77DE-47D0-B2C7-B1448ACD33C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
