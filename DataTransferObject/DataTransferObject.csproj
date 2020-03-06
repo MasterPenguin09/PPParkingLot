@@ -45,6 +45,7 @@
     <Compile Include="Enums\PayForm.cs" />
     <Compile Include="LocationDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VehicleDTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
