@@ -11,8 +11,8 @@ namespace DataTransferObject
         public int ID { get; set; }
        // public int IDCliente { get; set; }
         public string CarBoard { get; set; }
-        //public string Brand { get; set; }
-        //public string Model { get; set; }
+        public virtual BrandDTO Brand { get; set; }
+        public virtual ModelDTO Model { get; set; }
 
     }
 }
