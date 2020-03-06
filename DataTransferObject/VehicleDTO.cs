@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataTransferObject.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +12,7 @@ namespace DataTransferObject
         public int ID { get; set; }
        // public int IDCliente { get; set; }
         public string CarBoard { get; set; }
-
-        public  BrandDTO Brand { get; set; }
-        public  int BrandID { get; set; }
-
+        public EVehicleType Type { get; set; }
         public ModelDTO Model { get; set; }
         public int ModelID { get; set; }
 
