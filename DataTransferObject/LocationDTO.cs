@@ -1,4 +1,5 @@
-﻿using DataTransferObject.Enums;
+﻿using Common;
+using DataTransferObject.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject
 {
-    class LocationDTO
+    class LocationDTO : UserPattern
     {
         public int ID { get; set; }
         public DateTime EntryTime { get; set; }
