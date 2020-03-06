@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BrandDTO.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="EmployeeDTO.cs" />
     <Compile Include="Enums\PayForm.cs" />
     <Compile Include="LocationDTO.cs" />
     <Compile Include="ModelDTO.cs" />
