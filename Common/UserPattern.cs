@@ -9,8 +9,9 @@ namespace Common
 {
     public class UserPattern
     {
-        public UserPattern(string name, string cPF, string number, DateTime birthDate, string passWord, string email, DateTime systemEntranceDate, DateTime systemExitDate, EAccessLevel accessLevel, bool isActive)
+        public UserPattern(int id, string name, string cPF, string number, DateTime birthDate, string passWord, string email, DateTime systemEntranceDate, DateTime systemExitDate, EAccessLevel accessLevel, bool isActive)
         {
+            ID = id;
             Name = name;
             CPF = cPF;
             Number = number;
@@ -25,6 +26,7 @@ namespace Common
 
         public UserPattern() { }
 
+        public int ID { get; set; }
         public string Name { get; set; }
         public string CPF { get; set; }
         public string Number { get; set; }
