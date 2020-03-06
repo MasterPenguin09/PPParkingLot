@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Impl\LocationService.cs" />
     <Compile Include="Interfaces\ILocationSevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

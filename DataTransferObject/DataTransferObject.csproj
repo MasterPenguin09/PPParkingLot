@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BrandDTO.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="EmployeeDTO.cs" />
     <Compile Include="Enums\EVehicleType.cs" />
     <Compile Include="Enums\PayForm.cs" />
