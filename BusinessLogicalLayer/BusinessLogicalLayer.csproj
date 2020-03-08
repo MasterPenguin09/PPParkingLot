@@ -42,7 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Impl\LocationService.cs" />
+    <Compile Include="Interfaces\IBrandService.cs" />
+    <Compile Include="Interfaces\IClientService.cs" />
+    <Compile Include="Interfaces\IEmployeeService.cs" />
     <Compile Include="Interfaces\ILocationSevice.cs" />
+    <Compile Include="Interfaces\IModelService.cs" />
+    <Compile Include="Interfaces\IVehicleService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicalLayer.Interfaces
 {
-    public interface ILocationSevice
+    internal interface ILocationSevice
     {
         Task Insert(LocationDTO location);
         Task<List<LocationDTO>> GetAll(LocationDTO location);

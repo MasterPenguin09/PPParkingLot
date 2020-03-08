@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject.ComplexTypes
 {
-   public class UserPattern
+   internal class UserPattern
     {
       
             public UserPattern(int id, string name, string cPF, string number, DateTime birthDate, string password, string email, DateTime systemEntranceDate, DateTime systemExitDate, EAccessLevel accessLevel, bool isActive)
