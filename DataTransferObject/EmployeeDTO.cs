@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject
 {
-   public class BrandRepository
+    class EmployeeDTO
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-
+        public double Wage { get; set; }
     }
 }

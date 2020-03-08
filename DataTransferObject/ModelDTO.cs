@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject
 {
-     public class ModelRepository 
+    class ModelDTO
     {
         public int ID { get; set; }
         public string Name { get; set; }
 
 
-        public BrandRepository BrandDTO { get; set; }
+        public BrandDTO BrandDTO { get; set; }
         public int BrandID { get; set; }
-
 
     }
 }
