@@ -41,7 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Impl\BrandService.cs" />
+    <Compile Include="Impl\ClientService.cs" />
+    <Compile Include="Impl\EmployeeService.cs" />
     <Compile Include="Impl\LocationService.cs" />
+    <Compile Include="Impl\ModelService.cs" />
+    <Compile Include="Impl\VehicleService.cs" />
     <Compile Include="Interfaces\IBrandService.cs" />
     <Compile Include="Interfaces\IClientService.cs" />
     <Compile Include="Interfaces\IEmployeeService.cs" />
