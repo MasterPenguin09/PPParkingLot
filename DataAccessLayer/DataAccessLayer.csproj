@@ -125,5 +125,9 @@
       <Name>DataTransferObject</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces%28EntityFrameworkCore%29\" />
+    <Folder Include="Repositories%28EntityFrameworkCore%29\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

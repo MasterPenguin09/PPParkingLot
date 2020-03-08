@@ -23,11 +23,22 @@ namespace DataAccessLayer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //TODO: Configurções globais
 
-            //Utilizar Reflection para criar configurações
-            //globais
+            //base.OnModelCreating(modelBuilder);
 
-            base.OnModelCreating(modelBuilder);
+            //// series of statements
+            //modelBuilder.Entity<Order>().Property(t => t.Length.).IsRequired();
+            //modelBuilder.Entity<Order>().Property(t => t.OrderDate).HasColumnType("Date");
+            //modelBuilder.Entity<Order>().Property(t => t.OrderDate).HasDefaultValueSql("GetDate()");
+            //// fluent api chained calls
+            //modelBuilder.Entity<Order>()
+            //    .Property(t => t.OrderDate)
+            //        .IsRequired()
+            //        .HasColumnType("Date")
+            //        .HasDefaultValueSql("GetDate()");
+
+            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }
