@@ -112,6 +112,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces%28EFCore%29\IBrandRepository.cs" />
+    <Compile Include="Interfaces%28EFCore%29\IEmployeeRepository.cs" />
+    <Compile Include="Interfaces%28EFCore%29\ILocationRepository.cs" />
+    <Compile Include="Interfaces%28EFCore%29\IModelRepository.cs" />
+    <Compile Include="Interfaces%28EFCore%29\IVehicleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SamartParkingContext.cs" />
   </ItemGroup>
@@ -126,8 +131,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces%28EntityFrameworkCore%29\" />
-    <Folder Include="Repositories%28EntityFrameworkCore%29\" />
+    <Folder Include="Repositories%28EFCore%29\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
