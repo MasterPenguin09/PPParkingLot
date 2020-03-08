@@ -112,12 +112,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SmartParkingContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SamartParkingContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataTransferObject\DataTransferObject.csproj">
+      <Project>{45C5A359-0A37-40E5-A717-5A0064D414F0}</Project>
+      <Name>DataTransferObject</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
