@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject
 {
-    public class EmployeeDTO : UserPattern
+    public class EmployeeRepository : UserPattern
     {
         
         public double Wage { get; set; }

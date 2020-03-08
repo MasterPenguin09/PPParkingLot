@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject
 {
-    public class LocationDTO
+    public class LocationRepository
     {
         public int ID { get; set; }
         public DateTime EntryTime { get; set; }
@@ -17,7 +17,7 @@ namespace DataTransferObject
         public int Value { get; set; }
 
         //
-        public VehicleDTO Vehicle { get; set; }
+        public VehicleRepository Vehicle { get; set; }
         public int VehicleID { get; set; }
 
 

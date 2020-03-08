@@ -41,20 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BrandDTO.cs" />
-    <Compile Include="EmployeeDTO.cs" />
+    <Compile Include="Impl\BrandRepository.cs" />
+    <Compile Include="Impl\EmployeeRepository.cs" />
     <Compile Include="Enums\EVehicleType.cs" />
     <Compile Include="Enums\PayForm.cs" />
-    <Compile Include="LocationDTO.cs" />
-    <Compile Include="ModelDTO.cs" />
+    <Compile Include="Impl\LocationRepository.cs" />
+    <Compile Include="Impl\ModelRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VehicleDTO.cs" />
+    <Compile Include="Impl\VehicleRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{22C3E818-77DE-47D0-B2C7-B1448ACD33C2}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
