@@ -1,4 +1,5 @@
-﻿using DataTransferObject;
+﻿using Common.FlowControl;
+using DataTransferObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,58 @@ namespace BusinessLogicalLayer.Interfaces
 {
    internal interface IBrandService
     {
-        Task Insert(BrandDTO brand);
-        Task<List<BrandDTO>> GetAll();
-        Task Update(BrandDTO brand);
-        Task<List<BrandDTO>> GetActives();
-        Task Disable(BrandDTO brand);
-        Task Delete(BrandDTO brand);
-        Task<List<BrandDTO>> GetLocationByID(int ID);
+        /// <summary>
+        /// Insere uma marca
+        /// </summary>
+        /// <param name="brand"></param>
+        /// <returns>Response</returns>
+        Task<Response> Insert(BrandDTO brand);
+
+        /// <summary>
+        /// Pega todas as marcas
+        /// </summary>
+        /// <returns>DataResponse</returns>
+        Task<DataResponse<BrandDTO>> GetAll();
+
+        /// <summary>
+        /// Edita uma marca
+        /// </summary>
+        /// <param name="brand"></param>
+        /// <returns>Response</returns>
+        Task<Response> Update(BrandDTO brand);
+
+        /// <summary>
+        /// Pega apenas marcas ativas
+        /// </summary>
+        /// <returns>DataResponse</returns>
+        Task<DataResponse<BrandDTO>> GetActives();
+
+        /// <summary>
+        /// Desabilita uma marca
+        /// </summary>
+        /// <param name="brand"></param>
+        /// <returns>Response</returns>
+        Task<Response> Disable(BrandDTO brand);
+
+        /// <summary>
+        /// Apaga uma marca do banco
+        /// </summary>
+        /// <param name="brand"></param>
+        /// <returns>Resposne</returns>
+        Task<Response> Delete(BrandDTO brand);
+
+        /// <summary>
+        /// Busca marca por ID
+        /// </summary>
+        /// <param name="brandID"></param>
+        /// <returns>DataResponse</returns>
+        Task<DataResponse<BrandDTO>> GetByID(int brandID);
+
+        /// <summary>
+        /// Busca uma marca pelo nome
+        /// </summary>
+        /// <param name="brandName"></param>
+        /// <returns>DataResponse</returns>
+        Task<DataResponse<BrandDTO>> GetByName(string brandName);
     }
 }

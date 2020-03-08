@@ -56,6 +56,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{22C3E818-77DE-47D0-B2C7-B1448ACD33C2}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
       <Project>{802EFE34-328F-4878-A945-9BE9E8F71CB2}</Project>
       <Name>DataAccessLayer</Name>

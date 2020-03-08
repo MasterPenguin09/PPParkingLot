@@ -1,4 +1,5 @@
-﻿using DataTransferObject;
+﻿using Common.FlowControl;
+using DataTransferObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,58 @@ namespace BusinessLogicalLayer.Interfaces
 {
     internal interface ILocationSevice
     {
-        Task Insert(LocationDTO location);
-        Task<List<LocationDTO>> GetAll();
-        Task Update(LocationDTO location);
-        Task<List<LocationDTO>> GetActives();
-        Task Disable(LocationDTO location);
-        Task Delete(LocationDTO location);
-        Task<List<LocationDTO>> GetLocationByID(int ID); 
-        
+        /// <summary>
+        /// Insere uma locação
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns>Response</returns>
+        Task<Response> Insert(LocationDTO location);
 
+        /// <summary>
+        /// Busca todas as locações
+        /// </summary>
+        /// <returns></returns>
+        Task<DataResponse<LocationDTO>> GetAll();
+
+        /// <summary>
+        /// Edita uma locação
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        Task<Response> Update(LocationDTO location);
+
+        /// <summary>
+        /// Busca apenas locações ativas
+        /// </summary>
+        /// <returns>DataResponse</returns>
+        Task<DataResponse<LocationDTO>> GetActives();
+
+        /// <summary>
+        /// Desabilita uma locação
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns>Response</returns>
+        Task<Response> Disable(LocationDTO location);
+
+        /// <summary>
+        /// Apaga uma locação
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        Task<Response> Delete(LocationDTO location);
+
+        /// <summary>
+        /// Busca uma locação por ID
+        /// </summary>
+        /// <param name="locationID"></param>
+        /// <returns>DataResponse</returns>
+        Task<DataResponse<LocationDTO>> GetByID(int locationID);
+
+        /// <summary>
+        /// Busca uma locação pelo valor
+        /// </summary>
+        /// <param name="locationValue"></param>
+        /// <returns>DataResponse</returns>
+        Task<DataResponse<LocationDTO>> GetByValue(double locationValue);
     }
 }

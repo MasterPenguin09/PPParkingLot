@@ -1,4 +1,5 @@
-﻿using DataTransferObject;
+﻿using Common.FlowControl;
+using DataTransferObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,51 @@ namespace DataAccessLayer.Interfaces_EFCore_
 {
     public interface IModelRepository
     {
-        Task Insert(ModelDTO model);
-        Task<List<ModelDTO>> GetAll();
-        Task Update(ModelDTO model);
-        Task<List<ModelDTO>> GetActives();
-        Task Disable(ModelDTO model);
-        Task Delete(ModelDTO model);
-        Task<List<ModelDTO>> GetLocationByID(int ID);
+        /// <summary>
+        /// Insere um modelo
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Response</returns>
+        Task<Response> Insert(ModelDTO model);
+
+        /// <summary>
+        /// Busca todos os modelos
+        /// </summary>
+        /// <returns>DataResponse</returns>
+        Task<DataResponse<ModelDTO>> GetAll();
+
+        /// <summary>
+        /// Edita um modelo
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Response</returns>
+        Task<Response> Update(ModelDTO model);
+
+        /// <summary>
+        /// Pega todos os modelos ativos
+        /// </summary>
+        /// <returns>DataResponse</returns>
+        Task<DataResponse<ModelDTO>> GetActives();
+
+        /// <summary>
+        /// Desabilita um modelo
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Response</returns>
+        Task<Response> Disable(ModelDTO model);
+
+        /// <summary>
+        /// Apaga um modelo
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Response</returns>
+        Task<Response> Delete(ModelDTO model);
+
+        /// <summary>
+        /// Pega um modelo pelo id
+        /// </summary>
+        /// <param name="modelID"></param>
+        /// <returns>DataResponse</returns>
+        Task<DataResponse<ModelDTO>> GetByID(int modelID);
     }
 }
