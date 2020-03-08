@@ -10,9 +10,9 @@ namespace BusinessLogicalLayer.Interfaces
     internal interface ILocationSevice
     {
         Task Insert(LocationDTO location);
-        Task<List<LocationDTO>> GetAll(LocationDTO location);
+        Task<List<LocationDTO>> GetAll();
         Task Update(LocationDTO location);
-        Task<List<LocationDTO>> GetActives(LocationDTO location);
+        Task<List<LocationDTO>> GetActives();
         Task Disable(LocationDTO location);
         Task Delete(LocationDTO location);
         Task<List<LocationDTO>> GetLocationByID(int ID); 

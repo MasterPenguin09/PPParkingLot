@@ -10,9 +10,9 @@ namespace DataAccessLayer.Interfaces_EFCore_
     public interface IModelRepository
     {
         Task Insert(ModelDTO model);
-        Task<List<ModelDTO>> GetAll(ModelDTO model);
+        Task<List<ModelDTO>> GetAll();
         Task Update(ModelDTO model);
-        Task<List<ModelDTO>> GetActives(ModelDTO model);
+        Task<List<ModelDTO>> GetActives();
         Task Disable(ModelDTO model);
         Task Delete(ModelDTO model);
         Task<List<ModelDTO>> GetLocationByID(int ID);

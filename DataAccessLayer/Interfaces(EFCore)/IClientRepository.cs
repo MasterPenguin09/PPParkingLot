@@ -10,9 +10,9 @@ namespace DataAccessLayer.Interfaces_EFCore_
    public interface IClientRepository
     {
         Task Insert(ClientDTO client);
-        Task<List<ClientDTO>> GetAll(ClientDTO client);
+        Task<List<ClientDTO>> GetAll();
         Task Update(ClientDTO client);
-        Task<List<ClientDTO>> GetActives(ClientDTO client);
+        Task<List<ClientDTO>> GetActives();
         Task Disable(ClientDTO client);
         Task Delete(ClientDTO client);
         Task<List<ClientDTO>> GetLocationByID(int ID);
