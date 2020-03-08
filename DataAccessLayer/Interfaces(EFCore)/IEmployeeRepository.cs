@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces_EFCore_
 {
-    internal interface IEmployeeRepository
+    public interface IEmployeeRepository
     {
         Task Insert(EmployeeDTO employee);
         Task<List<EmployeeDTO>> GetAll(EmployeeDTO employee);

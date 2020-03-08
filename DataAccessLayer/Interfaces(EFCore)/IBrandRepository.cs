@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces_EFCore_
 {
-    internal interface IBrandRepository
+    public interface IBrandRepository
     {
         
         Task Insert(BrandDTO brand);

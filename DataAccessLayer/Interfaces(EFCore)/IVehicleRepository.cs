@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces_EFCore_
 {
-   internal interface IVehicleRepository
+    public interface IVehicleRepository
     {
         Task Insert(VehicleDTO vehicle);
         Task<List<VehicleDTO>> GetAll(VehicleDTO vehicle);

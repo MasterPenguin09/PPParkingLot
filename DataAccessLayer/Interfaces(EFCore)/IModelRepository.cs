@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces_EFCore_
 {
-    internal interface IModelRepository
+    public interface IModelRepository
     {
         Task Insert(ModelDTO model);
         Task<List<ModelDTO>> GetAll(ModelDTO model);

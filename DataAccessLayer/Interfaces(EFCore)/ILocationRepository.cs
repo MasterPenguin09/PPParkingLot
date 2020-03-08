@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces_EFCore_
 {
-   internal interface ILocationRepository
+    public interface ILocationRepository
     {
         Task Insert(LocationDTO location);
         Task<List<LocationDTO>> GetAll(LocationDTO location);
