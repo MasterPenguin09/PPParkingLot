@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BrandDTO.cs" />
+    <Compile Include="ClientDTO.cs" />
     <Compile Include="ComplexTypes\UserPattern.cs" />
     <Compile Include="EmployeeDTO.cs" />
     <Compile Include="Enums\EUserAccessLevel.cs" />
