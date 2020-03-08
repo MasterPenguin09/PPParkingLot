@@ -7,8 +7,21 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject
 {
-    class VehicleDTO
+   public class VehicleDTO
     {
+        public VehicleDTO(int iD, string carBoard, EVehicleType type, ModelDTO model, int modelID)
+        {
+            ID = iD;
+            CarBoard = carBoard;
+            Type = type;
+            Model = model;
+            ModelID = modelID;
+        }
+        public VehicleDTO()
+        {
+
+        }
+
         public int ID { get; set; }
         // public int IDCliente { get; set; }
         public string CarBoard { get; set; }

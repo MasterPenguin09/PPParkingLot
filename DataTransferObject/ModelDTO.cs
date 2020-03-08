@@ -6,8 +6,20 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject
 {
-    class ModelDTO
+    public class ModelDTO
     {
+        public ModelDTO(int iD, string name, BrandDTO brandDTO, int brandID)
+        {
+            ID = iD;
+            Name = name;
+            BrandDTO = brandDTO;
+            BrandID = brandID;
+        }
+        public ModelDTO()
+        {
+
+        }
+
         public int ID { get; set; }
         public string Name { get; set; }
 

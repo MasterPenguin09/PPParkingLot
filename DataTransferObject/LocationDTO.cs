@@ -7,8 +7,24 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject
 {
+
     class LocationDTO
     {
+        public LocationDTO(int iD, DateTime entryTime, DateTime exitTime, PayForm payForm, int value, VehicleDTO vehicle, int vehicleID)
+        {
+            ID = iD;
+            EntryTime = entryTime;
+            ExitTime = exitTime;
+            PayForm = payForm;
+            Value = value;
+            Vehicle = vehicle;
+            VehicleID = vehicleID;
+        }
+        public LocationDTO()
+        {
+
+        }
+
         public int ID { get; set; }
         public DateTime EntryTime { get; set; }
         public DateTime ExitTime { get; set; }

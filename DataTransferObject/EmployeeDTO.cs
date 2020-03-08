@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject
 {
-    class EmployeeDTO
+    public class EmployeeDTO
     {
+        public EmployeeDTO(double wage)
+        {
+            Wage = wage;
+        }
+        public EmployeeDTO()
+        {
+
+        }
+
         public double Wage { get; set; }
     }
 }
