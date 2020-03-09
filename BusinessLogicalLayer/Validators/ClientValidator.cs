@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicalLayer.Validators
 {
-    class BrandValidator : AbstractValidator<BrandDTO>
+    class ClientValidator : AbstractValidator<ClientDTO>
     {
-        public BrandValidator()
+        public ClientValidator()
         {
+            RuleFor(c => c.BirthDate).LessThan(DateTime.Now);
+            RuleFor(c => c.Name).Length(3,64);
             RuleFor(c => c.Name).NotEmpty();
-            RuleFor(c => c.Name).Length(1, 64);
-            RuleFor(c => c.ID).Must(c => c >= 0);
+            RuleFor(c => c.AccessLevel).IsInEnum();
         }
     }
 }
