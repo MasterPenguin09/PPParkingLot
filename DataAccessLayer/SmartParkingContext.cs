@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class SamartParkingContext : DbContext
+    public class SmartParkingContext : DbContext
     {
         //https://www.learnentityframeworkcore.com/configuration/fluent-api
-        public SamartParkingContext() : base()
+        public SmartParkingContext() : base()
         {
 
         }
@@ -22,7 +22,11 @@ namespace DataAccessLayer
         public DbSet<VehicleDTO> Vehicles  { get; set; }
         public DbSet<ClientDTO> Clients { get; set; }
 
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            
+        }
+    
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //TODO: Configurções globais
