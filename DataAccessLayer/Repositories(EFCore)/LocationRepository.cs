@@ -1,29 +1,19 @@
-﻿using BusinessLogicalLayer.Interfaces;
-using Common.FlowControl;
+﻿using Common.FlowControl;
 using DataAccessLayer.Interfaces_EFCore_;
 using DataTransferObject;
-using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogicalLayer.Impl
+namespace DataAccessLayer.Repositories_EFCore_
 {
-    public class LocationService :  ILocationSevice
+    public class LocationRepository : ILocationRepository
     {
-        private ILocationRepository _iLocationRepository;
-        public LocationService(ILocationRepository iLocationRep)
+        public Task<Response> Delete(LocationDTO location)
         {
-            this._iLocationRepository = iLocationRep;
-        }
-
-
-        public  Task<Response> Delete(LocationDTO location)
-        {
-
-
+            throw new NotImplementedException();
         }
 
         public Task<Response> Disable(LocationDTO location)

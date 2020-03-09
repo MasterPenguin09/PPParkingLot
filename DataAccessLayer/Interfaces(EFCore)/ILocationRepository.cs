@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogicalLayer.Interfaces
+namespace DataAccessLayer.Interfaces_EFCore_
 {
-    internal interface ILocationSevice
+    public interface ILocationRepository
     {
         /// <summary>
         /// Insere uma locação

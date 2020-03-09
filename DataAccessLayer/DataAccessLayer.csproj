@@ -112,12 +112,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SmartParkingContext.cs" />
+    <Compile Include="Interfaces%28EFCore%29\IBrandRepository.cs" />
+    <Compile Include="Interfaces%28EFCore%29\IClientRepository.cs" />
+    <Compile Include="Interfaces%28EFCore%29\IEmployeeRepository.cs" />
+    <Compile Include="Interfaces%28EFCore%29\ILocationRepository.cs" />
+    <Compile Include="Interfaces%28EFCore%29\IModelRepository.cs" />
+    <Compile Include="Interfaces%28EFCore%29\IVehicleRepository.cs" />
+    <Compile Include="MapConfig%28EFCore%29\BrandMapConfig.cs" />
+    <Compile Include="MapConfig%28EFCore%29\ClientMapConfig.cs" />
+    <Compile Include="MapConfig%28EFCore%29\EmployeeMapConfig.cs" />
+    <Compile Include="MapConfig%28EFCore%29\LocationMapConfig.cs" />
+    <Compile Include="MapConfig%28EFCore%29\ModelMapConfig.cs" />
+    <Compile Include="MapConfig%28EFCore%29\VehicleMapConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories%28EFCore%29\BrandRepository.cs" />
+    <Compile Include="Repositories%28EFCore%29\ClientRepository.cs" />
+    <Compile Include="Repositories%28EFCore%29\EmployeeRepository.cs" />
+    <Compile Include="Repositories%28EFCore%29\LocationRepository.cs" />
+    <Compile Include="Repositories%28EFCore%29\ModelRepository.cs" />
+    <Compile Include="Repositories%28EFCore%29\VehicleRepository.cs" />
+    <Compile Include="SamartParkingContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{22C3E818-77DE-47D0-B2C7-B1448ACD33C2}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataTransferObject\DataTransferObject.csproj">
+      <Project>{45C5A359-0A37-40E5-A717-5A0064D414F0}</Project>
+      <Name>DataTransferObject</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

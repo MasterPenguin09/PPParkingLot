@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Enums
+namespace BusinessLogicalLayer.Validators
 {
-    public enum EAccessLevel{
-    DefaultUser,
-    Employee,
-    Administrator,
+    class BrandValidator
+    {
+
     }
 }

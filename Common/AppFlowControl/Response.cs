@@ -16,16 +16,28 @@ namespace Common.FlowControl
         }
         public Response()
         {
-
+            this.Errors = new List<string>();
         }
 
         public bool Success { get; set; }
         public List<string> Errors { get; set; }
 
-        public string GetErrors() 
+        public string GetErrorMessage()
         {
-            return this.Errors.ToString();
+            StringBuilder builder = new StringBuilder();
+            //Lambda Expression
+            //Erros.ForEach(erro => builder.AppendLine(erro));
+            foreach (string item in this.Errors)
+            {
+                builder.AppendLine(item);
+            }
+
+            return builder.ToString();
         }
 
+        public bool HasErrors()
+        {
+            return this.Errors.Count > 0;
+        }
     }
 }

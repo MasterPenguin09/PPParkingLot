@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.FlowControl
 {
-    class DataResponse<T> : Response
+   public class DataResponse<T> : Response
     {
         public DataResponse()
         {

@@ -9,12 +9,24 @@ namespace DataTransferObject
 {
    public class VehicleDTO
     {
+        public VehicleDTO(int iD, string carBoard, EVehicleType type, ModelDTO model, int modelID)
+        {
+            ID = iD;
+            CarBoard = carBoard;
+            Type = type;
+            Model = model;
+            ModelID = modelID;
+        }
+        public VehicleDTO()
+        {
+
+        }
+
         public int ID { get; set; }
-       // public int IDCliente { get; set; }
+        // public int IDCliente { get; set; }
         public string CarBoard { get; set; }
         public EVehicleType Type { get; set; }
         public ModelDTO Model { get; set; }
         public int ModelID { get; set; }
-
     }
 }
