@@ -23,16 +23,16 @@ namespace BusinessLogicalLayer.Impl
         public async Task<Response> Delete(BrandDTO brand)
         {
             Response response = new Response();
-            if (brand.ID < 0)
+            BrandValidator validate = new BrandValidator();
+            ValidationResult result = validate.Validate(brand);
+
+            if (!result.IsValid)
             {
-                response.Errors.Add("ID marca inválido");
-            }
-            else if(brand.ID.Equals(null)) 
-            {
-                response.Errors.Add("ID marca nulo");
-            }
-            if (response.HasErrors())
-            {
+                foreach (var failure in result.Errors)
+                {
+                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                }
+
                 return response;
             }
             else
@@ -41,9 +41,25 @@ namespace BusinessLogicalLayer.Impl
             }
         }
 
-        public Task<Response> Disable(BrandDTO brand)
+        public async Task<Response> Disable(BrandDTO brand)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            BrandValidator validate = new BrandValidator();
+            ValidationResult result = validate.Validate(brand);
+
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                }
+
+                return response;
+            }
+            else
+            {
+                return await _iBrandRepository.Disable(brand);
+            }
         }
 
         public Task<DataResponse<BrandDTO>> GetActives()
