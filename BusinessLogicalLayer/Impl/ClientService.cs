@@ -43,7 +43,23 @@ namespace BusinessLogicalLayer.Impl
 
         public async Task<Response> Disable(ClientDTO client)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            ClientValidator validate = new ClientValidator();
+            ValidationResult result = validate.Validate(client);
+
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                }
+
+                return response;
+            }
+            else
+            {
+                return await _iClientRepository.Disable(client);
+            }
         }
 
         public async Task<DataResponse<ClientDTO>> GetActives()
