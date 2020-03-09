@@ -122,6 +122,11 @@ namespace BusinessLogicalLayer.Impl
             ClientValidator validate = new ClientValidator();
             ValidationResult result = validate.Validate(client);
 
+            if (true)
+            {
+
+            }
+
             if (!result.IsValid)
             {
                 foreach (var failure in result.Errors)
