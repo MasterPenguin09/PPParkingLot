@@ -96,17 +96,66 @@ namespace BusinessLogicalLayer.Impl
 
         public async Task<DataResponse<ClientDTO>> GetByName(string clientName)
         {
-            throw new NotImplementedException();
+            DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
+            if (string.IsNullOrEmpty(clientName))
+            {
+                response.Errors.Add("Nome cliente inválido");
+            }
+            if (clientName.Equals(null))
+            {
+                response.Errors.Add("Nome cliente nulo");
+            }
+
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
+            {
+                return await _iClientRepository.GetByName(clientName);
+            }
         }
 
         public async Task<Response> Insert(ClientDTO client)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            ClientValidator validate = new ClientValidator();
+            ValidationResult result = validate.Validate(client);
+
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                }
+
+                return response;
+            }
+            else
+            {
+                return await _iClientRepository.Insert(client);
+            }
         }
 
         public async Task<Response> Update(ClientDTO client)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            ClientValidator validate = new ClientValidator();
+            ValidationResult result = validate.Validate(client);
+
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                }
+
+                return response;
+            }
+            else
+            {
+                return await _iClientRepository.Update(client);
+            }
         }
     }
 }
