@@ -8,9 +8,9 @@ namespace DataTransferObject.Enums
 {
    public enum PayForm
     {
-        CartaoD,
-        CartaoC,
-        Dinheiro
+        CartaoD =0,
+        CartaoC =1,
+        Dinheiro =2
 
 
     }

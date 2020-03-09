@@ -13,6 +13,7 @@ namespace DataAccessLayer
         {
             foreach (PropertyInfo prop in typeof(SmartParkingContext).GetProperties())
             {
+
                 if (prop.Name != "ID")
                 {
                     if (prop.PropertyType == typeof(string))

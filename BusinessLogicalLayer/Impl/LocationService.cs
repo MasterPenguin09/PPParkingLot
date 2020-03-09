@@ -1,8 +1,11 @@
 ﻿using BusinessLogicalLayer.Interfaces;
+using BusinessLogicalLayer.Validator;
+using BusinessLogicalLayer.Validators;
 using Common.FlowControl;
 using DataAccessLayer.Interfaces_EFCore_;
+using DataAccessLayer.Repositories_EFCore_;
 using DataTransferObject;
-using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,39 +14,100 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicalLayer.Impl
 {
-    public class LocationService :  ILocationSevice
+    public class LocationService : ILocationService
     {
         private ILocationRepository _iLocationRepository;
+
+        public LocationService()
+        {
+        }
+
         public LocationService(ILocationRepository iLocationRep)
         {
             this._iLocationRepository = iLocationRep;
         }
 
 
-        public  Task<Response> Delete(LocationDTO location)
+        public async Task<Response> Create(LocationDTO location)
         {
+            Response response = new Response();
+            LocationValidator validate = new LocationValidator();
+            ValidationResult result = validate.Validate(location);
 
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                }
+
+                return response;
+            }
+            else
+            {
+                return await _iLocationRepository.Create(location);
+            }
 
         }
 
-        public Task<Response> Disable(LocationDTO location)
+        public async Task<Response> Delete(LocationDTO location)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            LocationValidator validate = new LocationValidator();
+            ValidationResult result = validate.Validate(location);
+
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                }
+
+                return response;
+            }
+            else
+            {
+                return await _iLocationRepository.Delete(location);
+            }
         }
 
-        public Task<DataResponse<LocationDTO>> GetActives()
+
+
+        public async Task<Response> Disable(LocationDTO location)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            LocationValidator validate = new LocationValidator();
+            ValidationResult result = validate.Validate(location);
+
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                }
+
+                return response;
+            }
+            else
+            {
+                return await _iLocationRepository.Disable(location);
+            }
+
         }
 
-        public Task<DataResponse<LocationDTO>> GetAll()
+        public async Task<DataResponse<LocationDTO>> GetActives()
         {
-            throw new NotImplementedException();
+            return await _iLocationRepository.GetActives();
         }
 
-        public Task<DataResponse<LocationDTO>> GetByID(int locationID)
+        public async Task<DataResponse<LocationDTO>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _iLocationRepository.GetAll();
+        }
+
+        public async Task<DataResponse<LocationDTO>> GetByID(int locationID)
+        {
+            return await _iLocationRepository.GetByID();
         }
 
         public Task<DataResponse<LocationDTO>> GetByValue(double locationValue)
@@ -51,14 +115,52 @@ namespace BusinessLogicalLayer.Impl
             throw new NotImplementedException();
         }
 
-        public Task<Response> Insert(LocationDTO location)
+        public async Task<Response> Insert(LocationDTO location)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            LocationValidator validate = new LocationValidator();
+            ValidationResult result = validate.Validate(location);
+
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                }
+
+                return response;
+            }
+            else
+            {
+                return await _iLocationRepository.Insert(location);
+            }
         }
 
-        public Task<Response> Update(LocationDTO location)
+            public async Task<Response> Update(LocationDTO location)
+            {
+                Response response = new Response();
+                LocationValidator validate = new LocationValidator();
+                ValidationResult result = validate.Validate(location);
+
+                if (!result.IsValid)
+                {
+                    foreach (var failure in result.Errors)
+                    {
+                        response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                    }
+
+                    return response;
+                }
+                else
+                {
+                    return await _iLocationRepository.Update(location);
+                }
+            }
+        
+
+        public interface ILocationService
         {
-            throw new NotImplementedException();
         }
     }
-}
+ }
+
