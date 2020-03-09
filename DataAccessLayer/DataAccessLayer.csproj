@@ -118,6 +118,12 @@
     <Compile Include="Interfaces%28EFCore%29\ILocationRepository.cs" />
     <Compile Include="Interfaces%28EFCore%29\IModelRepository.cs" />
     <Compile Include="Interfaces%28EFCore%29\IVehicleRepository.cs" />
+    <Compile Include="MapConfig%28EFCore%29\BrandMapConfig.cs" />
+    <Compile Include="MapConfig%28EFCore%29\ClientMapConfig.cs" />
+    <Compile Include="MapConfig%28EFCore%29\EmployeeMapConfig.cs" />
+    <Compile Include="MapConfig%28EFCore%29\LocationMapConfig.cs" />
+    <Compile Include="MapConfig%28EFCore%29\ModelMapConfig.cs" />
+    <Compile Include="MapConfig%28EFCore%29\VehicleMapConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories%28EFCore%29\BrandRepository.cs" />
     <Compile Include="Repositories%28EFCore%29\ClientRepository.cs" />
