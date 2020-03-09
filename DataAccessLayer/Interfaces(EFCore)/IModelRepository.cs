@@ -41,14 +41,14 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// </summary>
         /// <param name="model"></param>
         /// <returns>Response</returns>
-        Task<Response> Disable(ModelDTO model);
+        Task<Response> Disable(int idModel);
 
         /// <summary>
         /// Apaga um modelo
         /// </summary>
         /// <param name="model"></param>
         /// <returns>Response</returns>
-        Task<Response> Delete(ModelDTO model);
+        Task<Response> Delete(int idModel);
 
         /// <summary>
         /// Pega um modelo pelo id

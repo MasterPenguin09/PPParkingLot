@@ -41,14 +41,14 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// </summary>
         /// <param name="employee"></param>
         /// <returns>Response</returns>
-        Task<Response> Disable(EmployeeDTO employee);
+        Task<Response> Disable(int idEmployee);
 
         /// <summary>
         /// Apaga um funcionário
         /// </summary>
         /// <param name="employee"></param>
         /// <returns>Response</returns>
-        Task<Response> Delete(EmployeeDTO employee);
+        Task<Response> Delete(int idEmployee);
 
         /// <summary>
         /// Busca funcionário pelo id

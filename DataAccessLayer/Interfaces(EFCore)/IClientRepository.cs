@@ -41,14 +41,14 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// </summary>
         /// <param name="client"></param>
         /// <returns>Response</returns>
-        Task<Response> Disable(ClientDTO client);
+        Task<Response> Disable(int idClient);
 
         /// <summary>
         /// Apaga um cliente
         /// </summary>
         /// <param name="client"></param>
         /// <returns>Response</returns>
-        Task<Response> Delete(ClientDTO client);
+        Task<Response> Delete(int idClient);
 
         /// <summary>
         /// Busca um cliente pelo ID 

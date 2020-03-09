@@ -48,14 +48,14 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// </summary>
         /// <param name="location"></param>
         /// <returns>Response</returns>
-        Task<Response> Disable(LocationDTO location);
+        Task<Response> Disable(int idLocation);
 
         /// <summary>
         /// Apaga uma locação
         /// </summary>
         /// <param name="location"></param>
         /// <returns></returns>
-        Task<Response> Delete(LocationDTO location);
+        Task<Response> Delete(int idLocation);
 
         /// <summary>
         /// Busca uma locação por ID
