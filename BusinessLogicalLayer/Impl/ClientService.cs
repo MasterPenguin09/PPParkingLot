@@ -64,12 +64,12 @@ namespace BusinessLogicalLayer.Impl
 
         public async Task<DataResponse<ClientDTO>> GetActives()
         {
-            throw new NotImplementedException();
+            return await _iClientRepository.GetActives();
         }
 
         public async Task<DataResponse<ClientDTO>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _iClientRepository.GetAll();
         }
 
         public async Task<DataResponse<ClientDTO>> GetByID(int clientID)
