@@ -10,6 +10,7 @@ namespace DataAccessLayer
 {
     public class SamartParkingContext : DbContext
     {
+        //https://www.learnentityframeworkcore.com/configuration/fluent-api
         public SamartParkingContext() : base()
         {
 
@@ -19,6 +20,7 @@ namespace DataAccessLayer
         public DbSet<LocationDTO> Locations { get; set; }
         public DbSet<ModelDTO> Models { get; set; }
         public DbSet<VehicleDTO> Vehicles  { get; set; }
+        public DbSet<ClientDTO> Clients { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
