@@ -9,7 +9,7 @@ namespace BusinessLogicalLayer.Validators
 {
    public static class PasswordValidator
     {
-        public static Response ValidateSenha(string password, DateTime birthDate)
+        public static Response CheckPassword(string password, DateTime birthDate)
         {
             Response response = new Response();
             if (string.IsNullOrWhiteSpace(password))

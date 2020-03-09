@@ -1,4 +1,5 @@
 ﻿using BusinessLogicalLayer.Interfaces;
+using BusinessLogicalLayer.Security;
 using BusinessLogicalLayer.Validators;
 using Common.FlowControl;
 using DataAccessLayer.Interfaces_EFCore_;
@@ -121,10 +122,16 @@ namespace BusinessLogicalLayer.Impl
             Response response = new Response();
             ClientValidator validate = new ClientValidator();
             ValidationResult result = validate.Validate(client);
-
-            if (true)
+            Response password = PasswordValidator.CheckPassword(client.Password, client.BirthDate);
+           
+            //Verifica se a senha está dentro dos padrões, caso esteja, hasheia e ela 
+            if (password.HasErrors())
             {
-
+                response.Errors.Add(password.Errors.ToString());
+            }
+            else
+            {
+                client.Password = HashUtils.HashPassword(client.Password);
             }
 
             if (!result.IsValid)
@@ -134,6 +141,11 @@ namespace BusinessLogicalLayer.Impl
                     response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
                 }
 
+                return response;
+            }
+
+            if (response.HasErrors())
+            {
                 return response;
             }
             else
@@ -147,6 +159,17 @@ namespace BusinessLogicalLayer.Impl
             Response response = new Response();
             ClientValidator validate = new ClientValidator();
             ValidationResult result = validate.Validate(client);
+            Response password = PasswordValidator.CheckPassword(client.Password, client.BirthDate);
+
+            //Verifica se a senha está dentro dos padrões, caso esteja, hasheia e ela 
+            if (password.HasErrors())
+            {
+                response.Errors.Add(password.Errors.ToString());
+            }
+            else
+            {
+                client.Password = HashUtils.HashPassword(client.Password);
+            }
 
             if (!result.IsValid)
             {
@@ -155,6 +178,12 @@ namespace BusinessLogicalLayer.Impl
                     response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
                 }
 
+                return response;
+            }
+
+
+            if (response.HasErrors())
+            {
                 return response;
             }
             else
