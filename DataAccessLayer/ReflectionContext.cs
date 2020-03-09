@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -9,23 +10,27 @@ namespace DataAccessLayer
 {
     internal class ContextReflection : SmartParkingContext
     {
-        internal void ConfigureReflection()
+        internal void ConfigureReflection<T>(ModelBuilder modelBuilder)
         {
-            foreach (PropertyInfo prop in typeof(SmartParkingContext).GetProperties())
+            
+            foreach (PropertyInfo prop in typeof(T).GetProperties())
             {
 
-                if (prop.Name != "ID")
-                {
-                    if (prop.PropertyType == typeof(string))
+                    if (prop.Name != "ID")
                     {
+                        if (prop.PropertyType == typeof(string))
+                        {
+                            
+                                        
+
+                        }
+                        else if (prop.PropertyType == typeof(DateTime))
+                        {
+
+                        }
 
                     }
-                    else if (prop.PropertyType == typeof(DateTime))
-                    {
-
-                    }
-
-                }
+                
             }
         }
 
