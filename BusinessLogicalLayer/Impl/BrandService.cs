@@ -72,9 +72,26 @@ namespace BusinessLogicalLayer.Impl
             return await _iBrandRepository.GetAll();
         }
 
-        public Task<DataResponse<BrandDTO>> GetByID(int brandID)
+        public async Task<DataResponse<BrandDTO>> GetByID(int brandID)
         {
-            throw new NotImplementedException();
+            DataResponse<BrandDTO> response = new DataResponse<BrandDTO>();
+            if (brandID < 0)
+            {
+                response.Errors.Add("ID marca inválido");
+            }
+            if(brandID.Equals(null))
+            {
+                response.Errors.Add("ID marca nulo");
+            }
+
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
+            {
+                return await _iBrandRepository.GetByID(brandID);
+            }
         }
 
         public Task<DataResponse<BrandDTO>> GetByName(string brandName)
