@@ -74,7 +74,24 @@ namespace BusinessLogicalLayer.Impl
 
         public async Task<DataResponse<ClientDTO>> GetByID(int clientID)
         {
-            throw new NotImplementedException();
+            DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
+            if (clientID < 0)
+            {
+                response.Errors.Add("ID cliente inválido");
+            }
+            if (clientID.Equals(null))
+            {
+                response.Errors.Add("ID cliente nulo");
+            }
+
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
+            {
+                return await _iClientRepository.GetByID(clientID);
+            }
         }
 
         public async Task<DataResponse<ClientDTO>> GetByName(string clientName)
