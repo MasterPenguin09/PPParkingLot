@@ -67,9 +67,9 @@ namespace BusinessLogicalLayer.Impl
                 return await _iBrandRepository.GetActives();
         }
 
-        public Task<DataResponse<BrandDTO>> GetAll()
+        public async Task<DataResponse<BrandDTO>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _iBrandRepository.GetAll();
         }
 
         public Task<DataResponse<BrandDTO>> GetByID(int brandID)
