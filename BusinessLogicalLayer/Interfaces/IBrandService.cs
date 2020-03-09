@@ -41,14 +41,14 @@ namespace BusinessLogicalLayer.Interfaces
         /// </summary>
         /// <param name="brand"></param>
         /// <returns>Response</returns>
-        Task<Response> Disable(BrandDTO brand);
+        Task<Response> Disable(int idBrand);
 
         /// <summary>
         /// Apaga uma marca do banco
         /// </summary>
         /// <param name="brand"></param>
         /// <returns>Resposne</returns>
-        Task<Response> Delete(BrandDTO brand);
+        Task<Response> Delete(int idBrand);
 
         /// <summary>
         /// Busca marca por ID

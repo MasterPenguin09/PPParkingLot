@@ -41,14 +41,14 @@ namespace BusinessLogicalLayer.Interfaces
         /// </summary>
         /// <param name="vehicle"></param>
         /// <returns>Response</returns>
-        Task<Response> Disable(VehicleDTO vehicle);
+        Task<Response> Disable(int idVehicle);
 
         /// <summary>
         /// Apaga um veículo
         /// </summary>
         /// <param name="vehicle"></param>
         /// <returns>Response</returns>
-        Task<Response> Delete(VehicleDTO vehicle);
+        Task<Response> Delete(int idVehicle);
 
         /// <summary>
         /// Busca um veículo pelo ID 
