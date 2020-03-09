@@ -11,6 +11,11 @@ namespace DataAccessLayer.Repositories_EFCore_
 {
     public class LocationRepository : ILocationRepository
     {
+        public Task<Response> Create(LocationDTO location)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Response> Delete(LocationDTO location)
         {
             throw new NotImplementedException();

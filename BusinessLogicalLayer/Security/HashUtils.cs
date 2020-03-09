@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicalLayer.Security
 {
-    class HasUtils
+   internal class HashUtils
     {
         /// <summary>
         /// Aplicará o algoritmo de HASH MD5, utilizando
         /// um "salt".
         /// </summary>
-        /// <param name="senha">Senha bruta</param>
+        /// <param name="password">Senha bruta</param>
         /// <returns>Senha "hasheada"</returns>
-        public static string HashPassword(string senha)
+        public static string HashPassword(string password)
         {
             //Adicionar um valor de Salt
             string saltValue = "1necoLuzDeVelas5";
@@ -23,16 +23,16 @@ namespace BusinessLogicalLayer.Security
 
             //Adiciona o salt na senha e transforma para uma 
             //representação númerica em vetor
-            byte[] codificacaoUTF8 =
-                Encoding.UTF8.GetBytes(senha + saltValue);
+            byte[] UTF8Codification =
+                Encoding.UTF8.GetBytes(password + saltValue);
 
             //Invoca o método 
-            byte[] senhaHasheada =
-                SHA1.Create().ComputeHash(codificacaoUTF8);
+            byte[] hashedPassword =
+                SHA1.Create().ComputeHash(UTF8Codification);
 
             //Retorna a senha hasheada utilizando codificação
             //utilizada por aplicações WEB.
-            return Convert.ToBase64String(senhaHasheada);
+            return Convert.ToBase64String(hashedPassword);
         }
     }
 }

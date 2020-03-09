@@ -47,19 +47,19 @@ namespace BusinessLogicalLayer.Impl
             BrandValidator validate = new BrandValidator();
             ValidationResult result = validate.Validate(brand);
 
-            if (!result.IsValid)
+        if (!result.IsValid)
+        {
+            foreach (var failure in result.Errors)
             {
-                foreach (var failure in result.Errors)
-                {
-                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
-                }
+                response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+            }
 
-                return response;
-            }
-            else
-            {
-                return await _iBrandRepository.Disable(brand);
-            }
+            return response;
+        }
+        else
+        {
+            return await _iBrandRepository.Disable(brand);
+        }
         }
 
         public async Task<DataResponse<BrandDTO>> GetActives()
