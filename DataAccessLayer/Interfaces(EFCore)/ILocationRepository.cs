@@ -21,6 +21,13 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// Busca todas as locações
         /// </summary>
         /// <returns></returns>
+        /// 
+        Task<Response> Create(LocationDTO location);
+        /// <summary>
+        /// Insere uma locação
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns>Response</returns>
         Task<DataResponse<LocationDTO>> GetAll();
 
         /// <summary>
@@ -63,5 +70,7 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// <param name="locationValue"></param>
         /// <returns>DataResponse</returns>
         Task<DataResponse<LocationDTO>> GetByValue(double locationValue);
+        Task<Task<DataResponse<LocationDTO>>> Disable(object location);
+        Task<DataResponse<LocationDTO>> GetActives(object location);
     }
 }
