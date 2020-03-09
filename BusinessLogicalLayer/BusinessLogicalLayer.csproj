@@ -101,6 +101,7 @@
     <Compile Include="Security\HashUtils.cs" />
     <Compile Include="Validators\BrandValidator.cs" />
     <Compile Include="Validators\ClientValidator.cs" />
+    <Compile Include="Validators\EmployeeValidator.cs" />
     <Compile Include="Validators\LocationValidator.cs" />
     <Compile Include="Validators\PasswordValidator.cs" />
   </ItemGroup>
