@@ -120,9 +120,25 @@ namespace BusinessLogicalLayer.Impl
             }
         }
 
-        public Task<Response> Update(BrandDTO brand)
+        public async Task<Response> Update(BrandDTO brand)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            BrandValidator validate = new BrandValidator();
+            ValidationResult result = validate.Validate(brand);
+
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                }
+
+                return response;
+            }
+            else
+            {
+                return await _iBrandRepository.Update(brand);
+            }
         }
     }
 }
