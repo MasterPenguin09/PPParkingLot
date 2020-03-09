@@ -94,9 +94,26 @@ namespace BusinessLogicalLayer.Impl
             }
         }
 
-        public Task<DataResponse<BrandDTO>> GetByName(string brandName)
+        public async Task<DataResponse<BrandDTO>> GetByName(string brandName)
         {
-            throw new NotImplementedException();
+            DataResponse<BrandDTO> response = new DataResponse<BrandDTO>();
+            if (string.IsNullOrEmpty(brandName))
+            {
+                response.Errors.Add("Nome marca inválido");
+            }
+            if (brandName.Equals(null))
+            {
+                response.Errors.Add("Nome marca nulo");
+            }
+
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
+            {
+                return await _iBrandRepository.GetByName(brandName);
+            }
         }
 
         public async Task<Response> Insert(BrandDTO brand)
