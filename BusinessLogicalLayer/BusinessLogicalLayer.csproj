@@ -99,6 +99,7 @@
     <Compile Include="Validators\EmployeeValidator.cs" />
     <Compile Include="Validators\LocationValidator.cs" />
     <Compile Include="Validators\ModelValidator.cs" />
+    <Compile Include="Validators\ParkingSpotValidator.cs" />
     <Compile Include="Validators\PasswordValidator.cs" />
     <Compile Include="Validators\VehicleValidator.cs" />
   </ItemGroup>
