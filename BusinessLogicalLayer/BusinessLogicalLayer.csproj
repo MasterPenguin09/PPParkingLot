@@ -99,6 +99,7 @@
     <Compile Include="Validators\LocationValidator.cs" />
     <Compile Include="Validators\ModelValidator.cs" />
     <Compile Include="Validators\PasswordValidator.cs" />
+    <Compile Include="Validators\VehicleValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
