@@ -94,11 +94,6 @@ namespace BusinessLogicalLayer.Impl
             {
                 response.Errors.Add("Nome cliente inválido");
             }
-            if (clientName.Equals(null))
-            {
-                response.Errors.Add("Nome cliente nulo");
-            }
-
             if (response.HasErrors())
             {
                 return response;
