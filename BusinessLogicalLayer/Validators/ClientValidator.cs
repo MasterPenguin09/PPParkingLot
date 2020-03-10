@@ -19,6 +19,9 @@ namespace BusinessLogicalLayer.Validators
             RuleFor(c => c.AccessLevel).IsInEnum();
             RuleFor(c => c.Email.EmailIsValid()).Equal(true);
             RuleFor(c => c.CPF.IsCpf()).Equal(true);
+
+           
+
         }
     }
 }

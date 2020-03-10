@@ -74,14 +74,14 @@ namespace BusinessLogicalLayer.Impl
 
         public async Task<DataResponse<LocationDTO>> GetByID(int location)
         {
-            DataResponse<ModelDTO> response = new DataResponse<ModelDTO>();
+            DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
             if (location < 0)
             {
-                response.Errors.Add("ID locação inválido");
+                response.Errors.Add("ID cliente inválido");
             }
             if (location.Equals(null))
             {
-                response.Errors.Add("ID locação nulo");
+                response.Errors.Add("ID cliente nulo");
             }
 
             if (response.HasErrors())
