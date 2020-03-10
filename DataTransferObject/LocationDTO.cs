@@ -34,5 +34,8 @@ namespace DataTransferObject
         public VehicleDTO Vehicle { get; set; }
         public int VehicleID { get; set; }
 
+        public ParkingSpotDTO ParkingSpot { get; set; }
+        public int ParkingSpotID { get; set; }
+
     }
 }
