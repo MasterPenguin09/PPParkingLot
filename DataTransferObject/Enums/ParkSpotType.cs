@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject.Enums
 {
-   public enum PayForm
+    public enum EParkSpotType
     {
-        CartaoD,
-        CartaoC,
-        Dinheiro
-
-
+        Simples,
+        Dupla,
+        Extra,
+        SimplesCoberta,
+        DuplaCoberta,
+        ExtraCoberta
     }
 }
