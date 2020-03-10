@@ -21,8 +21,6 @@ namespace DataAccessLayer.MapConfig_EFCore_
 
             builder.Property(c => c.VehicleID).IsRequired();
 
-
-
             builder.Property(c => c.).IsRequired();
 
 
