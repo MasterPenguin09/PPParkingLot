@@ -19,7 +19,7 @@ namespace DataTransferObject
 
         public ParkingSpotDTO()
         {
-
+             
         }
 
         public int ID { get; set; }

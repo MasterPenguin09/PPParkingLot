@@ -117,6 +117,7 @@
     <Compile Include="Interfaces%28EFCore%29\IEmployeeRepository.cs" />
     <Compile Include="Interfaces%28EFCore%29\ILocationRepository.cs" />
     <Compile Include="Interfaces%28EFCore%29\IModelRepository.cs" />
+    <Compile Include="Interfaces%28EFCore%29\IParkingSpotRepository.cs" />
     <Compile Include="Interfaces%28EFCore%29\IVehicleRepository.cs" />
     <Compile Include="MapConfig%28EFCore%29\BrandMapConfig.cs" />
     <Compile Include="MapConfig%28EFCore%29\ClientMapConfig.cs" />
