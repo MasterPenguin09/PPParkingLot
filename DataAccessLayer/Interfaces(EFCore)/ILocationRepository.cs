@@ -18,12 +18,6 @@ namespace DataAccessLayer.Interfaces_EFCore_
         Task<Response> Insert(LocationDTO location);
 
         /// <summary>
-        /// Busca todas as locações
-        /// </summary>
-        /// <returns></returns>
-        /// 
-        Task<Response> Create(LocationDTO location); //Insert e create fazem a msm coisa
-        /// <summary>
         /// Insere uma locação
         /// </summary>
         /// <param name="location"></param>

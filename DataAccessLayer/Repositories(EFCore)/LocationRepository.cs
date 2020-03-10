@@ -11,67 +11,52 @@ namespace DataAccessLayer.Repositories_EFCore_
 {
     public class LocationRepository : ILocationRepository
     {
-        public async Task<Response> Create(LocationDTO location)
+        public Task<Response> Delete(int idLocation)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Response> Delete(LocationDTO location)
+        public Task<Response> Disable(int idLocation)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Response> Delete(int idLocation)
+        public Task<Task<DataResponse<LocationDTO>>> Disable(object location)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Response> Disable(LocationDTO location)
+        public Task<DataResponse<LocationDTO>> GetActives()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Response> Disable(int idLocation)
+        public Task<DataResponse<LocationDTO>> GetActives(object location)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Task<DataResponse<LocationDTO>>> Disable(object location)
+        public Task<DataResponse<LocationDTO>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DataResponse<LocationDTO>> GetActives()
+        public Task<DataResponse<LocationDTO>> GetByID(int locationID)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DataResponse<LocationDTO>> GetActives(object location)
+        public Task<DataResponse<LocationDTO>> GetByValue(double locationValue)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DataResponse<LocationDTO>> GetAll()
+        public Task<Response> Insert(LocationDTO location)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DataResponse<LocationDTO>> GetByID(int locationID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<DataResponse<LocationDTO>> GetByValue(double locationValue)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Response> Insert(LocationDTO location)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Response> Update(LocationDTO location)
+        public Task<Response> Update(LocationDTO location)
         {
             throw new NotImplementedException();
         }

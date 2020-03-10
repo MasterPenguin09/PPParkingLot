@@ -21,13 +21,6 @@ namespace BusinessLogicalLayer.Interfaces
         /// Busca todas as locações
         /// </summary>
         /// <returns></returns>
-        /// 
-        Task<Response> Create(LocationDTO location); //Insert e crate fazem a msm coisa
-
-        /// <summary>
-        /// Busca todas as locações
-        /// </summary>
-        /// <returns></returns>
         Task<DataResponse<LocationDTO>> GetAll();
 
         /// <summary>
