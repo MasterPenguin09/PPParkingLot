@@ -11,9 +11,26 @@ namespace DataAccessLayer.Repositories_EFCore_
 {
     public class LocationRepository : ILocationRepository
     {
-        public Task<Response> Delete(int idLocation)
+        public async Task<Response> Delete(int idLocation)
         {
-            throw new NotImplementedException();
+  
+            using (SmartParkingContext context = new SmartParkingContext())
+            {
+
+                LocationDTO location = new LocationDTO();
+
+                
+            }
+
+        }
+        public Task<DataResponse<LocationDTO>> GetActives()
+        {
+
+            using (SmartParkingContext context = new SmartParkingContext())
+            {
+                return await context.Locations.ToListAsync();
+            }
+
         }
 
         public Task<Response> Disable(int idLocation)
@@ -26,9 +43,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             throw new NotImplementedException();
         }
 
-        public Task<DataResponse<LocationDTO>> GetActives()
-        {
-            throw new NotImplementedException();
         }
 
         public Task<DataResponse<LocationDTO>> GetActives(object location)
