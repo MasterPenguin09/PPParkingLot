@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,7 +27,22 @@ namespace DataAccessLayer
         {
             
         }
-    
+
+        private void LoadStringConfig(ModelBuilder modelBuilder)
+        {
+            Assembly assemblyDTO = Assembly.GetAssembly(typeof(BrandDTO));
+
+            List<Type> types = assemblyDTO.GetTypes().Where(c => c.Namespace == "DTO").ToList();
+
+            foreach (Type item in types)
+            {
+                foreach (PropertyInfo propriedade in item.GetProperties().Where(c => c.PropertyType == typeof(string)))
+                {
+                    modelBuilder.Entity(item.Name).Property(propriedade.Name).IsRequired().IsUnicode(false);
+                }
+            }
+
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //TODO: Configurções globais
@@ -45,6 +61,7 @@ namespace DataAccessLayer
             //        .HasDefaultValueSql("GetDate()");
 
             //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
