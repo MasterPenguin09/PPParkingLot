@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="Extensions\CPFValidator.cs" />
     <Compile Include="Extensions\EmailValidator.cs" />
+    <Compile Include="Extensions\FluentValidationsComplements.cs" />
     <Compile Include="Impl\BrandService.cs" />
     <Compile Include="Impl\ClientService.cs" />
     <Compile Include="Impl\EmployeeService.cs" />
