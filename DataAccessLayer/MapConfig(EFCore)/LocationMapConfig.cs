@@ -13,7 +13,19 @@ namespace DataAccessLayer.MapConfig_EFCore_
     {
         public void Configure(EntityTypeBuilder<LocationDTO> builder)
         {
-            //Nada          
+            builder.Property(c => c.PayForm).IsRequired();
+
+            builder.Property(c => c.Value).IsRequired();
+
+            builder.Property(c => c.ParkingSpotID).IsRequired();
+
+            builder.Property(c => c.VehicleID).IsRequired();
+
+
+
+            builder.Property(c => c.).IsRequired();
+
+
         }
     }
 }
