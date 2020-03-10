@@ -9,9 +9,16 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
+    // =================GRANDE ARTHUR==================== Precisa tirar o delete on cascade 
+
     public class SmartParkingContext : DbContext
     {
         //https://www.learnentityframeworkcore.com/configuration/fluent-api
+        public SmartParkingContext(DbContextOptions<SmartParkingContext> options) : base (options)
+        {
+
+        }
+        
         public SmartParkingContext() : base()
         {
 
