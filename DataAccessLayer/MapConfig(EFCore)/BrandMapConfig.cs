@@ -1,5 +1,6 @@
 ﻿using DataTransferObject;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,12 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.MapConfig_EFCore_
 {
-   internal class BrandMapConfig : IEntityTypeConfiguration<BrandDTO>
+    internal class BrandMapConfig : IEntityTypeConfiguration<BrandDTO>
     {
+        public void Configure(EntityTypeBuilder<BrandDTO> builder)
+        {
+            builder.Property(c => c.Name).IsRequired().IsUnicode(false);
+
+        }
     }
 }
