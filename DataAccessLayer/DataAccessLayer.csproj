@@ -131,6 +131,7 @@
     <Compile Include="Repositories%28EFCore%29\EmployeeRepository.cs" />
     <Compile Include="Repositories%28EFCore%29\LocationRepository.cs" />
     <Compile Include="Repositories%28EFCore%29\ModelRepository.cs" />
+    <Compile Include="Repositories%28EFCore%29\ParkingSpotRepository.cs" />
     <Compile Include="Repositories%28EFCore%29\VehicleRepository.cs" />
     <Compile Include="SmartParkingContext.cs" />
   </ItemGroup>
