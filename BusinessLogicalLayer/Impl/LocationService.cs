@@ -24,29 +24,74 @@ namespace BusinessLogicalLayer.Impl
         }
 
 
-        public Task<Response> Delete(int idLocation)
+
+
+
+
+        public async Task<Response> Delete(int location)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            if (location < 0)
+            {
+                response.Errors.Add("ID Inválido!");
+            }
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
+            {
+                return await _iLocationRepository.Delete(location);
+            }
         }
 
-        public Task<Response> Disable(int idLocation)
+        public async Task<Response> Disable(int location)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            if (location < 0)
+            {
+                response.Errors.Add("ID Inválido!");
+            }
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
+            {
+                return await _iLocationRepository.Disable(location);
+            }
         }
 
-        public Task<DataResponse<LocationDTO>> GetActives()
+        public async Task<DataResponse<LocationDTO>> GetActives()
         {
-            throw new NotImplementedException();
+            return await _iLocationRepository.GetActives();
         }
 
-        public Task<DataResponse<LocationDTO>> GetAll()
+        public async Task<DataResponse<LocationDTO>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _iLocationRepository.GetAll();
         }
 
-        public Task<DataResponse<LocationDTO>> GetByID(int locationID)
+        public async Task<DataResponse<LocationDTO>> GetByID(int location)
         {
-            throw new NotImplementedException();
+            DataResponse<ModelDTO> response = new DataResponse<ModelDTO>();
+            if (location < 0)
+            {
+                response.Errors.Add("ID locação inválido");
+            }
+            if (location.Equals(null))
+            {
+                response.Errors.Add("ID locação nulo");
+            }
+
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
+            {
+                return await _iLocationRepository.GetByID(location);
+            }
         }
 
         public Task<DataResponse<LocationDTO>> GetByValue(double locationValue)
@@ -54,14 +99,45 @@ namespace BusinessLogicalLayer.Impl
             throw new NotImplementedException();
         }
 
-        public Task<Response> Insert(LocationDTO location)
+        public async Task<Response> Insert(LocationDTO location)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            LocationValidator validate = new LocationValidator();
+            ValidationResult result = validate.Validate(location);
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                }
+
+                return response;
+            }
+            else
+            {
+                return await _iLocationRepository.Insert(location);
+            }
         }
 
-        public Task<Response> Update(LocationDTO location)
+        public async Task<Response> Update(LocationDTO location)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            LocationValidator validate = new LocationValidator();
+            ValidationResult result = validate.Validate(location);
+
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                }
+
+                return response;
+            }
+            else
+            {
+                return await _iLocationRepository.Update(location);
+            }
         }
     }
  }
