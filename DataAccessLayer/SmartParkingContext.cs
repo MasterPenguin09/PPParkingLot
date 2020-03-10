@@ -29,7 +29,7 @@ namespace DataAccessLayer
         public DbSet<ModelDTO> Models { get; set; }
         public DbSet<VehicleDTO> Vehicles  { get; set; }
         public DbSet<ClientDTO> Clients { get; set; }
-
+        public DbSet<ParkingSpotDTO> ParkingSpots { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             
