@@ -126,7 +126,6 @@
     <Compile Include="MapConfig%28EFCore%29\ModelMapConfig.cs" />
     <Compile Include="MapConfig%28EFCore%29\VehicleMapConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReflectionContext.cs" />
     <Compile Include="Repositories%28EFCore%29\BrandRepository.cs" />
     <Compile Include="Repositories%28EFCore%29\ClientRepository.cs" />
     <Compile Include="Repositories%28EFCore%29\EmployeeRepository.cs" />
