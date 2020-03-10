@@ -35,7 +35,7 @@ namespace DataTransferObject.ComplexTypes
             public string Password { get; set; }
             public string Email { get; set; }
             public DateTime SystemEntranceDate { get; set; }
-            public DateTime SystemExitDate { get; set; }
+            public DateTime? SystemExitDate { get; set; }
             public EAccessLevel AccessLevel { get; set; }
             public bool IsActive { get; set; }
     }

@@ -84,6 +84,7 @@
     <Compile Include="Impl\EmployeeService.cs" />
     <Compile Include="Impl\LocationService.cs" />
     <Compile Include="Impl\ModelService.cs" />
+    <Compile Include="Impl\ParkingSpotService.cs" />
     <Compile Include="Impl\VehicleService.cs" />
     <Compile Include="Interfaces\IBrandService.cs" />
     <Compile Include="Interfaces\IClientService.cs" />

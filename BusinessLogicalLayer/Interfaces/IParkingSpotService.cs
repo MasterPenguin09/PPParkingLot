@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicalLayer.Interfaces
 {
-    interface IParkingSpotService
+     interface IParkingSpotService
     {
         /// <summary>
         /// Insere um modelo
@@ -39,21 +39,21 @@ namespace BusinessLogicalLayer.Interfaces
         /// <summary>
         /// Desabilita um modelo
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="idPakingSpot"></param>
         /// <returns>Response</returns>
         Task<Response> Disable(int idPakingSpot);
 
         /// <summary>
         /// Apaga um modelo
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="idPakingSpot"></param>
         /// <returns>Response</returns>
         Task<Response> Delete(int idPakingSpot);
 
         /// <summary>
         /// Pega um modelo pelo id
         /// </summary>
-        /// <param name="modelID"></param>
+        /// <param name="idPakingSpot"></param>
         /// <returns>DataResponse</returns>
         Task<DataResponse<ParkingSpotDTO>> GetByID(int idPakingSpot);
     }

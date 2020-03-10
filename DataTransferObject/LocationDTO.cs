@@ -27,7 +27,7 @@ namespace DataTransferObject
 
         public int ID { get; set; }
         public DateTime EntryTime { get; set; }
-        public DateTime ExitTime { get; set; }
+        public DateTime? ExitTime { get; set; }
         public PayForm PayForm { get; set; }
         public int Value { get; set; }
 
