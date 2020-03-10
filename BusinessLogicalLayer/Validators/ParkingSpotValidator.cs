@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicalLayer.Validators
 {
-    class ParkingSpotValidator : AbstractValidator<ParkingSpotDTO>
+    public class ParkingSpotValidator : AbstractValidator<ParkingSpotDTO>
     {
         public ParkingSpotValidator()
         {

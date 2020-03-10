@@ -1,9 +1,13 @@
 ﻿using BusinessLogicalLayer.Interfaces;
+using BusinessLogicalLayer.Validators;
 using Common.FlowControl;
 using DataAccessLayer.Interfaces_EFCore_;
 using DataTransferObject;
+using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,39 +22,113 @@ namespace BusinessLogicalLayer.Impl
             this._iParkingSpotRepository = iParkingRep;
         }
 
-        public Task<Response> Delete(int idPakingSpot)
+        public async Task<Response> Delete(int idPakingSpot)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            if (idPakingSpot < 0)
+            {
+                response.Errors.Add("ID Inválido!");
+            }
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
+            {
+                return await _iParkingSpotRepository.Delete(idPakingSpot);
+            }
         }
 
-        public Task<Response> Disable(int idPakingSpot)
+        public async Task<Response> Disable(int idPakingSpot)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            if (idPakingSpot < 0)
+            {
+                response.Errors.Add("ID Inválido!");
+            }
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
+            {
+                return await _iParkingSpotRepository.Disable(idPakingSpot);
+            }
         }
 
-        public Task<DataResponse<ParkingSpotDTO>> GetActives()
+        public async Task<DataResponse<ParkingSpotDTO>> GetActives()
         {
-            throw new NotImplementedException();
+            return await _iParkingSpotRepository.GetActives();
         }
 
-        public Task<DataResponse<ParkingSpotDTO>> GetAll()
+        public async Task<DataResponse<ParkingSpotDTO>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _iParkingSpotRepository.GetAll();
+
         }
 
-        public Task<DataResponse<ParkingSpotDTO>> GetByID(int idPakingSpot)
+        public async Task<DataResponse<ParkingSpotDTO>> GetByID(int idPakingSpot)
         {
-            throw new NotImplementedException();
+            DataResponse<ParkingSpotDTO> response = new DataResponse<ParkingSpotDTO>();
+            if (idPakingSpot < 0)
+            {
+                response.Errors.Add("ID vaga inválido");
+            }
+            if (idPakingSpot.Equals(null))
+            {
+                response.Errors.Add("ID vaga nulo");
+            }
+
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
+            {
+                return await _iParkingSpotRepository.GetByID(idPakingSpot);
+            }
         }
 
-        public Task<Response> Insert(ParkingSpotDTO pakingSpot)
+        public async Task<Response> Insert(ParkingSpotDTO pakingSpot)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            ParkingSpotValidator validate = new ParkingSpotValidator();
+            ValidationResult result = validate.Validate(pakingSpot);
+
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                }
+
+                return response;
+            }
+            else
+            {
+                return await _iParkingSpotRepository.Insert(pakingSpot);
+            }
         }
 
-        public Task<Response> Update(ParkingSpotDTO pakingSpot)
+        public async Task<Response> Update(ParkingSpotDTO pakingSpot)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            ParkingSpotValidator validate = new ParkingSpotValidator();
+            ValidationResult result = validate.Validate(pakingSpot);
+
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                }
+
+                return response;
+            }
+            else
+            {
+                return await _iParkingSpotRepository.Update(pakingSpot);
+            }
         }
     }
 }
