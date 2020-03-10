@@ -22,7 +22,7 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// </summary>
         /// <returns></returns>
         /// 
-        Task<Response> Create(LocationDTO location);
+        Task<Response> Create(LocationDTO location); //Insert e create fazem a msm coisa
         /// <summary>
         /// Insere uma locação
         /// </summary>

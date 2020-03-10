@@ -20,45 +20,37 @@ namespace BusinessLogicalLayer.Impl
             this._iBrandRepository = iBrandRep;
         }
 
-        public async Task<Response> Delete(BrandDTO brand)
+        public async Task<Response> Delete(int idBrand)
         {
             Response response = new Response();
-            BrandValidator validate = new BrandValidator();
-            ValidationResult result = validate.Validate(brand);
-
-            if (!result.IsValid)
+            if (idBrand<0)
             {
-                foreach (var failure in result.Errors)
-                {
-                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
-                }
-
+                response.Errors.Add("ID Inválido!");
+            }
+            if (response.HasErrors())
+            {
                 return response;
             }
             else
             {
-                return await _iBrandRepository.Delete(brand);
+                return await _iBrandRepository.Delete(idBrand);
             }
         }
 
-        public async Task<Response> Disable(BrandDTO brand)
+        public async Task<Response> Disable(int idBrand)
         {
             Response response = new Response();
-            BrandValidator validate = new BrandValidator();
-            ValidationResult result = validate.Validate(brand);
-
-        if (!result.IsValid)
-        {
-            foreach (var failure in result.Errors)
+            if (idBrand < 0)
             {
-                response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
+                response.Errors.Add("ID Inválido!");
             }
-
-            return response;
-        }
-        else
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
         {
-            return await _iBrandRepository.Disable(brand);
+            return await _iBrandRepository.Disable(idBrand);
         }
         }
 
@@ -135,6 +127,8 @@ namespace BusinessLogicalLayer.Impl
             {
                 return await _iBrandRepository.Insert(brand);
             }
+
+
         }
 
         public async Task<Response> Update(BrandDTO brand)

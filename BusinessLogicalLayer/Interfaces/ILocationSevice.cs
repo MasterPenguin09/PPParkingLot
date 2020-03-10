@@ -22,7 +22,7 @@ namespace BusinessLogicalLayer.Interfaces
         /// </summary>
         /// <returns></returns>
         /// 
-        Task<Response> Create(LocationDTO location);
+        Task<Response> Create(LocationDTO location); //Insert e crate fazem a msm coisa
 
         /// <summary>
         /// Busca todas as locações

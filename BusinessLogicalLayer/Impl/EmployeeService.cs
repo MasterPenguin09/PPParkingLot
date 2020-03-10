@@ -20,30 +20,38 @@ namespace BusinessLogicalLayer.Impl
             this._iEmployeeRepository = iEmployeeRep;
         }
 
-        public async Task<Response> Delete(EmployeeDTO employee)
+        public async Task<Response> Delete(int idEmployee)
         {
             Response response = new Response();
-            EmployeeValidator validate = new EmployeeValidator();
-            ValidationResult result = validate.Validate(employee);
-
-            if (!result.IsValid)
+            if (idEmployee < 0)
             {
-                foreach (var failure in result.Errors)
-                {
-                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
-                }
-
+                response.Errors.Add("ID Inválido!");
+            }
+            if (response.HasErrors())
+            {
                 return response;
             }
             else
             {
-                return await _iEmployeeRepository.Delete(employee);
+                return await _iEmployeeRepository.Delete(idEmployee);
             }
         }
 
-        public async Task<Response> Disable(EmployeeDTO employee)
+        public async Task<Response> Disable(int idEmployee)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            if (idEmployee < 0)
+            {
+                response.Errors.Add("ID Inválido!");
+            }
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
+            {
+                return await _iEmployeeRepository.Disable(idEmployee);
+            }
         }
 
         public async Task<DataResponse<EmployeeDTO>> GetActives()

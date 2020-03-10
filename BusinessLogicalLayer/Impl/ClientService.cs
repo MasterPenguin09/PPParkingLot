@@ -21,45 +21,37 @@ namespace BusinessLogicalLayer.Impl
             this._iClientRepository = iClientRep;
         }
 
-        public async Task<Response> Delete(ClientDTO client)
+        public async Task<Response> Delete(int idClient)
         {
             Response response = new Response();
-            ClientValidator validate = new ClientValidator();
-            ValidationResult result = validate.Validate(client);
-
-            if (!result.IsValid)
+            if (idClient < 0)
             {
-                foreach (var failure in result.Errors)
-                {
-                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
-                }
-
+                response.Errors.Add("ID Inválido!");
+            }
+            if (response.HasErrors())
+            {
                 return response;
             }
             else
             {
-                return await _iClientRepository.Delete(client);
+                return await _iClientRepository.Delete(idClient);
             }
         }
 
-        public async Task<Response> Disable(ClientDTO client)
+        public async Task<Response> Disable(int idClient)
         {
             Response response = new Response();
-            ClientValidator validate = new ClientValidator();
-            ValidationResult result = validate.Validate(client);
-
-            if (!result.IsValid)
+            if (idClient < 0)
             {
-                foreach (var failure in result.Errors)
-                {
-                    response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
-                }
-
+                response.Errors.Add("ID Inválido!");
+            }
+            if (response.HasErrors())
+            {
                 return response;
             }
             else
             {
-                return await _iClientRepository.Disable(client);
+                return await _iClientRepository.Disable(idClient);
             }
         }
 
