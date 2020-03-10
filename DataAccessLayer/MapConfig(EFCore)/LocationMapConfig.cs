@@ -13,7 +13,7 @@ namespace DataAccessLayer.MapConfig_EFCore_
     {
         public void Configure(EntityTypeBuilder<LocationDTO> builder)
         {
-            throw new NotImplementedException();
+            //Nada          
         }
     }
 }
