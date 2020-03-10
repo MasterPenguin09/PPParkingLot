@@ -10,7 +10,7 @@ namespace DataTransferObject
 
     public class LocationDTO
     {
-        public LocationDTO(int iD, DateTime entryTime, DateTime exitTime, PayForm payForm, int value, VehicleDTO vehicle, int vehicleID)
+        public LocationDTO(int iD, DateTime entryTime, DateTime? exitTime, PayForm payForm, int value, VehicleDTO vehicle, int vehicleID, ParkingSpotDTO parkingSpot, int parkingSpotID)
         {
             ID = iD;
             EntryTime = entryTime;
@@ -19,6 +19,8 @@ namespace DataTransferObject
             Value = value;
             Vehicle = vehicle;
             VehicleID = vehicleID;
+            ParkingSpot = parkingSpot;
+            ParkingSpotID = parkingSpotID;
         }
         public LocationDTO()
         {
