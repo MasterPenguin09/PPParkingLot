@@ -13,7 +13,7 @@ namespace BusinessLogicalLayer.Validators
     {
         public ClientValidator()
         {
-            RuleFor(c => c.BirthDate).LessThan(DateTime.Now);
+            RuleFor(c => c.BirthDate).GreaterThan(DateTime.Now);
             RuleFor(c => c.Name).Length(3,64);
             RuleFor(c => c.Name).NotEmpty();
             RuleFor(c => c.AccessLevel).IsInEnum();
