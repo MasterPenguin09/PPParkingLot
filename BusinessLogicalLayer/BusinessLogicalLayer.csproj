@@ -97,6 +97,7 @@
     <Compile Include="Validators\ClientValidator.cs" />
     <Compile Include="Validators\EmployeeValidator.cs" />
     <Compile Include="Validators\LocationValidator.cs" />
+    <Compile Include="Validators\ModelValidator.cs" />
     <Compile Include="Validators\PasswordValidator.cs" />
   </ItemGroup>
   <ItemGroup>
