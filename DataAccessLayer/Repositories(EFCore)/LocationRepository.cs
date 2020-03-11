@@ -1,6 +1,7 @@
 ﻿using Common.FlowControl;
 using DataAccessLayer.Interfaces_EFCore_;
 using DataTransferObject;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace DataAccessLayer.Repositories_EFCore_
 
             }
         }
-        public Task<DataResponse<LocationDTO>> GetActives()
+        public async Task<DataResponse<LocationDTO>> GetActives()
         {
 
             using (SmartParkingContext context = new SmartParkingContext())
@@ -58,7 +59,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             throw new NotImplementedException();
         }
 
-        }
+        
 
         public Task<DataResponse<LocationDTO>> GetActives(object location)
         {

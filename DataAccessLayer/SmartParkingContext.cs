@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    // =================GRANDE ARTHUR==================== Precisa tirar o delete on cascade 
+    
 
     public class SmartParkingContext : DbContext
     {
@@ -54,20 +54,16 @@ namespace DataAccessLayer
         {
             //TODO: Configurções globais
 
-            //base.OnModelCreating(modelBuilder);
+            var cascadeFKs = modelBuilder.Model.GetEntityTypes()
+       
+                .SelectMany(t => t.GetForeignKeys())
+        
+                .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
 
-            //// series of statements
-            //modelBuilder.Entity<Order>().Property(t => t.Length.).IsRequired();
-            //modelBuilder.Entity<Order>().Property(t => t.OrderDate).HasColumnType("Date");
-            //modelBuilder.Entity<Order>().Property(t => t.OrderDate).HasDefaultValueSql("GetDate()");
-            //// fluent api chained calls
-            //modelBuilder.Entity<Order>()
-            //    .Property(t => t.OrderDate)
-            //        .IsRequired()
-            //        .HasColumnType("Date")
-            //        .HasDefaultValueSql("GetDate()");
+            foreach (var fk in cascadeFKs)
+                fk.DeleteBehavior = DeleteBehavior.Restrict;
 
-            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            
             base.OnModelCreating(modelBuilder);
         }
     }
