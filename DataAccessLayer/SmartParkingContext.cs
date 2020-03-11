@@ -35,6 +35,7 @@ namespace DataAccessLayer
             
         }
 
+
         private void LoadStringConfig(ModelBuilder modelBuilder)
         {
             Assembly assemblyDTO = Assembly.GetAssembly(typeof(BrandDTO));
