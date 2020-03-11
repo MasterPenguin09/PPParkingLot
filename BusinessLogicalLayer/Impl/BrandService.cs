@@ -33,14 +33,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                
                 response = await _iBrandRepository.Delete(idBrand);
                 if (!response.Success)
                 {
-                    //LOG
                     return response;
                 }
-
+                else
+                {
+                 //Logger
+                }
             }
         }
 
