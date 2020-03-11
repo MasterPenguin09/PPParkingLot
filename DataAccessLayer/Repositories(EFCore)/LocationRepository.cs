@@ -4,6 +4,7 @@ using DataTransferObject;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,11 +42,30 @@ namespace DataAccessLayer.Repositories_EFCore_
         }
         public async Task<DataResponse<LocationDTO>> GetActives()
         {
-
-            using (SmartParkingContext context = new SmartParkingContext())
+            List<LocationDTO> locations= new List<LocationDTO>();
+          
+            try
             {
-                return await context.Locations.ToListAsync();
+                using (SmartParkingContext context = new SmartParkingContext())
+                {
+                    locations = await context.Locations.Where(c => c.IsActive == true).ToListAsync();
+                    
+                }
+                DataResponse<LocationDTO> dataResponse = new DataResponse<LocationDTO>();
+                dataResponse.Data = locations;
+                dataResponse.Success = true;
+                return dataResponse;
             }
+            catch (Exception ex)
+            {
+
+                File.WriteAllText("log.txt", ex.Message);
+                DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
+                response.Success = false;
+                response.Errors.Add("Falha ao acessar o banco de dados, contate o suporte.");
+                return response;
+            }
+
 
         }
 
