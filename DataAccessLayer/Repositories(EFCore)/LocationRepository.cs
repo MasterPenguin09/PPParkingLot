@@ -81,11 +81,6 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         
 
-        public Task<DataResponse<LocationDTO>> GetActives(object location)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<DataResponse<LocationDTO>> GetAll()
         {
             throw new NotImplementedException();

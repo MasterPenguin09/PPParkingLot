@@ -65,6 +65,6 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// <returns>DataResponse</returns>
         Task<DataResponse<LocationDTO>> GetByValue(double locationValue);
         Task<Task<DataResponse<LocationDTO>>> Disable(object location);
-        Task<DataResponse<LocationDTO>> GetActives(object location);
+
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Common.FlowControl;
 using DataAccessLayer.Interfaces_EFCore_;
 using DataTransferObject;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,9 +45,31 @@ namespace DataAccessLayer.Repositories_EFCore_
             throw new NotImplementedException();
         }
 
-        public Task<DataResponse<ParkingSpotDTO>> GetActives()
+        public async Task<DataResponse<ParkingSpotDTO>> GetActives()
         {
-            throw new NotImplementedException();
+            List<ParkingSpotDTO> parkingSpots = new List<ParkingSpotDTO>();
+
+            try
+            {
+                using (SmartParkingContext context = new SmartParkingContext())
+                {
+                    parkingSpots = await context.ParkingSpots.Where(c => c.IsActive == true).ToListAsync();
+
+                }
+                DataResponse<ParkingSpotDTO> dataResponse = new DataResponse<ParkingSpotDTO>();
+                dataResponse.Data = parkingSpots;
+                dataResponse.Success = true;
+                return dataResponse;
+            }
+            catch (Exception ex)
+            {
+
+                File.WriteAllText("log.txt", ex.Message);
+                DataResponse<ParkingSpotDTO> response = new DataResponse<ParkingSpotDTO>();
+                response.Success = false;
+                response.Errors.Add("Falha ao acessar o banco de dados, contate o suporte.");
+                return response;
+            }
         }
 
         public Task<DataResponse<ParkingSpotDTO>> GetAll()

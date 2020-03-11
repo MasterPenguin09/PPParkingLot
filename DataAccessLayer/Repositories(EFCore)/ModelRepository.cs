@@ -1,8 +1,10 @@
 ﻿using Common.FlowControl;
 using DataAccessLayer.Interfaces_EFCore_;
 using DataTransferObject;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,11 +45,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             throw new NotImplementedException();
         }
 
-        public async Task<DataResponse<ModelDTO>> GetActives()
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public async Task<DataResponse<ModelDTO>> GetAll()
         {
             throw new NotImplementedException();
