@@ -13,7 +13,29 @@ namespace DataAccessLayer.Repositories_EFCore_
     {
         public async Task<Response> Delete(int idVehicle)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            try
+            {
+                using (SmartParkingContext context = new SmartParkingContext())
+                {
+                    context.Entry<VehicleDTO>(new VehicleDTO() { ID = idVehicle }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                    int nLinhasAfetadas = await context.SaveChangesAsync();
+                    if (nLinhasAfetadas == 1)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+
+                    response.Errors.Add("Exclusão não executada");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+
+            }
         }
 
         public async Task<Response> Disable(int idVehicle)

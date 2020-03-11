@@ -32,11 +32,9 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                response.Errors.Add(ex.Message);
-                response.Errors.Add(ex.StackTrace);
-                response.Errors.Add("Erro no banco de dados conta o administrador");
-                return response;
-
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+                
             }
         }
 
