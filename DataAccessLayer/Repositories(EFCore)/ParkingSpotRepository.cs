@@ -13,7 +13,7 @@ namespace DataAccessLayer.Repositories_EFCore_
 {
     public class ParkingSpotRepository : IParkingSpotRepository
     {
-        public Task<Response> Delete(int idParkingSpot)
+        public async Task<Response> Delete(int idParkingSpot)
         {
             Response response = new Response();
             try
@@ -64,7 +64,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             catch (Exception ex)
             {
 
-                File.WriteAllText("log.txt", ex.Message);
                 DataResponse<ParkingSpotDTO> response = new DataResponse<ParkingSpotDTO>();
                 response.Success = false;
                 response.Errors.Add("Falha ao acessar o banco de dados, contate o suporte.");

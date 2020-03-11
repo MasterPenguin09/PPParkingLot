@@ -64,7 +64,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             catch (Exception ex)
             {
 
-                File.WriteAllText("log.txt", ex.Message);
+                
                 DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
                 response.Success = false;
                 response.Errors.Add("Falha ao acessar o banco de dados, contate o suporte.");

@@ -43,10 +43,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             throw new NotImplementedException();
         }
 
-        public async Task<DataResponse<BrandDTO>> GetActives()
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<DataResponse<BrandDTO>> GetAll()
         {
@@ -65,12 +61,35 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         public async Task<Response> Insert(BrandDTO brand)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            try
+            {
+                using (SmartParkingContext context = new SmartParkingContext())
+                {
+                    context.Brands.Add(brand);
+                    context.SaveChanges();
+                }
+                response.Success = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<Response> Update(BrandDTO brand)
         {
-            throw new NotImplementedException();
+            try
+            {
+                 
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }
