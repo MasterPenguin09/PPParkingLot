@@ -29,12 +29,7 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// <param name="model"></param>
         /// <returns>Response</returns>
         Task<Response> Update(ModelDTO model);
-
-        /// <summary>
-        /// Pega todos os modelos ativos
-        /// </summary>
-        /// <returns>DataResponse</returns>
-        Task<DataResponse<ModelDTO>> GetActives();
+ 
 
         /// <summary>
         /// Desabilita um modelo

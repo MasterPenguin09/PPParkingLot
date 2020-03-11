@@ -59,7 +59,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             catch (Exception ex)
             {
 
-                File.WriteAllText("log.txt", ex.Message);
+                
                 DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
                 response.Success = false;
                 response.Errors.Add("Falha ao acessar o banco de dados, contate o suporte.");
@@ -80,11 +80,6 @@ namespace DataAccessLayer.Repositories_EFCore_
         }
 
         
-
-        public Task<DataResponse<LocationDTO>> GetActives(object location)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<DataResponse<LocationDTO>> GetAll()
         {

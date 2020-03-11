@@ -146,6 +146,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\BoardValidator.cs" />
     <Compile Include="Extensions\CPFValidator.cs" />
     <Compile Include="Extensions\EmailValidator.cs" />
     <Compile Include="Extensions\FluentValidationsComplements.cs" />

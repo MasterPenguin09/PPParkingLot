@@ -31,11 +31,7 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// <returns>Response</returns>
         Task<Response> Update(BrandDTO brand);
 
-        /// <summary>
-        /// Pega apenas marcas ativas
-        /// </summary>
-        /// <returns>DataResponse</returns>
-        Task<DataResponse<BrandDTO>> GetActives();
+  
 
         /// <summary>
         /// Desabilita uma marca
