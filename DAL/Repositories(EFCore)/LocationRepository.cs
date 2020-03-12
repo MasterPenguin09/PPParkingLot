@@ -15,13 +15,19 @@ namespace DataAccessLayer.Repositories_EFCore_
 {
     public class LocationRepository : ILocationRepository
     {
+        private SmartParkingContext _context;
+        public LocationRepository(SmartParkingContext context)
+        {
+            _context = context;
+        }
+
         public async Task<Response> Delete(int idLocation)
         {
 
             Response response = new Response();
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
                     context.Entry<LocationDTO>(new LocationDTO() { ID = idLocation }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
                     int nLinhasAfetadas = await context.SaveChangesAsync();
@@ -44,68 +50,149 @@ namespace DataAccessLayer.Repositories_EFCore_
         }
         public async Task<DataResponse<LocationDTO>> GetActives()
         {
-            List<LocationDTO> locations= new List<LocationDTO>();
-          
+            DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
-                    locations = await context.Locations.Where(c => c.IsActive == true).ToListAsync();
-                    
+                    response.Data = await context.Locations.Where(c => c.IsActive == true).ToListAsync();
+                    response.Success = true;
+                    return response;
                 }
-                DataResponse<LocationDTO> dataResponse = new DataResponse<LocationDTO>();
-                dataResponse.Data = locations;
-                dataResponse.Success = true;
-                return dataResponse;
             }
             catch (Exception ex)
             {
-
-                
-                DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
-                response.Success = false;
                 response.Errors.Add("Falha ao acessar o banco de dados, contate o suporte.");
                 return response;
             }
-
-
         }
 
-        public Task<Response> Disable(int idLocation)
+        public async Task<Response> Disable(int idLocation)
+        {
+            Response response = new Response();
+
+            try
+            {
+                using (var context = _context)
+                {
+                    LocationDTO location = await context.Locations.FindAsync(idLocation);
+                    location.IsActive = false;
+                    await context.SaveChangesAsync();
+                }
+                response.Success = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+
+            }
+        }
+
+      
+        public async Task<DataResponse<LocationDTO>> GetAll()
+        {
+            DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
+
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data = await context.Locations.ToListAsync();
+
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Locações não encontradas");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
+        }
+
+        public async Task<DataResponse<LocationDTO>> GetByID(int locationID)
+        {
+            DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data.Add(await context.Locations.FindAsync(locationID));
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Cliente não encontrado");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
+        }
+
+        public async Task<DataResponse<LocationDTO>> GetByValue(double locationValue)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Task<DataResponse<LocationDTO>>> Disable(object location)
+        public async Task<Response> Insert(LocationDTO location)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            try
+            {
+                using (var context = _context)
+                {
+                    context.Locations.Add(location);
+                    await context.SaveChangesAsync();
+                }
+                response.Success = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
-        
-
-        public Task<DataResponse<LocationDTO>> GetAll()
+        public async Task<Response> Update(LocationDTO location)
         {
-            throw new NotImplementedException();
-        }
+            Response response = new Response();
+            try
+            {
+                using (var context = _context)
+                {
+                    //context.Entry(brand).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 
-        public Task<DataResponse<LocationDTO>> GetByID(int locationID)
-        {
-            throw new NotImplementedException();
-        }
+                    // int nLinhasAfetadas = await context.SaveChangesAsync();
+                    context.Update(location);
+                    await context.SaveChangesAsync();
+                    //if (nLinhasAfetadas == 1)
+                }  // {
+                response.Success = true;
+                return response;
+                // }
 
-        public Task<DataResponse<LocationDTO>> GetByValue(double locationValue)
-        {
-            throw new NotImplementedException();
-        }
+                // response.Errors.Add("Edição não executada");
+                //return response;
 
-        public Task<Response> Insert(LocationDTO location)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Response> Update(LocationDTO location)
-        {
-            throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
     }
 }

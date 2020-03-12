@@ -65,7 +65,7 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// <param name="locationValue"></param>
         /// <returns>DataResponse</returns>
         Task<DataResponse<LocationDTO>> GetByValue(double locationValue);
-        Task<Task<DataResponse<LocationDTO>>> Disable(object location);
+     
 
     }
 }
