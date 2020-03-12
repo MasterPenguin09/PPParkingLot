@@ -178,7 +178,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                     //context.Entry(brand).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 
                     // int nLinhasAfetadas = await context.SaveChangesAsync();
-                    context.Update(client);
+                    context.Clients.Update(client);
                     await context.SaveChangesAsync();
                     //if (nLinhasAfetadas == 1)
                 }  // {

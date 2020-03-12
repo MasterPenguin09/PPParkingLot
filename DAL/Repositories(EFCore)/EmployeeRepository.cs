@@ -114,12 +114,51 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         public async Task<Response> Insert(EmployeeDTO employee)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            try
+            {
+                using (var context = _context)
+                {
+                    context.Employees.Add(employee);
+                    await context.SaveChangesAsync();
+                }
+                response.Success = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<Response> Update(EmployeeDTO employee)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            try
+            {
+                using (var context = _context)
+                {
+                    //context.Entry(brand).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+                    // int nLinhasAfetadas = await context.SaveChangesAsync();
+                    context.Employees.Update(employee);
+                    await context.SaveChangesAsync();
+                    //if (nLinhasAfetadas == 1)
+                }  // {
+                response.Success = true;
+                return response;
+                // }
+
+                // response.Errors.Add("Edição não executada");
+                //return response;
+
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
     }
 }
