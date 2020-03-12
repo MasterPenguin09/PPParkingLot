@@ -15,12 +15,18 @@ namespace DataAccessLayer.Repositories_EFCore_
 {
     public class ParkingSpotRepository : IParkingSpotRepository
     {
+        private SmartParkingContext _context;
+        public ParkingSpotRepository(SmartParkingContext context)
+        {
+            _context = context;
+        }
+
         public async Task<Response> Delete(int idParkingSpot)
         {
             Response response = new Response();
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
                     context.Entry<ParkingSpotDTO>(new ParkingSpotDTO() { ID = idParkingSpot }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
                     int nLinhasAfetadas = await context.SaveChangesAsync();
@@ -42,55 +48,147 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
         }
 
-        public Task<Response> Disable(int idPakingSpot)
+        public async Task<Response> Disable(int idPakingSpot)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            try
+            {
+                using (var context = _context)
+                {
+                    ParkingSpotDTO parkingSpot = await context.ParkingSpots.FindAsync(idPakingSpot);
+                    parkingSpot.IsActive = false;
+                    context.ParkingSpots.Update(parkingSpot);
+                    await context.SaveChangesAsync();
+                }
+                response.Success = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+
+            }
         }
 
         public async Task<DataResponse<ParkingSpotDTO>> GetActives()
         {
-            List<ParkingSpotDTO> parkingSpots = new List<ParkingSpotDTO>();
+            DataResponse<ParkingSpotDTO> response = new DataResponse<ParkingSpotDTO>();
 
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
-                    parkingSpots = await context.ParkingSpots.Where(c => c.IsActive == true).ToListAsync();
-
+                    response.Data = await context.ParkingSpots.Where(c => c.IsActive == true).ToListAsync();
+                    response.Success = true;
+                    return response;
                 }
-                DataResponse<ParkingSpotDTO> dataResponse = new DataResponse<ParkingSpotDTO>();
-                dataResponse.Data = parkingSpots;
-                dataResponse.Success = true;
-                return dataResponse;
             }
             catch (Exception ex)
             {
-
-                DataResponse<ParkingSpotDTO> response = new DataResponse<ParkingSpotDTO>();
                 response.Success = false;
                 response.Errors.Add("Falha ao acessar o banco de dados, contate o suporte.");
                 return response;
             }
         }
 
-        public Task<DataResponse<ParkingSpotDTO>> GetAll()
+        public async Task<DataResponse<ParkingSpotDTO>> GetAll()
         {
-            throw new NotImplementedException();
+            DataResponse<ParkingSpotDTO> response = new DataResponse<ParkingSpotDTO>();
+
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data = await context.ParkingSpots.ToListAsync();
+
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Vagas não encontradas");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
-        public Task<DataResponse<ParkingSpotDTO>> GetByID(int idPakingSpot)
+        public async Task<DataResponse<ParkingSpotDTO>> GetByID(int idPakingSpot)
         {
-            throw new NotImplementedException();
+            DataResponse<ParkingSpotDTO> response = new DataResponse<ParkingSpotDTO>();
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data.Add(await context.ParkingSpots.FindAsync(idPakingSpot));
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Vaga não encontrada");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
-        public Task<Response> Insert(ParkingSpotDTO pakingSpot)
+        public async Task<Response> Insert(ParkingSpotDTO pakingSpot)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            try
+            {
+                using (var context = _context)
+                {
+                    context.ParkingSpots.Add(pakingSpot);
+                    await context.SaveChangesAsync();
+                }
+                response.Success = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
-        public Task<Response> Update(ParkingSpotDTO pakingSpot)
+        public async Task<Response> Update(ParkingSpotDTO pakingSpot)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            try
+            {
+                using (var context = _context)
+                {
+                    //context.Entry(brand).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+                    // int nLinhasAfetadas = await context.SaveChangesAsync();
+                    context.ParkingSpots.Update(pakingSpot);
+                    await context.SaveChangesAsync();
+                    //if (nLinhasAfetadas == 1)
+                }  // {
+                response.Success = true;
+                return response;
+                // }
+
+                // response.Errors.Add("Edição não executada");
+                //return response;
+
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
     }
 }

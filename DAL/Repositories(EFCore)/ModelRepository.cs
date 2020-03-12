@@ -15,12 +15,17 @@ namespace DataAccessLayer.Repositories_EFCore_
 {
     public class ModelRepository : IModelRepository
     {
+        private SmartParkingContext _context;
+        public ModelRepository(SmartParkingContext context)
+        {
+            _context = context;
+        }
         public async Task<Response> Delete(int idModel)
         {
             Response response = new Response();
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
                     context.Entry<ModelDTO>(new ModelDTO() { ID = idModel }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
                     int nLinhasAfetadas = await context.SaveChangesAsync();
@@ -40,32 +45,97 @@ namespace DataAccessLayer.Repositories_EFCore_
                 throw ex;
 
             }
-        }
-
-        public async Task<Response> Disable(int idModel)
-        {
-            throw new NotImplementedException();
-        }
-
-       
+        }     
+      
         public async Task<DataResponse<ModelDTO>> GetAll()
         {
-            throw new NotImplementedException();
+            DataResponse<ModelDTO> response = new DataResponse<ModelDTO>();
+
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data = await context.Models.ToListAsync();
+
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Modelos não encontrados");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<DataResponse<ModelDTO>> GetByID(int modelID)
         {
-            throw new NotImplementedException();
+            DataResponse<ModelDTO> response = new DataResponse<ModelDTO>();
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data.Add(await context.Models.FindAsync(modelID));
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Modelo não encontrado");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<Response> Insert(ModelDTO model)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            try
+            {
+                using (var context = _context)
+                {
+                    context.Models.Add(model);
+                    await context.SaveChangesAsync();
+                }
+                response.Success = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
+    
 
         public async Task<Response> Update(ModelDTO model)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            try
+            {
+                using (var context = _context)
+                {                       
+                    context.Models.Update(model);
+                    await context.SaveChangesAsync();
+                }
+                response.Success = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
     }
 }

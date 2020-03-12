@@ -31,14 +31,7 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// <returns>Response</returns>
         Task<Response> Update(ModelDTO model);
  
-
-        /// <summary>
-        /// Desabilita um modelo
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns>Response</returns>
-        Task<Response> Disable(int idModel);
-
+        
         /// <summary>
         /// Apaga um modelo
         /// </summary>

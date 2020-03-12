@@ -44,22 +44,7 @@ namespace BusinessLogicalLayer.Impl
             }
         }
 
-        public async Task<Response> Disable(int idModel)
-        {
-            Response response = new Response();
-            if (idModel < 0)
-            {
-                response.Errors.Add("ID Inválido!");
-            }
-            if (response.HasErrors())
-            {
-                return response;
-            }
-            else
-            {
-                return await _iModelRepository.Disable(idModel);
-            }
-        }
+       
 
       
 
