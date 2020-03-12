@@ -37,12 +37,7 @@ namespace BusinessLogicalLayer.Interfaces
 
        
 
-        /// <summary>
-        /// Desabilita uma marca
-        /// </summary>
-        /// <param name="brand"></param>
-        /// <returns>Response</returns>
-        Task<Response> Disable(int idBrand);
+       
 
         /// <summary>
         /// Apaga uma marca do banco

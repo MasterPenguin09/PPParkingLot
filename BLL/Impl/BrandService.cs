@@ -47,10 +47,7 @@ namespace BusinessLogicalLayer.Impl
             }
         }
 
-        public Task<Response> Disable(int idBrand)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         //public async Task<Response> Disable(int idBrand)
         //{
