@@ -15,12 +15,18 @@ namespace DataAccessLayer.Repositories_EFCore_
 {
     public class VehicleRepository : IVehicleRepository
     {
+        private SmartParkingContext _context;
+        public VehicleRepository(SmartParkingContext context)
+        {
+            _context = context;
+        }
+
         public async Task<Response> Delete(int idVehicle)
         {
             Response response = new Response();
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
                     context.Entry<VehicleDTO>(new VehicleDTO() { ID = idVehicle }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
                     int nLinhasAfetadas = await context.SaveChangesAsync();
@@ -44,30 +50,42 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         public async Task<Response> Disable(int idVehicle)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+
+            try
+            {
+                using (var context = _context)
+                {
+                    VehicleDTO vehicle = await context.Vehicles.FindAsync(idVehicle);
+                    vehicle.IsActive = false;
+                    await context.SaveChangesAsync();
+                }
+                response.Success = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+
+            }
         }
 
         public async Task<DataResponse<VehicleDTO>> GetActives()
         {
-            List<VehicleDTO> vehicles = new List<VehicleDTO>();
+            DataResponse<VehicleDTO> response = new DataResponse<VehicleDTO>();
 
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
-                    vehicles = await context.Vehicles.Where(c => c.IsActive == true).ToListAsync();
-
+                    response.Data = await context.Vehicles.Where(c => c.IsActive == true).ToListAsync();
+                    response.Success = true;
+                    return response;
                 }
-                DataResponse<VehicleDTO> dataResponse = new DataResponse<VehicleDTO>();
-                dataResponse.Data = vehicles;
-                dataResponse.Success = true;
-                return dataResponse;
             }
             catch (Exception ex)
             {
-
-
-                DataResponse<VehicleDTO> response = new DataResponse<VehicleDTO>();
                 response.Success = false;
                 response.Errors.Add("Falha ao acessar o banco de dados, contate o suporte.");
                 return response;
@@ -76,27 +94,125 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         public async Task<DataResponse<VehicleDTO>> GetAll()
         {
-            throw new NotImplementedException();
+            DataResponse<VehicleDTO> response = new DataResponse<VehicleDTO>();
+
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data = await context.Vehicles.ToListAsync();
+
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Veículos não encontradas");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<DataResponse<VehicleDTO>> GetByID(int vehicleID)
         {
-            throw new NotImplementedException();
+            DataResponse<VehicleDTO> response = new DataResponse<VehicleDTO>();
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data.Add(await context.Vehicles.FindAsync(vehicleID));
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Veículo não encontrado");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<DataResponse<VehicleDTO>> GetByVehicleBoard(string vehicleBoard)
         {
-            throw new NotImplementedException();
+            DataResponse<VehicleDTO> response = new DataResponse<VehicleDTO>();
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data.Add(await context.Vehicles.Where(c => c.CarBoard == vehicleBoard).FirstOrDefaultAsync());
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Veículo não encontrado");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<Response> Insert(VehicleDTO vehicle)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            try
+            {
+                using (var context = _context)
+                {
+                    context.Vehicles.Add(vehicle);
+                    await context.SaveChangesAsync();
+                }
+                response.Success = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<Response> Update(VehicleDTO vehicle)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            try
+            {
+                using (var context = _context)
+                {
+                    //context.Entry(brand).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+                    // int nLinhasAfetadas = await context.SaveChangesAsync();
+                    context.Vehicles.Update(vehicle);
+                    await context.SaveChangesAsync();
+                    //if (nLinhasAfetadas == 1)
+                }  // {
+                response.Success = true;
+                return response;
+                // }
+
+                // response.Errors.Add("Edição não executada");
+                //return response;
+
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
     }
 }
