@@ -9,7 +9,11 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Interfaces
 {
-   internal interface IVehicleService
+    /// <summary>
+    /// Possui uma interface interna que contém todas as ações da VehicleService
+    /// </summary>
+
+    internal interface IVehicleService
     {
         /// <summary>
         /// Insere um veículo

@@ -33,7 +33,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                     if (nLinhasAfetadas == 1)
                     {
                         response.Success = true;
-                        return response;
+                        return  response;
                     }
 
                     response.Errors.Add("Exclusão não executada");

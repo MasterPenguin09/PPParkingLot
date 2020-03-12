@@ -10,6 +10,10 @@ namespace BusinessLogicalLayer.Validators
 {
     class VehicleValidator : AbstractValidator<VehicleDTO>
     {
+        /// <summary>
+        ///É uma classe que herda de  AbstractValidator
+        ///e passa como parametro VehicleDTO e possui um metodo que valida suas propriedades
+        /// </summary>
         public VehicleValidator()
         {
             RuleFor(c => c.Model).NotEmpty();

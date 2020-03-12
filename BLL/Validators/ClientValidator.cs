@@ -11,6 +11,10 @@ namespace BusinessLogicalLayer.Validators
 {
     class ClientValidator : AbstractValidator<ClientDTO>
     {
+        /// <summary>
+        ///É uma classe que herda de  AbstractValidator
+        ///e passa como parametro ClientDTO e possui um metodo que valida suas propriedades
+        /// </summary>
         public ClientValidator()
         {
             RuleFor(c => c.BirthDate).GreaterThan(DateTime.Now);

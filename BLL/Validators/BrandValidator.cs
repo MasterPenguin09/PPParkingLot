@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicalLayer.Validators
 {
+    /// <summary>
+    ///É uma classe que herda de  AbstractValidator
+    ///e passa como parametro BrandDTO, e possui um metodo que valida suas propriedades
+    /// </summary>
     class BrandValidator : AbstractValidator<BrandDTO>
     {
         public BrandValidator()
