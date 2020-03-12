@@ -9,6 +9,9 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Interfaces
 {
+    /// <summary>
+    /// Possui uma interface interna que contém todas as ações da ClientService
+    /// </summary>
     internal interface IClientService
     {
         /// <summary>

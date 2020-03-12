@@ -9,7 +9,10 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Interfaces
 {
-   internal interface IEmployeeService
+    /// <summary>
+    /// Possui uma interface interna que contém todas as ações da EmployeeService
+    /// </summary>
+    internal interface IEmployeeService
     {
         /// <summary>
         /// Insere um funcionário

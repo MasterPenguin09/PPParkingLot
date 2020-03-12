@@ -15,6 +15,13 @@ namespace BusinessLogicalLayer.Impl
 {
    public class VehicleService : IVehicleService
     {
+
+        /// <summary>
+        /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
+        /// Sua função é trazer os serviços do Vehicle ligadas a logica dos negocios, com auxilio de
+        /// uma interface privada que traz as regras do Banco de Dados ligada a Vehicle
+        /// </summary>
+        /// 
         private IVehicleRepository _iVehicleRepository;
         public VehicleService(IVehicleRepository iVehicleRep)
         {

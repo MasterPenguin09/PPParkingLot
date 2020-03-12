@@ -50,7 +50,26 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         public async Task<Response> Disable(int idClient)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+
+            try
+            {
+                using (var context = _context)
+                {
+                    ClientDTO client = await context.Clients.FindAsync(idClient);
+                    client.IsActive = false;
+                    context.Clients.Update(client);
+                    await context.SaveChangesAsync();
+                }
+                response.Success = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+
+            }
         }
 
         public async Task<DataResponse<ClientDTO>> GetActives()

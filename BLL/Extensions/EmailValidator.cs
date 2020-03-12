@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicalLayer.Extensions
 {
+
     static class EmailValidator
     {
+
+        /// <summary>
+        /// Classe estatica que valida o Email
+        /// Possui um Regex estatico que valida um email
+        /// </summary>
+        
         static Regex ValidEmailRegex = CreateValidEmailRegex();
         private static Regex CreateValidEmailRegex()
         {

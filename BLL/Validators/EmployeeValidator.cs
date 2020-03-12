@@ -11,6 +11,10 @@ namespace BusinessLogicalLayer.Validators
 {
     class EmployeeValidator : AbstractValidator<EmployeeDTO>
     {
+        /// <summary>
+        ///É uma classe que herda de  AbstractValidator
+        ///e passa como parametro EmployeeDTO e possui um metodo que valida suas propriedades
+        /// </summary>
         public EmployeeValidator()
         {
             RuleFor(c => c.BirthDate).LessThan(DateTime.Now);

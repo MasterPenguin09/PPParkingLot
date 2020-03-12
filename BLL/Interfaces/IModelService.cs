@@ -9,6 +9,10 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Interfaces
 {
+    /// <summary>
+    /// Possui uma interface interna que contém todas as ações da ModelService
+    /// </summary>
+
     internal interface IModelService
     {
         /// <summary>
@@ -32,13 +36,6 @@ namespace BusinessLogicalLayer.Interfaces
         Task<Response> Update(ModelDTO model);
 
       
-
-        /// <summary>
-        /// Desabilita um modelo
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns>Response</returns>
-        Task<Response> Disable(int idModel);
 
         /// <summary>
         /// Apaga um modelo

@@ -15,7 +15,13 @@ namespace BusinessLogicalLayer.Impl
 {
    public class ClientService : IClientService
     {
-        private  IClientRepository _iClientRepository;
+        /// <summary>
+        /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
+        /// Sua função é trazer os serviços do Client ligadas a logica dos negocios, com auxilio de
+        /// uma interface privada que traz as regras do Banco de Dados ligada ao CLient
+        /// </summary>
+
+        private IClientRepository _iClientRepository;
         public ClientService(IClientRepository iClientRep)
         {
             this._iClientRepository = iClientRep;
