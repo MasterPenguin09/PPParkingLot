@@ -58,6 +58,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                 {
                     VehicleDTO vehicle = await context.Vehicles.FindAsync(idVehicle);
                     vehicle.IsActive = false;
+                    context.Vehicles.Update(vehicle);
                     await context.SaveChangesAsync();
                 }
                 response.Success = true;

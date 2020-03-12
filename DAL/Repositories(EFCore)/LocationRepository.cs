@@ -77,6 +77,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                 {
                     LocationDTO location = await context.Locations.FindAsync(idLocation);
                     location.IsActive = false;
+                    context.Locations.Update(location);
                     await context.SaveChangesAsync();
                 }
                 response.Success = true;

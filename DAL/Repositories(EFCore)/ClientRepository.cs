@@ -58,6 +58,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                 {
                     ClientDTO client = await context.Clients.FindAsync(idClient);
                     client.IsActive = false;
+                    context.Clients.Update(client);
                     await context.SaveChangesAsync();
                 }
                 response.Success = true;

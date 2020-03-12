@@ -57,6 +57,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                 {
                     ParkingSpotDTO parkingSpot = await context.ParkingSpots.FindAsync(idPakingSpot);
                     parkingSpot.IsActive = false;
+                    context.ParkingSpots.Update(parkingSpot);
                     await context.SaveChangesAsync();
                 }
                 response.Success = true;

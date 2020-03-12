@@ -57,6 +57,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                 {
                    EmployeeDTO employee = await context.Employees.FindAsync(idEmployee);
                     employee.IsActive = false;
+                    context.Employees.Update(employee);
                     await context.SaveChangesAsync();
                 }
                 response.Success = true;
