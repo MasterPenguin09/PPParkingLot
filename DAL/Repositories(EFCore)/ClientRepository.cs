@@ -15,12 +15,18 @@ namespace DataAccessLayer.Repositories_EFCore_
 {
     public class ClientRepository : IClientRepository
     {
+        private SmartParkingContext _context;
+        public ClientRepository(SmartParkingContext context)
+        {
+            _context = context;
+        }
+
         public async Task<Response> Delete(int idClient)
         {
             Response response = new Response();
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
                     context.Entry<ClientDTO>(new ClientDTO() { ID = idClient }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
                     int nLinhasAfetadas = await context.SaveChangesAsync();
@@ -49,25 +55,19 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         public async Task<DataResponse<ClientDTO>> GetActives()
         {
-            List<ClientDTO> clients = new List<ClientDTO>();
+            DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
 
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
-                    clients = await context.Clients.Where(c => c.IsActive == true).ToListAsync();
-
+                    response.Data = await context.Clients.Where(c => c.IsActive == true).ToListAsync();
+                    response.Success = true;
+                    return response;
                 }
-                DataResponse<ClientDTO> dataResponse = new DataResponse<ClientDTO>();
-                dataResponse.Data = clients;
-                dataResponse.Success = true;
-                return dataResponse;
             }
             catch (Exception ex)
             {
-
-                
-                DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
                 response.Success = false;
                 response.Errors.Add("Falha ao acessar o banco de dados, contate o suporte.");
                 return response;
@@ -76,12 +76,52 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         public async Task<DataResponse<ClientDTO>> GetAll()
         {
-            throw new NotImplementedException();
+            DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
+
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data = await context.Clients.ToListAsync();
+
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Clientes não encontradas");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<DataResponse<ClientDTO>> GetByID(int clientID)
         {
-            throw new NotImplementedException();
+            DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data.Add(await context.Clients.FindAsync(clientID));
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Cliente não encontrado");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<DataResponse<ClientDTO>> GetByName(string clientName)
