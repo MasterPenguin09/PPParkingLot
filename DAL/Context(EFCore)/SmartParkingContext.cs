@@ -43,7 +43,7 @@ namespace DAL.Context_EFCore_
         //        }
         //    }
 
-        }
+        //}
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
         //    //TODO: Configurções globais

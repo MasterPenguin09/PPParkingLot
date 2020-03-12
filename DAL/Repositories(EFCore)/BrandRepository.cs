@@ -101,7 +101,26 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         public async Task<DataResponse<BrandDTO>> GetByName(string brandName)
         {
-            throw new NotImplementedException();
+            DataResponse<BrandDTO> response = new DataResponse<BrandDTO>();
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data.Add(await context.Brands.Where(c => c.Name == brandName).FirstOrDefaultAsync());
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Marca não encontrada");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<Response> Insert(BrandDTO brand)
