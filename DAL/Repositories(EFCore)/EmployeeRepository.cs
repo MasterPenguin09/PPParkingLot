@@ -15,12 +15,17 @@ namespace DataAccessLayer.Repositories_EFCore_
 {
     public class EmployeeRepository : IEmployeeRepository
     {
+        private SmartParkingContext _context;
+        public EmployeeRepository(SmartParkingContext context)
+        {
+            _context = context;
+        }
         public async Task<Response> Delete(int idEmployee)
         {
             Response response = new Response();
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
                     context.Entry<EmployeeDTO>(new EmployeeDTO() { ID = idEmployee }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
                     int nLinhasAfetadas = await context.SaveChangesAsync();
@@ -29,7 +34,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                         response.Success = true;
                         return response;
                     }
-
+                    
                     response.Errors.Add("Exclusão não executada");
                     return response;
                 }
@@ -44,7 +49,25 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         public async Task<Response> Disable(int idEmployee)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+
+            try
+            {
+                using (var context = _context)
+                {
+                   EmployeeDTO employee = await context.Employees.FindAsync(idEmployee);
+                    employee.IsActive = false;
+                    await context.SaveChangesAsync();
+                }
+                response.Success = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+
+            }
         }
 
         public async Task<DataResponse<EmployeeDTO>> GetActives()
@@ -53,7 +76,7 @@ namespace DataAccessLayer.Repositories_EFCore_
 
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
                     employees = await context.Employees.Where(c => c.IsActive == true).ToListAsync();
 
