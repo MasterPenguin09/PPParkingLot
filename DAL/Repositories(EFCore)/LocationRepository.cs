@@ -67,9 +67,27 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
         }
 
-        public Task<Response> Disable(int idLocation)
+        public async Task<Response> Disable(int idLocation)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+
+            try
+            {
+                using (var context = _context)
+                {
+                    LocationDTO location = await context.Locations.FindAsync(idLocation);
+                    location.IsActive = false;
+                    await context.SaveChangesAsync();
+                }
+                response.Success = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+
+            }
         }
 
       
