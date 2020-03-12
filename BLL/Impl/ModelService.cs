@@ -15,6 +15,12 @@ namespace BusinessLogicalLayer.Impl
 {
    public class ModelService : IModelService
     {
+        /// <summary>
+        /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
+        /// Sua função é trazer os serviços do Model ligadas a logica dos negocios, com auxilio de
+        /// uma interface privada que traz as regras do Banco de Dados ligada a Model
+        /// </summary>
+
         private IModelRepository _iModelRepository;
         public ModelService(IModelRepository iModelRep)
         {

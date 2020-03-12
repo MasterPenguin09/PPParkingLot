@@ -14,6 +14,12 @@ namespace BusinessLogicalLayer.Impl
 {
    public class BrandService : IBrandService
     {
+        /// <summary>
+        /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
+        /// Sua função é trazer os serviços da Brand ligadas a logica dos negocios, com auxilio de
+        /// uma interface privada que traz as regras do Banco de Dados ligada a Brand
+        /// </summary>
+
         private IBrandRepository _iBrandRepository;
         public BrandService(IBrandRepository iBrandRep)
         {

@@ -16,6 +16,12 @@ namespace BusinessLogicalLayer.Impl
 {
    public class EmployeeService : IEmployeeService
     {
+        /// <summary>
+        /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
+        /// Sua função é trazer os serviços do Employee ligadas a logica dos negocios, com auxilio de
+        /// uma interface privada que traz as regras do Banco de Dados ligada a Employee
+        /// </summary>
+
         private IEmployeeRepository _iEmployeeRepository;
         public EmployeeService(IEmployeeRepository iEmployeeRep)
         {

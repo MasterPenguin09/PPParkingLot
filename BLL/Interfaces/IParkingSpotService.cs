@@ -9,7 +9,10 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Interfaces
 {
-     interface IParkingSpotService
+    /// <summary>
+    /// Possui uma interface interna que contém todas as ações da ParkingSpotService
+    /// </summary>
+    interface IParkingSpotService
     {
         /// <summary>
         /// Insere um modelo

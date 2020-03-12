@@ -10,6 +10,10 @@ namespace BusinessLogicalLayer.Validators
 {
     public class ParkingSpotValidator : AbstractValidator<ParkingSpotDTO>
     {
+        /// <summary>
+        ///É uma classe que herda de  AbstractValidator
+        ///e passa como parametro ParkingSpotDTO e possui um metodo que valida suas propriedades
+        /// </summary>
         public ParkingSpotValidator()
         {
             RuleFor(c => c.Type).IsInEnum();
