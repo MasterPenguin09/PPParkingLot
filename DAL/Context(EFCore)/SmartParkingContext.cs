@@ -33,19 +33,19 @@ namespace DAL.Context_EFCore_
         }
 
 
-        private void LoadStringConfig(ModelBuilder modelBuilder)
-        {
-            Assembly assemblyDTO = Assembly.GetAssembly(typeof(BrandDTO));
+        //private void LoadStringConfig(ModelBuilder modelBuilder)
+        //{
+        //    Assembly assemblyDTO = Assembly.GetAssembly(typeof(BrandDTO));
 
-            List<Type> types = assemblyDTO.GetTypes().Where(c => c.Namespace == "DTO").ToList();
+        //    List<Type> types = assemblyDTO.GetTypes().Where(c => c.Namespace == "DTO").ToList();
 
-            foreach (Type item in types)
-            {
-                foreach (PropertyInfo propriedade in item.GetProperties().Where(c => c.PropertyType == typeof(string)))
-                {
-                    modelBuilder.Entity(item.Name).Property(propriedade.Name).IsRequired().IsUnicode(false);
-                }
-            }
+        //    foreach (Type item in types)
+        //    {
+        //        foreach (PropertyInfo propriedade in item.GetProperties().Where(c => c.PropertyType == typeof(string)))
+        //        {
+        //            modelBuilder.Entity(item.Name).Property(propriedade.Name).IsRequired().IsUnicode(false);
+        //        }
+        //    }
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

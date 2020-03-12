@@ -17,7 +17,7 @@ namespace BusinessLogicalLayer.Validators
 
             RuleFor(l => l.Vehicle).NotEmpty();
 
-            RuleFor(l => l.EntryTime).LessThan(DateTime.Now);
+            RuleFor(l => l.EntryTime).GreaterThan(DateTime.Now);
 
             RuleFor(l => l.VehicleID).NotEmpty();
 

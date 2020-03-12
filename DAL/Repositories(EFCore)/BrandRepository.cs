@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SystemCommons;
+using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Repositories_EFCore_
 {
@@ -36,24 +38,59 @@ namespace DataAccessLayer.Repositories_EFCore_
             {
                 response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
-                
+
             }
         }
 
-        public async Task<Response> Disable(int idBrand)
-        {
-            throw new NotImplementedException();
-        }
-
-
         public async Task<DataResponse<BrandDTO>> GetAll()
         {
-            throw new NotImplementedException();
+            DataResponse<BrandDTO> response = new DataResponse<BrandDTO>();
+
+            try
+            {
+                using (SmartParkingContext context = new SmartParkingContext())
+                {
+                    response.Data = await context.Brands.ToListAsync();
+
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Marcas não encontradas");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<DataResponse<BrandDTO>> GetByID(int brandID)
         {
-            throw new NotImplementedException();
+            DataResponse<BrandDTO> response = new DataResponse<BrandDTO>();
+            try
+            {
+                using (SmartParkingContext context = new SmartParkingContext())
+                {
+                    response.Data.Add(await context.Brands.FindAsync(brandID));
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Marca não encontrada");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
+
         }
 
         public async Task<DataResponse<BrandDTO>> GetByName(string brandName)
@@ -69,7 +106,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (SmartParkingContext context = new SmartParkingContext())
                 {
                     context.Brands.Add(brand);
-                    context.SaveChanges();
+                    await context.SaveChangesAsync();
                 }
                 response.Success = true;
                 return response;
@@ -83,14 +120,27 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         public async Task<Response> Update(BrandDTO brand)
         {
+            Response response = new Response();
             try
             {
-                 
+                using (SmartParkingContext context = new SmartParkingContext())
+                {
+                    context.Entry(brand).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    int nLinhasAfetadas = await context.SaveChangesAsync();
+                    if (nLinhasAfetadas == 1)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+
+                    response.Errors.Add("Edição não executada");
+                    return response;
+                }
             }
             catch (Exception ex)
             {
-
-                throw;
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
             }
         }
     }

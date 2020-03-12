@@ -32,15 +32,7 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// <returns>Response</returns>
         Task<Response> Update(BrandDTO brand);
 
-  
-
-        /// <summary>
-        /// Desabilita uma marca
-        /// </summary>
-        /// <param name="brand"></param>
-        /// <returns>Response</returns>
-        Task<Response> Disable(int idBrand);
-
+ 
         /// <summary>
         /// Apaga uma marca do banco
         /// </summary>
