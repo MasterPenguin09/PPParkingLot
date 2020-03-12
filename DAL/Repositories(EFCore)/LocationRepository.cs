@@ -143,7 +143,26 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         public async Task<DataResponse<LocationDTO>> GetByValue(double locationValue)
         {
-            throw new NotImplementedException();
+            DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data.Add(await context.Locations.Where(c => c.Value <= locationValue).FirstOrDefaultAsync());
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Cliente não encontrado");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<Response> Insert(LocationDTO location)
