@@ -38,10 +38,12 @@ namespace BusinessLogicalLayer.Impl
                 {
                     return response;
                 }
+
                 else
                 {
-                  
-                 //Logger
+                    response.Success = true;
+                    return response;
+                    //Logger
                 }
             }
         }
