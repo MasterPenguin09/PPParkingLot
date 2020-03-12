@@ -34,13 +34,6 @@ namespace BusinessLogicalLayer.Interfaces
       
 
         /// <summary>
-        /// Desabilita um modelo
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns>Response</returns>
-        Task<Response> Disable(int idModel);
-
-        /// <summary>
         /// Apaga um modelo
         /// </summary>
         /// <param name="model"></param>
