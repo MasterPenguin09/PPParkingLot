@@ -40,28 +40,34 @@ namespace BusinessLogicalLayer.Impl
                 }
                 else
                 {
+                    return response;
                   
                  //Logger
                 }
             }
         }
 
-        public async Task<Response> Disable(int idBrand)
+        public Task<Response> Disable(int idBrand)
         {
-            Response response = new Response();
-            if (idBrand < 0)
-            {
-                response.Errors.Add("ID Inválido!");
-            }
-            if (response.HasErrors())
-            {
-                return response;
-            }
-            else
-        {
-            return await _iBrandRepository.Disable(idBrand);
+            throw new NotImplementedException();
         }
-        }
+
+        //public async Task<Response> Disable(int idBrand)
+        //{
+        //    Response response = new Response();
+        //    if (idBrand < 0)
+        //    {
+        //        response.Errors.Add("ID Inválido!");
+        //    }
+        //    if (response.HasErrors())
+        //    {
+        //        return response;
+        //    }
+        //    else
+        //{
+        //    return await _iBrandRepository.Disable(idBrand);
+        //}
+        //}
 
         public async Task<DataResponse<BrandDTO>> GetAll()
         {

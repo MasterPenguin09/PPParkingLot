@@ -64,5 +64,7 @@ namespace BusinessLogicalLayer.Interfaces
         /// <param name="locationValue"></param>
         /// <returns>DataResponse</returns>
         Task<DataResponse<LocationDTO>> GetByValue(double locationValue);
+
+
     }
 }

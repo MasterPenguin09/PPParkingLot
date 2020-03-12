@@ -139,6 +139,16 @@ namespace BusinessLogicalLayer.Impl
                 return await _iLocationRepository.Update(location);
             }
         }
+        private LocationDTO CalculatePrice(int idLocation)
+        {
+            Task<DataResponse<LocationDTO>> CU = _iLocationRepository.GetByID(idLocation);
+            LocationDTO locacao = CU.Result.Data.FirstOrDefault();
+            locacao.ExitTime = DateTime.Now;
+            TimeSpan tempoDeLocacao = locacao.ExitTime.Value.Subtract(locacao.EntryTime);
+            Double valorLocacao = tempoDeLocacao.Hours * locacao.ParkingSpot.ValuePerHour;
+            locacao.Value = valorLocacao;
+            return locacao;
+        }
     }
  }
 
