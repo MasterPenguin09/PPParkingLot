@@ -8,18 +8,14 @@ using System.Text;
 
 namespace DAL.Context_EFCore_
 {
-    class SmartParkingContext : DbContext
+    public class SmartParkingContext : DbContext
     {
         //https://www.learnentityframeworkcore.com/configuration/fluent-api
         public SmartParkingContext(DbContextOptions<SmartParkingContext> options) : base(options)
         {
-
         }
 
-        public SmartParkingContext() : base()
-        {
-
-        }
+       
         public DbSet<BrandDTO> Brands { get; set; }
         public DbSet<EmployeeDTO> Employees { get; set; }
         public DbSet<LocationDTO> Locations { get; set; }
@@ -48,21 +44,21 @@ namespace DAL.Context_EFCore_
         //    }
 
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            //TODO: Configurções globais
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    //TODO: Configurções globais
 
-            var cascadeFKs = modelBuilder.Model.GetEntityTypes()
+        //    var cascadeFKs = modelBuilder.Model.GetEntityTypes()
 
-                .SelectMany(t => t.GetForeignKeys())
+        //        .SelectMany(t => t.GetForeignKeys())
 
-                .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
+        //        .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
 
-            foreach (var fk in cascadeFKs)
-                fk.DeleteBehavior = DeleteBehavior.Restrict;
+        //    foreach (var fk in cascadeFKs)
+        //        fk.DeleteBehavior = DeleteBehavior.Restrict;
 
 
-            base.OnModelCreating(modelBuilder);
-        }
+        //    base.OnModelCreating(modelBuilder);
+        //}
     }
 }

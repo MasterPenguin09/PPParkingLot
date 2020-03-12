@@ -15,12 +15,18 @@ namespace DataAccessLayer.Repositories_EFCore_
 {
     public class BrandRepository : IBrandRepository
     {
+        private SmartParkingContext _context;
+        public BrandRepository(SmartParkingContext context)
+        {
+            _context = context;
+        }
+
         public async Task<Response> Delete(int idBrand)
         {
             Response response = new Response();
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
                     context.Entry<BrandDTO>(new BrandDTO() { ID = idBrand }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
                     int nLinhasAfetadas = await context.SaveChangesAsync();
@@ -48,7 +54,7 @@ namespace DataAccessLayer.Repositories_EFCore_
 
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
                     response.Data = await context.Brands.ToListAsync();
 
@@ -73,7 +79,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             DataResponse<BrandDTO> response = new DataResponse<BrandDTO>();
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
                     response.Data.Add(await context.Brands.FindAsync(brandID));
                     if (response.Data != null)
@@ -103,7 +109,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             Response response = new Response();
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
                     context.Brands.Add(brand);
                     await context.SaveChangesAsync();
@@ -123,7 +129,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             Response response = new Response();
             try
             {
-                using (SmartParkingContext context = new SmartParkingContext())
+                using (var context = _context)
                 {
                     context.Entry(brand).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     int nLinhasAfetadas = await context.SaveChangesAsync();
