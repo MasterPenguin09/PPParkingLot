@@ -13,7 +13,7 @@ namespace BusinessLogicalLayer.Interfaces
     /// Possui uma interface interna que contém todas as ações da VehicleService
     /// </summary>
 
-    internal interface IVehicleService
+    public interface IVehicleService
     {
         /// <summary>
         /// Insere um veículo

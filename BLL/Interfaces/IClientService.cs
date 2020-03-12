@@ -12,7 +12,7 @@ namespace BusinessLogicalLayer.Interfaces
     /// <summary>
     /// Possui uma interface interna que contém todas as ações da ClientService
     /// </summary>
-    internal interface IClientService
+    public interface IClientService
     {
         /// <summary>
         /// Insere cliente

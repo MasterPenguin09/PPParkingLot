@@ -1,4 +1,4 @@
-﻿
+﻿public
 using DataTransferObject;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace BusinessLogicalLayer.Interfaces
     /// <summary>
     /// Possui uma interface interna que contém todas as ações da ParkingSpotService
     /// </summary>
-    interface IParkingSpotService
+    public interface IParkingSpotService
     {
         /// <summary>
         /// Insere um modelo

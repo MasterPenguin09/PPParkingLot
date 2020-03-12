@@ -12,7 +12,7 @@ namespace BusinessLogicalLayer.Interfaces
     /// <summary>
     /// Possui uma interface interna que contém todas as ações da LocationService
     /// </summary>
-    internal interface ILocationSevice
+    public interface ILocationSevice
     {
         /// <summary>
         /// Insere uma locação

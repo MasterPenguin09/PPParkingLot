@@ -151,7 +151,7 @@ namespace BusinessLogicalLayer.Impl
             LocationDTO locacao = CU.Result.Data.FirstOrDefault();
             locacao.ExitTime = DateTime.Now;
             TimeSpan tempoDeLocacao = locacao.ExitTime.Value.Subtract(locacao.EntryTime);
-            Double valorLocacao = tempoDeLocacao.Hours * locacao.ParkingSpot.ValuePerHour;
+            double valorLocacao = tempoDeLocacao.Hours * locacao.ParkingSpot.ValuePerHour;
             locacao.Value = valorLocacao;
             return locacao;
         }

@@ -12,7 +12,7 @@ namespace BusinessLogicalLayer.Interfaces
     /// <summary>
     /// Possui uma interface interna que contém todas as ações da EmployeeService
     /// </summary>
-    internal interface IEmployeeService
+    public interface IEmployeeService
     {
         /// <summary>
         /// Insere um funcionário

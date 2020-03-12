@@ -13,7 +13,7 @@ namespace BusinessLogicalLayer.Interfaces
     /// Possui uma interface interna que contém todas as ações da ModelService
     /// </summary>
 
-    internal interface IModelService
+    public interface IModelService
     {
         /// <summary>
         /// Insere um modelo
