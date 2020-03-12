@@ -145,16 +145,35 @@ namespace BusinessLogicalLayer.Impl
                 return await _iLocationRepository.Update(location);
             }
         }
-        private LocationDTO CalculatePrice(int idLocation)
+        private Response CalculatePrice(int idLocation)
         {
-            Task<DataResponse<LocationDTO>> CU = _iLocationRepository.GetByID(idLocation);
-            LocationDTO locacao = CU.Result.Data.FirstOrDefault();
+            Response response = new Response();
+            Task<DataResponse<LocationDTO>> location = _iLocationRepository.GetByID(idLocation);
+            LocationDTO locacao = location.Result.Data.FirstOrDefault();
             locacao.ExitTime = DateTime.Now;
             TimeSpan tempoDeLocacao = locacao.ExitTime.Value.Subtract(locacao.EntryTime);
             double valorLocacao = tempoDeLocacao.Hours * locacao.ParkingSpot.ValuePerHour;
             locacao.Value = valorLocacao;
-            return locacao;
+            if (_iLocationRepository.Update(locacao).Result.Success)
+            {
+                if (_iLocationRepository.Disable(locacao.ID).Result.Success)
+                {
+                    response.Success = true;
+                    return response;
+                }
+                response.Errors.Add("Erro de fechamento de vaga!");
+            }
+            else
+            {
+                response.Errors.Add("Erro de Update de vaga!");
+            }
+
+            return response;
+           
+          
         }
+
+
     }
  }
 
