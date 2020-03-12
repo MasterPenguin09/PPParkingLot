@@ -11,6 +11,10 @@ namespace BusinessLogicalLayer.Validators
 {
    public class LocationValidator : AbstractValidator<LocationDTO>
     {
+        /// <summary>
+        ///É uma classe que herda de  AbstractValidator
+        ///e passa como parametro LocationDTO e possui um metodo que valida suas propriedades
+        /// </summary>
         public LocationValidator()
         {
             RuleFor(l => l.Value).GreaterThan(0);

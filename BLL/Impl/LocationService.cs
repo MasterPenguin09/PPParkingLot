@@ -16,6 +16,12 @@ namespace BusinessLogicalLayer.Impl
 {
     public class LocationService : ILocationSevice
     {
+        /// <summary>
+        /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
+        /// Sua função é trazer os serviços do Location ligadas a logica dos negocios, com auxilio de
+        /// uma interface privada que traz as regras do Banco de Dados ligada a Location
+        /// </summary>
+
         private ILocationRepository _iLocationRepository;
 
         public LocationService(ILocationRepository iLocationRep)

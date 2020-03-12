@@ -8,6 +8,14 @@ namespace BusinessLogicalLayer.Extensions
 {
     static class CPFValidator
     {
+		/// <summary>
+		/// Esta é uma classe estatica que valida o CPF;
+		/// Possui um metodo estatico publico chamado IsCPF, 
+		/// pelo qual aceita uma string cpf e retorna um bool
+		/// Ela remove os caracteres especiais também;
+		/// </summary>
+		/// <param name="cpf"></param>
+		/// <returns></returns>
 		public static bool IsCpf(this string cpf)
 		{
 			int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };

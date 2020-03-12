@@ -10,6 +10,13 @@ namespace BusinessLogicalLayer.Extensions
 {
     static class FluentValidationsComplements
     {
+        /// <summary>
+        /// Uma classe estatica
+        /// Que possui um metodo chamado MargeValidationErrors
+        /// Ele serve para fundir todos os erros
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
         public static string MergeValidationErrors(this Response response) 
         {
             //TODO: Errors Merge 

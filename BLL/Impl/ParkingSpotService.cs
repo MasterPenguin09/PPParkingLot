@@ -17,6 +17,12 @@ namespace BusinessLogicalLayer.Impl
 {
     public class ParkingSpotService : IParkingSpotService
     {
+        /// <summary>
+        /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
+        /// Sua função é trazer os serviços do ParkingSpot ligadas a logica dos negocios, com auxilio de
+        /// uma interface privada que traz as regras do Banco de Dados ligada a ParingSpot
+        /// </summary>
+
         private IParkingSpotRepository _iParkingSpotRepository;
         public ParkingSpotService(IParkingSpotRepository iParkingRep)
         {

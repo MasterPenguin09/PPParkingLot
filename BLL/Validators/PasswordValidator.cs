@@ -8,7 +8,11 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Validators
 {
-   public static class PasswordValidator
+    /// <summary>
+    ///É uma classe que herda de  AbstractValidator
+    ///e passa como parametro PasswordDTO e possui um metodo que valida suas propriedades
+    /// </summary>
+    public static class PasswordValidator
     {
         public static Response CheckPassword(string password, DateTime birthDate)
         {
