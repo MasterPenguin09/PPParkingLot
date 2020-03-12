@@ -112,7 +112,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Clientes não encontradas");
+                    response.Errors.Add("Funcionários não encontrados");
                     return response;
                 }
             }
@@ -136,7 +136,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Cliente não encontrado");
+                    response.Errors.Add("Funcionário não encontrado");
                     return response;
                 }
             }
@@ -160,7 +160,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Cliente não encontrado");
+                    response.Errors.Add("Funcionário não encontrado");
                     return response;
                 }
             }
@@ -198,19 +198,14 @@ namespace DataAccessLayer.Repositories_EFCore_
             {
                 using (var context = _context)
                 {
-                    //context.Entry(brand).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-
-                    // int nLinhasAfetadas = await context.SaveChangesAsync();
+ 
                     context.Employees.Update(employee);
                     await context.SaveChangesAsync();
-                    //if (nLinhasAfetadas == 1)
-                }  // {
+
+                } 
                 response.Success = true;
                 return response;
-                // }
 
-                // response.Errors.Add("Edição não executada");
-                //return response;
 
             }
             catch (Exception ex)
