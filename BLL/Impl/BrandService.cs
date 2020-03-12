@@ -69,6 +69,7 @@ namespace BusinessLogicalLayer.Impl
         {
             return await _iBrandRepository.Disable(idBrand);
         }
+            //TODO: 1
         }
 
         public async Task<DataResponse<BrandDTO>> GetAll()
