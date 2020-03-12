@@ -99,17 +99,76 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         public async Task<DataResponse<EmployeeDTO>> GetAll()
         {
-            throw new NotImplementedException();
+            DataResponse<EmployeeDTO> response = new DataResponse<EmployeeDTO>();
+
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data = await context.Employees.ToListAsync();
+
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Clientes não encontradas");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<DataResponse<EmployeeDTO>> GetByID(int employeeID)
         {
-            throw new NotImplementedException();
+            DataResponse<EmployeeDTO> response = new DataResponse<EmployeeDTO>();
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data.Add(await context.Employees.FindAsync(employeeID));
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Cliente não encontrado");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<DataResponse<EmployeeDTO>> GetByName(string employeeName)
         {
-            throw new NotImplementedException();
+            DataResponse<EmployeeDTO> response = new DataResponse<EmployeeDTO>();
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data.Add(await context.Employees.Where(c => c.Name == employeeName).FirstOrDefaultAsync());
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Cliente não encontrado");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
 
         public async Task<Response> Insert(EmployeeDTO employee)
