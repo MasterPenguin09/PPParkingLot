@@ -170,7 +170,31 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         public async Task<Response> Update(ClientDTO client)
         {
-           
+            Response response = new Response();
+            try
+            {
+                using (var context = _context)
+                {
+                    //context.Entry(brand).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+                    // int nLinhasAfetadas = await context.SaveChangesAsync();
+                    context.Update(client);
+                    await context.SaveChangesAsync();
+                    //if (nLinhasAfetadas == 1)
+                }  // {
+                response.Success = true;
+                return response;
+                // }
+
+                // response.Errors.Add("Edição não executada");
+                //return response;
+
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
         }
     }
 }
