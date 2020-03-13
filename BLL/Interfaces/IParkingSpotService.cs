@@ -1,4 +1,4 @@
-﻿public
+﻿
 using DataTransferObject;
 using System;
 using System.Collections.Generic;
