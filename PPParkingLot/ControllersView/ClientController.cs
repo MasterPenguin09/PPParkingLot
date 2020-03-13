@@ -42,7 +42,7 @@ namespace PPParkingLot.Controllers
             return View();
         }
 
-        public async Task<ActionResult> Register()
+        public ActionResult Register()
         {
             return View();
         }
