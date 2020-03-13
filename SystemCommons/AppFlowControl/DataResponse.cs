@@ -12,11 +12,11 @@ namespace SystemCommons
 
         }
 
-        public DataResponse(Task<List<T>> data)
+        public DataResponse(List<T> data)
         {
             Data = data;
         }
 
-        public Task<List<T>> Data { get; set; }
+        public List<T> Data { get; set; }
     }
 }

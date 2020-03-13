@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogicalLayer.Impl;
+using BusinessLogicalLayer.Interfaces;
 using DAL.Context_EFCore_;
 using DataTransferObject;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,14 @@ namespace PPParkingLot.Controllers
 {
     public class ClientController:Controller
     {
-
-        public ClientController()
+        IClientService _service;
+        public ClientController(IClientService service)
         {
-
+            this._service = service;
         }
+
+
+
     }
 
 }
