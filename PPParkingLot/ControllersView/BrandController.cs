@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SystemCommons;
 
 namespace PPParkingLot.Controllers
 {
@@ -22,7 +23,7 @@ namespace PPParkingLot.Controllers
         {
 
 
-           List<BrandDTO> brands = await _service.GetAll().Result.Data;
+           DataResponse<BrandDTO> brands = await _service.GetAll();
 
             var configuration = new MapperConfiguration(cfg =>
             {
@@ -32,7 +33,7 @@ namespace PPParkingLot.Controllers
             IMapper mapper = configuration.CreateMapper();
           
             List<BrandInsertViewModel> brandsViewModel =
-                mapper.Map<List<BrandInsertViewModel>>(brands);
+                mapper.Map<List<BrandInsertViewModel>>(brands.Data);
 
             ViewBag.Categorias = brandsViewModel;
 
@@ -59,7 +60,7 @@ namespace PPParkingLot.Controllers
             try
             {
                 await _service.Insert(dto);
-                return RedirectToAction("Index", "Produto");
+                return RedirectToAction("Index", "Brand");
             }
             catch (Exception ex)
             {

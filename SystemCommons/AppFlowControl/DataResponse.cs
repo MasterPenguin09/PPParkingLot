@@ -12,7 +12,7 @@ namespace SystemCommons
 
         }
 
-        public DataResponse(Task<List<T>> data)
+        public DataResponse(List<T> data)
         {
             Data = data;
         }
