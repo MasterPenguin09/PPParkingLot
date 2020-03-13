@@ -11,6 +11,13 @@ namespace DataAccessLayer.MapConfig_EFCore_
 {
     internal class LocationMapConfig : IEntityTypeConfiguration<LocationDTO>
     {
+        /// <summary>
+        /// Classe Interna que herda de uma Interface Microsoft
+        /// Tem um método publico que configura como sera 
+        /// a construção da Tabela Location na DB
+        /// </summary>
+        /// <param name="builder"></param>
+
         public void Configure(EntityTypeBuilder<LocationDTO> builder)
         {
 

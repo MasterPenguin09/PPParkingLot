@@ -100,7 +100,7 @@ namespace BusinessLogicalLayer.Impl
             DataResponse<EmployeeDTO> response = new DataResponse<EmployeeDTO>();
             if (string.IsNullOrEmpty(employeeName))
             {
-                response.Errors.Add("Nome funcionátio inválido");
+                response.Errors.Add("Nome funcionário inválido");
             }
 
             if (response.HasErrors())

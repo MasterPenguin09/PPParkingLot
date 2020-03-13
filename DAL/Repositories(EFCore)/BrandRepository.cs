@@ -15,6 +15,13 @@ namespace DataAccessLayer.Repositories_EFCore_
 {
     public class BrandRepository : IBrandRepository
     {
+        /// <summary>
+        /// Uma Classe publica BrandRepository que herda de uma interface com mesmo nome (+I na frente),
+        /// Essa interface possui todas as ações que a BrandDTO pode fazer ligadas ao banco de dados
+        /// 
+        /// Nessa classe as ações herdadas são preenchidas
+        /// </summary>
+
         private SmartParkingContext _context;
         public BrandRepository(SmartParkingContext context)
         {

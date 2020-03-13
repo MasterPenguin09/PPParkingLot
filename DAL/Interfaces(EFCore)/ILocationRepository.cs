@@ -12,6 +12,12 @@ namespace DataAccessLayer.Interfaces_EFCore_
     public interface ILocationRepository
     {
         /// <summary>
+        ///  Possui uma Interface EF do Repositorio da Location
+        ///  Nela tem todas as ações que a LocationDTO pode fazer
+        ///  ligadas ao banco de dados
+        /// </summary>
+
+        /// <summary>
         /// Insere uma locação
         /// </summary>
         /// <param name="location"></param>

@@ -8,9 +8,14 @@ using System.Threading.Tasks;
 using SystemCommons;
 
 namespace DataAccessLayer.Interfaces_EFCore_
-{
+{/// <summary>
+///  Possui uma Interface EF do Repositorio da Brand
+///  Nela tem todas as ações que a BrandDTO pode fazer
+///  ligadas ao banco de dados
+/// </summary>
     public interface IBrandRepository
     {
+       
 
         /// <summary>
         /// Insere uma marca

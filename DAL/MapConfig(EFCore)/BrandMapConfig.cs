@@ -9,9 +9,16 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.MapConfig_EFCore_
 {
-    internal class BrandMapConfig : IEntityTypeConfiguration<CLientDTO>
+    internal class BrandMapConfig : IEntityTypeConfiguration<BrandDTO>
     {
-        public void Configure(EntityTypeBuilder<CLientDTO> builder)
+        /// <summary>
+        /// Classe Interna que herda de uma Interface Microsoft
+        /// Tem um método publico que configura como sera 
+        /// a construção da Tabela Brand na DB
+        /// </summary>
+        /// <param name="builder"></param>
+
+        public void Configure(EntityTypeBuilder<BrandDTO> builder)
         {
             builder.Property(c => c.Name).IsRequired().IsUnicode(false);
             builder.Property(c => c.Name).IsRequired().IsUnicode(false);

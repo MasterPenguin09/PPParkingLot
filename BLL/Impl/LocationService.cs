@@ -83,11 +83,11 @@ namespace BusinessLogicalLayer.Impl
             DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
             if (location < 0)
             {
-                response.Errors.Add("ID cliente inválido");
+                response.Errors.Add("ID locação inválido");
             }
             if (location.Equals(null))
             {
-                response.Errors.Add("ID cliente nulo");
+                response.Errors.Add("ID locação nulo");
             }
 
             if (response.HasErrors())

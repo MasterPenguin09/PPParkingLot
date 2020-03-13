@@ -13,6 +13,13 @@ using SystemCommons;
 
 namespace DataAccessLayer.Repositories_EFCore_
 {
+    /// <summary>
+    /// Uma Classe publica ModelRepository que herda de uma interface com mesmo nome (+I na frente),
+    /// Essa interface possui todas as ações que a ModelDTO pode fazer ligadas ao banco de dados
+    /// 
+    /// Nessa classe as ações herdadas são preenchidas
+    /// </summary>
+
     public class ModelRepository : IModelRepository
     {
         private SmartParkingContext _context;
