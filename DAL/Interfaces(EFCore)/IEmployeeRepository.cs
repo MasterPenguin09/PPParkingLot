@@ -9,6 +9,12 @@ using SystemCommons;
 
 namespace DataAccessLayer.Interfaces_EFCore_
 {
+
+    /// <summary>
+    ///  Possui uma Interface EF do Repositorio do Employee
+    ///  Nela tem todas as ações que o EmployeeTO pode fazer
+    ///  ligadas ao banco de dados
+    /// </summary>
     public interface IEmployeeRepository
     {
         /// <summary>

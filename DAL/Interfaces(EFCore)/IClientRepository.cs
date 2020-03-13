@@ -9,7 +9,13 @@ using SystemCommons;
 
 namespace DataAccessLayer.Interfaces_EFCore_
 {
-   public interface IClientRepository
+
+    /// <summary>
+    ///  Possui uma Interface EF do Repositorio do Client
+    ///  Nela tem todas as ações que o ClientDTO pode fazer
+    ///  ligadas ao banco de dados
+    /// </summary>
+    public interface IClientRepository
     {
         /// <summary>
         /// Insere cliente

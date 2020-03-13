@@ -15,6 +15,13 @@ namespace DataAccessLayer.Repositories_EFCore_
 {
     public class ClientRepository : IClientRepository
     {
+        /// <summary>
+        /// Uma Classe publica ClientRepository que herda de uma interface com mesmo nome (+I na frente),
+        /// Essa interface possui todas as ações que a ClientDTO pode fazer ligadas ao banco de dados
+        /// 
+        /// Nessa classe as ações herdadas são preenchidas
+        /// </summary>
+
         private SmartParkingContext _context;
         public ClientRepository(SmartParkingContext context)
         {

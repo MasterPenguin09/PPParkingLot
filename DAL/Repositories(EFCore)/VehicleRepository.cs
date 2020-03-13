@@ -13,6 +13,13 @@ using SystemCommons;
 
 namespace DataAccessLayer.Repositories_EFCore_
 {
+    /// <summary>
+    /// Uma Classe publica VehicleRepository que herda de uma interface com mesmo nome (+I na frente),
+    /// Essa interface possui todas as ações que a VehicleDTO pode fazer ligadas ao banco de dados
+    /// 
+    /// Nessa classe as ações herdadas são preenchidas
+    /// </summary>
+
     public class VehicleRepository : IVehicleRepository
     {
         private SmartParkingContext _context;

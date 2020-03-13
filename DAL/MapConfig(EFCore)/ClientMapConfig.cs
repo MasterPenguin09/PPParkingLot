@@ -11,6 +11,13 @@ namespace DataAccessLayer.MapConfig_EFCore_
 {
     class ClientMapConfig : IEntityTypeConfiguration<ClientDTO>
     {
+        /// <summary>
+        /// Classe Interna que herda de uma Interface Microsoft
+        /// Tem um método publico que configura como sera 
+        /// a construção da Tabela Client na DB
+        /// </summary>
+        /// <param name="builder"></param>
+
         public void Configure(EntityTypeBuilder<ClientDTO> builder)
         {
 

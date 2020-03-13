@@ -9,7 +9,13 @@ using SystemCommons;
 
 namespace DataAccessLayer.Interfaces_EFCore_
 {
-   public interface IParkingSpotRepository
+    /// <summary>
+    ///  Possui uma Interface EF do Repositorio da ParkingSpot
+    ///  Nela tem todas as ações que a ParkingSpotDTO pode fazer
+    ///  ligadas ao banco de dados
+    /// </summary>
+
+    public interface IParkingSpotRepository
     {
         /// <summary>
         /// Insere um modelo

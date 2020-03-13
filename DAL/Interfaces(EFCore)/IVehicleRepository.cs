@@ -9,6 +9,12 @@ using SystemCommons;
 
 namespace DataAccessLayer.Interfaces_EFCore_
 {
+    /// <summary>
+    ///  Possui uma Interface EF do Repositorio do Vehicle
+    ///  Nela tem todas as ações que a VehicleDTO pode fazer
+    ///  ligadas ao banco de dados
+    /// </summary>
+
     public interface IVehicleRepository
     {
         /// <summary>
