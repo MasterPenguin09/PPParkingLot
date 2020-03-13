@@ -131,7 +131,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Cliente não encontrado");
+                    response.Errors.Add("Locação não encontrada");
                     return response;
                 }
             }
@@ -155,7 +155,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Cliente não encontrado");
+                    response.Errors.Add("Locação não encontrada");
                     return response;
                 }
             }
