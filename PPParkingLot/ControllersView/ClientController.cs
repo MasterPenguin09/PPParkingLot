@@ -11,10 +11,13 @@ using System.Threading.Tasks;
 
 namespace PPParkingLot.Controllers
 {
-    public class ClientViewController:Controller
+    public class ClientController:Controller
     {
-       
 
+        public ClientController()
+        {
+
+        }
     }
 
 }

@@ -9,11 +9,11 @@ using PPParkingLot.Models;
 
 namespace PPParkingLot.Controllers
 {
-    public class HomeViewController : Controller
+    public class HomeController : Controller
     {
-        private readonly ILogger<HomeViewController> _logger;
+        private readonly ILogger<HomeController> _logger;
 
-        public HomeViewController(ILogger<HomeViewController> logger)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }

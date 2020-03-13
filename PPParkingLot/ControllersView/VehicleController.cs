@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PPParkingLot.Controllers
 {
-    public class VehicleViewController: Controller
+    public class VehicleController: Controller
     {
 
 

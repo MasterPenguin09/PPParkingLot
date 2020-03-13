@@ -1,4 +1,5 @@
-﻿using BusinessLogicalLayer.Interfaces;
+﻿using AutoMapper;
+using BusinessLogicalLayer.Interfaces;
 using DataTransferObject;
 using Microsoft.AspNetCore.Mvc;
 using PPParkingLot.Models.Insert;
@@ -9,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace PPParkingLot.Controllers
 {
-    public class BrandViewController : Controller
+    public class BrandController : Controller
     {
         private IBrandService _service;
-        public BrandViewController(IBrandService service)
+        public BrandController(IBrandService service)
         {
             this._service = service;
         }
@@ -27,9 +28,9 @@ namespace PPParkingLot.Controllers
             {
                 cfg.CreateMap<BrandDTO, BrandInsertViewModel>();
             });
+
             IMapper mapper = configuration.CreateMapper();
-            // new SERService().GetSERByID(4);
-            //Transforma o ClienteInsertViewModel em um ClienteDTO
+          
             List<BrandInsertViewModel> brandsViewModel =
                 mapper.Map<List<BrandInsertViewModel>>(brands);
 
@@ -38,7 +39,7 @@ namespace PPParkingLot.Controllers
             return View();
         }
 
-        public async Task<ActionResult> Cadastrar()
+        public async Task<ActionResult> Cadaster()
         {
             return View();
         }
@@ -51,8 +52,7 @@ namespace PPParkingLot.Controllers
                 cfg.CreateMap<BrandInsertViewModel, BrandDTO>();
             });
             IMapper mapper = configuration.CreateMapper();
-            // new SERService().GetSERByID(4);
-            //Transforma o ClienteInsertViewModel em um ClienteDTO
+          
             BrandDTO dto = mapper.Map<BrandDTO>(viewModel);
 
           
