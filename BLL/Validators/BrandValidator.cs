@@ -17,7 +17,9 @@ namespace BusinessLogicalLayer.Validators
         public BrandValidator()
         {
             RuleFor(c => c.Name).NotEmpty();
+
             RuleFor(c => c.Name).Length(1, 64);
+
             RuleFor(c => c.ID).Must(c => c >= 0);
         }
     }

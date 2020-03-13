@@ -13,7 +13,7 @@ namespace BusinessLogicalLayer.Interfaces
     /// Possui uma interface interna que contém todas as ações da BrandService
     /// </summary>
 
-   internal interface IBrandService
+   public interface IBrandService
     {
         /// <summary>
         /// Insere uma marca
@@ -37,12 +37,7 @@ namespace BusinessLogicalLayer.Interfaces
 
        
 
-        /// <summary>
-        /// Desabilita uma marca
-        /// </summary>
-        /// <param name="brand"></param>
-        /// <returns>Response</returns>
-        Task<Response> Disable(int idBrand);
+       
 
         /// <summary>
         /// Apaga uma marca do banco

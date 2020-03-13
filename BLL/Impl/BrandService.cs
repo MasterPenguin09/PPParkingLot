@@ -14,12 +14,6 @@ namespace BusinessLogicalLayer.Impl
 {
    public class BrandService : IBrandService
     {
-        /// <summary>
-        /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
-        /// Sua função é trazer os serviços da Brand ligadas a logica dos negocios, com auxilio de
-        /// uma interface privada que traz as regras do Banco de Dados ligada a Brand
-        /// </summary>
-
         private IBrandRepository _iBrandRepository;
         public BrandService(IBrandRepository iBrandRep)
         {
@@ -44,33 +38,33 @@ namespace BusinessLogicalLayer.Impl
                 {
                     return response;
                 }
-
                 else
                 {
-                    response.Success = true;
                     return response;
-                    //Logger
+                  
+                 //Logger
                 }
             }
         }
 
-        public async Task<Response> Disable(int idBrand)
-        {
-            Response response = new Response();
-            if (idBrand < 0)
-            {
-                response.Errors.Add("ID Inválido!");
-            }
-            if (response.HasErrors())
-            {
-                return response;
-            }
-            else
-        {
-            return await _iBrandRepository.Disable(idBrand);
-        }
-            //TODO: 1
-        }
+        
+
+        //public async Task<Response> Disable(int idBrand)
+        //{
+        //    Response response = new Response();
+        //    if (idBrand < 0)
+        //    {
+        //        response.Errors.Add("ID Inválido!");
+        //    }
+        //    if (response.HasErrors())
+        //    {
+        //        return response;
+        //    }
+        //    else
+        //{
+        //    return await _iBrandRepository.Disable(idBrand);
+        //}
+        //}
 
         public async Task<DataResponse<BrandDTO>> GetAll()
         {

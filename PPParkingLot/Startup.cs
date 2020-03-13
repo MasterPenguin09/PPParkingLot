@@ -2,7 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicalLayer.Impl;
+using BusinessLogicalLayer.Interfaces;
 using DAL.Context_EFCore_;
+using DataAccessLayer.Interfaces_EFCore_;
+using DataAccessLayer.Repositories_EFCore_;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +31,30 @@ namespace PPParkingLot
         {
             services.AddDbContextPool<SmartParkingContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
             services.AddControllersWithViews();
+
+            services.AddTransient<IClientService, ClientService>();
+            services.AddTransient<IClientRepository, ClientRepository>();
+
+            services.AddTransient<IEmployeeService, EmployeeService>();
+            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+
+            services.AddTransient<IVehicleService, VehicleService>();
+            services.AddTransient<IVehicleRepository, VehicleRepository>();
+
+            services.AddTransient<ILocationSevice, LocationService>();
+            services.AddTransient<ILocationRepository, LocationRepository>();
+
+            services.AddTransient<IModelService, ModelService>();
+            services.AddTransient<IModelRepository, ModelRepository>();
+
+            services.AddTransient<IParkingSpotService, ParkingSpotService>();
+            services.AddTransient<IParkingSpotRepository, ParkingSpotRepository>();
+
+            services.AddTransient<IBrandService, BrandService>();
+            services.AddTransient<IBrandRepository, BrandRepository>();
+
+      
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +71,7 @@ namespace PPParkingLot
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();

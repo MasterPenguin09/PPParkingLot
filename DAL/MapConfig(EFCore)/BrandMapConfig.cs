@@ -21,7 +21,8 @@ namespace DataAccessLayer.MapConfig_EFCore_
         public void Configure(EntityTypeBuilder<BrandDTO> builder)
         {
             builder.Property(c => c.Name).IsRequired().IsUnicode(false);
-
+            builder.Property(c => c.Name).IsRequired().IsUnicode(false);
+            builder.Property(c => c.Name).IsRequired().HasMaxLength(256);
         }
     }
 }

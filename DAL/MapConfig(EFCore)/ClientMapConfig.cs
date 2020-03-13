@@ -21,9 +21,11 @@ namespace DataAccessLayer.MapConfig_EFCore_
         public void Configure(EntityTypeBuilder<ClientDTO> builder)
         {
 
-            builder.Property(c => c.CPF).IsRequired().HasMaxLength(14);
+            builder.Property(c => c.CPF).IsRequired().HasMaxLength(14).IsFixedLength(true);
+            builder.Property(c => c.CPF).IsRequired().IsUnicode(false);
             builder.HasIndex(c => c.CPF).IsUnique();
 
+            builder.Property(c => c.Name).IsRequired().HasMaxLength(256);
             builder.Property(c => c.Name).IsRequired().IsUnicode(false);
 
             builder.Property(c => c.Email).IsRequired().IsUnicode(false);
@@ -41,8 +43,6 @@ namespace DataAccessLayer.MapConfig_EFCore_
             builder.Property(c => c.Password).IsRequired().IsUnicode(false);
 
             builder.Property(c => c.SystemEntranceDate).IsRequired().ValueGeneratedOnAdd();
-
-            
         }
     }
 }

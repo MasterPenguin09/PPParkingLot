@@ -23,7 +23,7 @@ namespace DataAccessLayer.MapConfig_EFCore_
             builder.Property(c => c.CarBoard).IsRequired().IsUnicode(false);
             builder.HasIndex(c => c.CarBoard).IsUnique();
 
-            builder.Property(c => c.Model).IsRequired();
+            builder.Property(c => c.ModelID).IsRequired();
 
             builder.Property(c => c.Type).IsRequired();
 

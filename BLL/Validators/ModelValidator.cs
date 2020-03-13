@@ -17,7 +17,9 @@ namespace BusinessLogicalLayer.Validators
         public ModelValidator()
         {
             RuleFor(c => c.ID).NotEmpty();
+
             RuleFor(c => c.Name).Length(3, 64);
+
             RuleFor(c => c.Name).NotEmpty();
         }
     }

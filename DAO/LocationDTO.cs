@@ -33,7 +33,10 @@ namespace DataTransferObject
         public DateTime EntryTime { get; set; }
         public DateTime? ExitTime { get; set; }
         public PayForm PayForm { get; set; }
-        public int Value { get; set; }
+        public double Value { get; set; }
+
+        public ClientDTO Client { get; set; }
+        public int ClientID { get; set; }
 
         public VehicleDTO Vehicle { get; set; }
         public int VehicleID { get; set; }

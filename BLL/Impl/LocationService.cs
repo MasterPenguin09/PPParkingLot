@@ -83,11 +83,11 @@ namespace BusinessLogicalLayer.Impl
             DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
             if (location < 0)
             {
-                response.Errors.Add("ID cliente inválido");
+                response.Errors.Add("ID locação inválido");
             }
             if (location.Equals(null))
             {
-                response.Errors.Add("ID cliente nulo");
+                response.Errors.Add("ID locação nulo");
             }
 
             if (response.HasErrors())
@@ -145,6 +145,58 @@ namespace BusinessLogicalLayer.Impl
                 return await _iLocationRepository.Update(location);
             }
         }
+
+        /// <summary>
+        /// Método que executa o "fechamento de vaga" (quando o cliente sai)
+        /// </summary>
+        /// <param name="idLocation"></param>
+        /// <returns></returns>
+        private DataResponse<LocationDTO> CalculatePrice(int idLocation)
+        {
+            DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
+
+            //Busca a locação pelo id
+            Task<DataResponse<LocationDTO>> temp_location = _iLocationRepository.GetByID(idLocation);
+
+            //Armazena a locação encontrada 
+            LocationDTO location = temp_location.Result.Data.FirstOrDefault();
+
+            //Adiciona a data de saída a locação 
+            location.ExitTime = DateTime.Now;
+
+            //Subtrai o valor de saída com o valor de entrada 
+            TimeSpan tempoDeLocacao = location.ExitTime.Value.Subtract(location.EntryTime);
+
+            //Pega a o valor subtraído em horas e multiplica pelo valor/hora da vaga
+            double valorLocacao = tempoDeLocacao.Hours * location.ParkingSpot.ValuePerHour;
+
+            //Adiciona o valor da locação no banco 
+            location.Value = valorLocacao;
+            if (_iLocationRepository.Update(location).Result.Success)
+            {
+                //Caso for adicionada com sucesso ela será desabilitada, pois o cliente saiu 
+                if (_iLocationRepository.Disable(location.ID).Result.Success)
+                {
+                    //Se o disable funcionar, adiociona a locação desse escopo e retorna 
+                    response.Success = true;
+                    response.Data.Add(location);
+                    return response;
+                }
+                //Caso o Disable falhe 
+                response.Errors.Add("Erro de fechamento de vaga!");
+            }
+            //Caso o Update falhe
+            else
+            {
+                response.Errors.Add("Erro de Update de vaga!");
+            }
+            //Retorna erros caso o Update tenha falhado
+            return response;
+           
+          
+        }
+
+
     }
  }
 

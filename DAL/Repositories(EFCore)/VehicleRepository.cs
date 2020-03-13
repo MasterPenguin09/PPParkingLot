@@ -115,7 +115,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Veículos não encontradas");
+                    response.Errors.Add("Veículos não encontrados");
                     return response;
                 }
             }

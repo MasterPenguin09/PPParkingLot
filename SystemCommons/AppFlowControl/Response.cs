@@ -25,8 +25,7 @@ namespace SystemCommons
         public string GetErrorMessage()
         {
             StringBuilder builder = new StringBuilder();
-            //Lambda Expression
-            //Erros.ForEach(erro => builder.AppendLine(erro));
+
             foreach (string item in this.Errors)
             {
                 builder.AppendLine(item);
