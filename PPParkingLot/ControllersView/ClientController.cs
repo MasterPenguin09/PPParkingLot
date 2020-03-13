@@ -52,11 +52,11 @@ namespace PPParkingLot.Controllers
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<ClientInsertViewModel, CLientDTO>();
+                cfg.CreateMap<ClientInsertViewModel, ClientDTO>();
             });
             IMapper mapper = configuration.CreateMapper();
 
-            CLientDTO dto = mapper.Map<CLientDTO>(viewModel);
+            ClientDTO dto = mapper.Map<ClientDTO>(viewModel);
 
 
             try

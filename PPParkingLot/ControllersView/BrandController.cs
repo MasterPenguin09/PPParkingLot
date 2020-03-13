@@ -23,11 +23,11 @@ namespace PPParkingLot.Controllers
         {
 
 
-            DataResponse<CLientDTO> brands = await _service.GetAll();
+            DataResponse<BrandDTO> brands = await _service.GetAll();
 
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<CLientDTO, BrandInsertViewModel>();
+                cfg.CreateMap<BrandDTO, BrandInsertViewModel>();
             });
 
             IMapper mapper = configuration.CreateMapper();
@@ -49,11 +49,11 @@ namespace PPParkingLot.Controllers
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<BrandInsertViewModel, CLientDTO>();
+                cfg.CreateMap<BrandInsertViewModel, BrandDTO>();
             });
             IMapper mapper = configuration.CreateMapper();
 
-            CLientDTO dto = mapper.Map<CLientDTO>(viewModel);
+            BrandDTO dto = mapper.Map<BrandDTO>(viewModel);
 
 
             try

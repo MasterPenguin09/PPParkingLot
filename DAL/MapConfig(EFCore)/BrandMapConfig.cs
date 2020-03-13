@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.MapConfig_EFCore_
 {
-    internal class BrandMapConfig : IEntityTypeConfiguration<CLientDTO>
+    internal class BrandMapConfig : IEntityTypeConfiguration<BrandDTO>
     {
         public void Configure(EntityTypeBuilder<BrandDTO> builder)
         {
