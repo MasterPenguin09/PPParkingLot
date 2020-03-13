@@ -16,7 +16,7 @@ namespace DataAccessLayer.MapConfig_EFCore_
             builder.Property(c => c.Name).IsRequired().IsUnicode(false);
             builder.HasIndex(c => c.Name).IsUnique();
 
-            builder.Property(c => c.BrandDTO).IsRequired();
+            builder.Property(c => c.BrandID).IsRequired();
 
             
         }

@@ -17,9 +17,13 @@ namespace BusinessLogicalLayer.Validators
         public ParkingSpotValidator()
         {
             RuleFor(c => c.Type).IsInEnum();
+
             RuleFor(c => c.ValuePerHour).Empty();
+
             RuleFor(c => c.ValuePerHour).GreaterThan(0);
+
             RuleFor(c => c.ID).Empty();
+
             RuleFor(c => c.IsActive).Equal(true);
         }
     }

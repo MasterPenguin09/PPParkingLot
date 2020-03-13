@@ -17,8 +17,12 @@ namespace BusinessLogicalLayer.Validators
         public VehicleValidator()
         {
             RuleFor(c => c.Model).NotEmpty();
-            RuleFor(c => c.CarBoard).NotEmpty(); //TODO: Fazer uma validação decente para a placa
+
+            RuleFor(c => c.CarBoard).NotEmpty();
+
             RuleFor(c => c.ModelID).NotEmpty();
+
+            //TODO: Fazer uma validação decente para a placa
         }
     }
 }

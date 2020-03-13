@@ -10,9 +10,10 @@ namespace DAL.Context_EFCore_
 {
     public class SmartParkingContext : DbContext
     {
-        //https://www.learnentityframeworkcore.com/configuration/fluent-api
+       
         public SmartParkingContext(DbContextOptions<SmartParkingContext> options) : base(options)
         {
+
         }
 
        
@@ -27,38 +28,5 @@ namespace DAL.Context_EFCore_
         {
 
         }
-
-
-        //private void LoadStringConfig(ModelBuilder modelBuilder)
-        //{
-        //    Assembly assemblyDTO = Assembly.GetAssembly(typeof(BrandDTO));
-
-        //    List<Type> types = assemblyDTO.GetTypes().Where(c => c.Namespace == "DTO").ToList();
-
-        //    foreach (Type item in types)
-        //    {
-        //        foreach (PropertyInfo propriedade in item.GetProperties().Where(c => c.PropertyType == typeof(string)))
-        //        {
-        //            modelBuilder.Entity(item.Name).Property(propriedade.Name).IsRequired().IsUnicode(false);
-        //        }
-        //    }
-
-        //}
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    //TODO: Configurções globais
-
-        //    var cascadeFKs = modelBuilder.Model.GetEntityTypes()
-
-        //        .SelectMany(t => t.GetForeignKeys())
-
-        //        .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
-
-        //    foreach (var fk in cascadeFKs)
-        //        fk.DeleteBehavior = DeleteBehavior.Restrict;
-
-
-        //    base.OnModelCreating(modelBuilder);
-        //}
     }
 }

@@ -18,13 +18,13 @@ namespace BusinessLogicalLayer.Security
         public static string HashPassword(string password)
         {
             //Adicionar um valor de Salt
-            string saltValue = "1necoLuzDeVelas5";
+            string saltValue = "@#aleatorystringsltvalue#2912934";
             //SHA1.Create().ComputeHash()
 
             //Adiciona o salt na senha e transforma para uma 
             //representação númerica em vetor
             byte[] UTF8Codification =
-                Encoding.UTF8.GetBytes(password + saltValue);
+                Encoding.UTF8.GetBytes(saltValue + password + saltValue);
 
             //Invoca o método 
             byte[] hashedPassword =

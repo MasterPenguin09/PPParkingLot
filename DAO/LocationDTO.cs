@@ -35,6 +35,9 @@ namespace DataTransferObject
         public PayForm PayForm { get; set; }
         public double Value { get; set; }
 
+        public ClientDTO Client { get; set; }
+        public int ClientID { get; set; }
+
         public VehicleDTO Vehicle { get; set; }
         public int VehicleID { get; set; }
 
