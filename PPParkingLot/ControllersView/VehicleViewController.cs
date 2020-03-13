@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿
 using DataTransferObject;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace PPParkingLot.Controllers
 {
-    public class VehicleController: Controller
+    public class VehicleViewController: Controller
     {
+
+
+
         public async Task<ActionResult> Cadastrar()
         {
             return View();
@@ -27,7 +30,7 @@ namespace PPParkingLot.Controllers
             IMapper mapper = configuration.CreateMapper();
             VehicleDTO produto = mapper.Map<VehicleDTO>(viewModel);
 
-            VehicleService svc = new VehicleService();
+        
             try
             {
                 await svc.Insert(produto);

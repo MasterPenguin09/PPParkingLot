@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPParkingLot.Controllers
 {
-    public class BrandController : Controller
+    public class LocationViewController: Controller
     {
-
     }
 }
