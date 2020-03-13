@@ -23,7 +23,7 @@ namespace PPParkingLot.Controllers
         {
 
 
-           DataResponse<BrandDTO> brands = await _service.GetAll();
+            DataResponse<BrandDTO> brands = await _service.GetAll();
 
             var configuration = new MapperConfiguration(cfg =>
             {
@@ -31,11 +31,10 @@ namespace PPParkingLot.Controllers
             });
 
             IMapper mapper = configuration.CreateMapper();
-          
-            List<BrandInsertViewModel> brandsViewModel =
-                mapper.Map<List<BrandInsertViewModel>>(brands.Data);
 
-            ViewBag.Categorias = brandsViewModel;
+            List<BrandInsertViewModel> brandsViewModel =
+            mapper.Map<List<BrandInsertViewModel>>(brands.Data);
+            ViewBag.Brands = brandsViewModel;
 
             return View();
         }
@@ -53,10 +52,10 @@ namespace PPParkingLot.Controllers
                 cfg.CreateMap<BrandInsertViewModel, BrandDTO>();
             });
             IMapper mapper = configuration.CreateMapper();
-          
+
             BrandDTO dto = mapper.Map<BrandDTO>(viewModel);
 
-          
+
             try
             {
                 await _service.Insert(dto);

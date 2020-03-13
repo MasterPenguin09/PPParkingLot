@@ -36,7 +36,7 @@ namespace PPParkingLot.Controllers
             List<ModelInsertViewModel> modelsViewModel =
                 mapper.Map<List<ModelInsertViewModel>>(models.Data);
 
-            ViewBag.Categorias = modelsViewModel;
+            ViewBag.Models = modelsViewModel;
 
             return View();
         }
@@ -47,7 +47,7 @@ namespace PPParkingLot.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Cadaster(BrandInsertViewModel viewModel)
+        public async Task<ActionResult> Cadaster(ModelInsertViewModel viewModel)
         {
             var configuration = new MapperConfiguration(cfg =>
             {
@@ -61,7 +61,7 @@ namespace PPParkingLot.Controllers
             try
             {
                 await _service.Insert(dto);
-                return RedirectToAction("Index", "Model");
+                return RedirectToAction("Index", "Models");
             }
             catch (Exception ex)
             {
