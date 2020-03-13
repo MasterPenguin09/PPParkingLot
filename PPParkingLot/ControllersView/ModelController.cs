@@ -41,13 +41,13 @@ namespace PPParkingLot.Controllers
             return View();
         }
 
-        public async Task<ActionResult> Cadaster()
+        public async Task<ActionResult> Resgister()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Cadaster(ModelInsertViewModel viewModel)
+        public async Task<ActionResult> Resgister(ModelInsertViewModel viewModel)
         {
             var configuration = new MapperConfiguration(cfg =>
             {
