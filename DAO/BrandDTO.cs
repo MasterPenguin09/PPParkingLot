@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject
 {
-    public class CLientDTO
+    public class BrandDTO
     {
-        public CLientDTO(int iD, string name)
+        public BrandDTO(int iD, string name)
         {
             ID = iD;
             Name = name;
         }
-        public CLientDTO()
+        public BrandDTO()
         {
 
         }

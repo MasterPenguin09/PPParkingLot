@@ -8,15 +8,15 @@ namespace PPParkingLot.ControllersView
     public class BaseController
     {
         //Antes de qualquer execução de ação, este método é rodado ^_^
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            HttpCookie cookie = this.Request.Cookies["USERIDENTITY"];
+        //protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        //{
+        //    HttpCookie cookie = this.Request.Cookies["USERIDENTITY"];
 
-            if (cookie == null)
-            {
-                filterContext.Result = new RedirectResult(Url.Action("Login", "Usuario"));
-            }
-            base.OnActionExecuting(filterContext);
-        }
+        //    if (cookie == null)
+        //    {
+        //        filterContext.Result = new RedirectResult(Url.Action("Login", "Usuario"));
+        //    }
+        //    base.OnActionExecuting(filterContext);
+        //}
     }
 }

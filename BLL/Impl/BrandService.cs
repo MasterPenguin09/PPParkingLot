@@ -66,14 +66,14 @@ namespace BusinessLogicalLayer.Impl
         //}
         //}
 
-        public async Task<DataResponse<CLientDTO>> GetAll()
+        public async Task<DataResponse<BrandDTO>> GetAll()
         {
             return await _iBrandRepository.GetAll();
         }
 
-        public async Task<DataResponse<CLientDTO>> GetByID(int brandID)
+        public async Task<DataResponse<BrandDTO>> GetByID(int brandID)
         {
-            DataResponse<CLientDTO> response = new DataResponse<CLientDTO>();
+            DataResponse<BrandDTO> response = new DataResponse<BrandDTO>();
             if (brandID < 0)
             {
                 response.Errors.Add("ID marca inválido");
@@ -93,9 +93,9 @@ namespace BusinessLogicalLayer.Impl
             }
         }
 
-        public async Task<DataResponse<CLientDTO>> GetByName(string brandName)
+        public async Task<DataResponse<BrandDTO>> GetByName(string brandName)
         {
-            DataResponse<CLientDTO> response = new DataResponse<CLientDTO>();
+            DataResponse<BrandDTO> response = new DataResponse<BrandDTO>();
             if (string.IsNullOrEmpty(brandName))
             {
                 response.Errors.Add("Nome marca inválido");
@@ -115,7 +115,7 @@ namespace BusinessLogicalLayer.Impl
             }
         }
 
-        public async Task<Response> Insert(CLientDTO brand)
+        public async Task<Response> Insert(BrandDTO brand)
         {
             Response response = new Response();
             BrandValidator validate = new BrandValidator();
@@ -138,7 +138,7 @@ namespace BusinessLogicalLayer.Impl
 
         }
 
-        public async Task<Response> Update(CLientDTO brand)
+        public async Task<Response> Update(BrandDTO brand)
         {
             Response response = new Response();
             BrandValidator validate = new BrandValidator();

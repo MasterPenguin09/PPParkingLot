@@ -35,7 +35,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             {
                 using (var context = _context)
                 {
-                    context.Entry<CLientDTO>(new CLientDTO() { ID = idBrand }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                    context.Entry<BrandDTO>(new BrandDTO() { ID = idBrand }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
                     int nLinhasAfetadas = await context.SaveChangesAsync();
                     if (nLinhasAfetadas == 1)
                     {
@@ -55,9 +55,9 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
         }
 
-        public async Task<DataResponse<CLientDTO>> GetAll()
+        public async Task<DataResponse<BrandDTO>> GetAll()
         {
-            DataResponse<CLientDTO> response = new DataResponse<CLientDTO>();
+            DataResponse<BrandDTO> response = new DataResponse<BrandDTO>();
 
             try
             {
@@ -81,9 +81,9 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
         }
 
-        public async Task<DataResponse<CLientDTO>> GetByID(int brandID)
+        public async Task<DataResponse<BrandDTO>> GetByID(int brandID)
         {
-            DataResponse<CLientDTO> response = new DataResponse<CLientDTO>();
+            DataResponse<BrandDTO> response = new DataResponse<BrandDTO>();
             try
             {
                 using (var context = _context)
@@ -106,9 +106,9 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         }
 
-        public async Task<DataResponse<CLientDTO>> GetByName(string brandName)
+        public async Task<DataResponse<BrandDTO>> GetByName(string brandName)
         {
-            DataResponse<CLientDTO> response = new DataResponse<CLientDTO>();
+            DataResponse<BrandDTO> response = new DataResponse<BrandDTO>();
             try
             {
                 using (var context = _context)
@@ -130,7 +130,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
         }
 
-        public async Task<Response> Insert(CLientDTO brand)
+        public async Task<Response> Insert(BrandDTO brand)
         {
             Response response = new Response();
             try
@@ -150,7 +150,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
         }
 
-        public async Task<Response> Update(CLientDTO brand)
+        public async Task<Response> Update(BrandDTO brand)
         {
             Response response = new Response();
             try
