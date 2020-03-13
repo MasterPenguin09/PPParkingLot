@@ -13,8 +13,11 @@ namespace PPParkingLot.Controllers
 {
     public class ClientController:Controller
     {
-       
 
+        public ClientController()
+        {
+
+        }
     }
 
 }
