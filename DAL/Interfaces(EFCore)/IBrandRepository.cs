@@ -17,20 +17,20 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// </summary>
         /// <param name="brand"></param>
         /// <returns>Response</returns>
-        Task<Response> Insert(BrandDTO brand);
+        Task<Response> Insert(CLientDTO brand);
 
         /// <summary>
         /// Pega todas as marcas
         /// </summary>
         /// <returns>DataResponse</returns>
-        Task<DataResponse<BrandDTO>> GetAll();
+        Task<DataResponse<CLientDTO>> GetAll();
 
         /// <summary>
         /// Edita uma marca
         /// </summary>
         /// <param name="brand"></param>
         /// <returns>Response</returns>
-        Task<Response> Update(BrandDTO brand);
+        Task<Response> Update(CLientDTO brand);
 
  
         /// <summary>
@@ -45,13 +45,13 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// </summary>
         /// <param name="brandID"></param>
         /// <returns>DataResponse</returns>
-        Task<DataResponse<BrandDTO>> GetByID(int brandID);
+        Task<DataResponse<CLientDTO>> GetByID(int brandID);
 
         /// <summary>
         /// Busca uma marca pelo nome
         /// </summary>
         /// <param name="brandName"></param>
         /// <returns>DataResponse</returns>
-        Task<DataResponse<BrandDTO>> GetByName(string brandName);
+        Task<DataResponse<CLientDTO>> GetByName(string brandName);
     }
 }

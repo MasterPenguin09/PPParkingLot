@@ -17,7 +17,7 @@ namespace DAL.Context_EFCore_
         }
 
        
-        public DbSet<BrandDTO> Brands { get; set; }
+        public DbSet<CLientDTO> Brands { get; set; }
         public DbSet<EmployeeDTO> Employees { get; set; }
         public DbSet<LocationDTO> Locations { get; set; }
         public DbSet<ModelDTO> Models { get; set; }

@@ -23,11 +23,11 @@ namespace PPParkingLot.Controllers
         {
 
 
-            DataResponse<BrandDTO> brands = await _service.GetAll();
+            DataResponse<CLientDTO> brands = await _service.GetAll();
 
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<BrandDTO, BrandInsertViewModel>();
+                cfg.CreateMap<CLientDTO, BrandInsertViewModel>();
             });
 
             IMapper mapper = configuration.CreateMapper();
@@ -39,21 +39,21 @@ namespace PPParkingLot.Controllers
             return View();
         }
 
-        public async Task<ActionResult> Resgister()
+        public async Task<ActionResult> Register()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Resgister(BrandInsertViewModel viewModel)
+        public async Task<ActionResult> Register(BrandInsertViewModel viewModel)
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<BrandInsertViewModel, BrandDTO>();
+                cfg.CreateMap<BrandInsertViewModel, CLientDTO>();
             });
             IMapper mapper = configuration.CreateMapper();
 
-            BrandDTO dto = mapper.Map<BrandDTO>(viewModel);
+            CLientDTO dto = mapper.Map<CLientDTO>(viewModel);
 
 
             try

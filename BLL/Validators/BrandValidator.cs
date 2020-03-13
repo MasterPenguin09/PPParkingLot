@@ -12,7 +12,7 @@ namespace BusinessLogicalLayer.Validators
     ///É uma classe que herda de  AbstractValidator
     ///e passa como parametro BrandDTO, e possui um metodo que valida suas propriedades
     /// </summary>
-    class BrandValidator : AbstractValidator<BrandDTO>
+    class BrandValidator : AbstractValidator<CLientDTO>
     {
         public BrandValidator()
         {

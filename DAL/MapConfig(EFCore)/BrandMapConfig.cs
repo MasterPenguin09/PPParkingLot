@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.MapConfig_EFCore_
 {
-    internal class BrandMapConfig : IEntityTypeConfiguration<BrandDTO>
+    internal class BrandMapConfig : IEntityTypeConfiguration<CLientDTO>
     {
-        public void Configure(EntityTypeBuilder<BrandDTO> builder)
+        public void Configure(EntityTypeBuilder<CLientDTO> builder)
         {
             builder.Property(c => c.Name).IsRequired().IsUnicode(false);
             builder.Property(c => c.Name).IsRequired().IsUnicode(false);

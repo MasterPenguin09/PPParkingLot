@@ -8,7 +8,7 @@ namespace DataTransferObject
 {
     public class ModelDTO
     {
-        public ModelDTO(int iD, string name, BrandDTO brandDTO, int brandID)
+        public ModelDTO(int iD, string name, CLientDTO brandDTO, int brandID)
         {
             ID = iD;
             Name = name;
@@ -24,7 +24,7 @@ namespace DataTransferObject
         public string Name { get; set; }
 
 
-        public BrandDTO BrandDTO { get; set; }
+        public CLientDTO BrandDTO { get; set; }
         public int BrandID { get; set; }
 
     }
