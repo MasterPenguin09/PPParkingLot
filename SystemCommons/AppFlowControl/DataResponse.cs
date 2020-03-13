@@ -17,6 +17,6 @@ namespace SystemCommons
             Data = data;
         }
 
-        public Task<List<T>> Data { get; set; }
+        public List<T> Data { get; set; }
     }
 }

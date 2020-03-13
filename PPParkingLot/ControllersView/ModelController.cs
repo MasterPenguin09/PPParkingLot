@@ -9,16 +9,6 @@ namespace PPParkingLot.Controllers
 {
     public class ModelController: Controller
     {
-        private IEmployeeService _service;
-
-        public EmplloyeeController(IEmployeeService service)
-        {
-            this._service = service;
-        }
-
-        public async Task<ActionResult> Cadastrar()
-        {
-
-        }
+      
     }
 }
