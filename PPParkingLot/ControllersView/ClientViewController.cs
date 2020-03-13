@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PPParkingLot.Controllers
 {
-    public class ClientController:Controller
+    public class ClientViewController:Controller
     {
        
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SystemCommons
 {
@@ -11,11 +12,11 @@ namespace SystemCommons
 
         }
 
-        public DataResponse(List<T> data)
+        public DataResponse(Task<List<T>> data)
         {
             Data = data;
         }
 
-        public List<T> Data { get; set; }
+        public Task<List<T>> Data { get; set; }
     }
 }
