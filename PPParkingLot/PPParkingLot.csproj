@@ -24,10 +24,6 @@
     <ProjectReference Include="..\DAL\DAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Brand\" />
-  </ItemGroup>
-
 
 
 </Project>
