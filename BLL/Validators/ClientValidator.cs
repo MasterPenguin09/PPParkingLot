@@ -21,7 +21,7 @@ namespace BusinessLogicalLayer.Validators
 
             RuleFor(c => c.Name).Length(4,128);
 
-            RuleFor(c => c.Name).NotEmpty();
+            RuleFor(c => c.Name).NotEmpty();           
 
             RuleFor(c => c.AccessLevel).IsInEnum();
 

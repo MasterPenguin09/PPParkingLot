@@ -5,9 +5,13 @@
 using BusinessLogicalLayer.Interfaces;
 using BusinessLogicalLayer.Security;
 using BusinessLogicalLayer.Validators;
+using DAL.Context_EFCore_;
 using DataAccessLayer.Interfaces_EFCore_;
 using DataTransferObject;
+using DTO;
 using FluentValidation.Results;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using SystemCommons;
 
@@ -22,9 +26,11 @@ namespace BusinessLogicalLayer.Impl
         /// </summary>
 
         private IClientRepository _iClientRepository;
-        public ClientService(IClientRepository iClientRep)
+        private SmartParkingContext _context;
+        public ClientService(IClientRepository iClientRep, SmartParkingContext context)
         {
             this._iClientRepository = iClientRep;
+            this._context = context;
         }
 
         public async Task<Response> Delete(int idClient)
@@ -114,7 +120,9 @@ namespace BusinessLogicalLayer.Impl
         {
             Response response = new Response();
             ClientValidator validate = new ClientValidator();
+
             ValidationResult result = validate.Validate(client);
+
             Response password = PasswordValidator.CheckPassword(client.Password, client.BirthDate);
            
             //Verifica se a senha está dentro dos padrões, caso esteja, hasheia e ela 
@@ -148,6 +156,27 @@ namespace BusinessLogicalLayer.Impl
             {
                 return await _iClientRepository.Insert(client);
             }
+        }
+
+        public async Task<DataResponse<ClientDTO>> Login(ClientLoginDTO client)
+        {
+            DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
+            using (var db = _context)
+            {
+                 response.Data = await db.Clients.ToListAsync();
+                foreach (ClientDTO item in response.Data)
+                {
+                    if (item.Email == client.Email && item.Password == client.Password)
+                    {
+                       response.Data.Add(item);
+                        return response;
+                        
+                    }
+                }
+                response.Errors.Add("Usuário ou senha inválidos");
+                
+            }
+            return null;
         }
 
         public async Task<Response> Update(ClientDTO client)

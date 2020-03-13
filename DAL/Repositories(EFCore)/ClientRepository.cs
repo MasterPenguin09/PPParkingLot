@@ -181,6 +181,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             {
                 using (var context = _context)
                 {
+                    
                     context.Clients.Add(client);
                     await context.SaveChangesAsync();
                 }
