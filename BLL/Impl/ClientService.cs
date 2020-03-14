@@ -158,6 +158,23 @@ namespace BusinessLogicalLayer.Impl
             }
         }
 
+        public async Task<DataResponse<ClientDTO>> GetByEmail(string emailClient) 
+        {
+            DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
+            if (string.IsNullOrEmpty(emailClient))
+            {
+                response.Errors.Add("Email cliente inválido");
+            }
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
+            {
+                return await _iClientRepository.GetByEmail(emailClient);
+            }
+        }
+
         public async Task<DataResponse<ClientDTO>> Login(ClientLoginDTO client)
         {
             DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();

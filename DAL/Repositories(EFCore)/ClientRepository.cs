@@ -174,6 +174,30 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
         }
 
+        public async Task<DataResponse<ClientDTO>> GetByEmail(string emailClient)
+        {
+            DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data.Add(await context.Clients.Where(c => c.Email == emailClient).FirstOrDefaultAsync());
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Cliente não encontrado");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
+        }
+
         public async Task<Response> Insert(ClientDTO client)
         {
             Response response = new Response();
