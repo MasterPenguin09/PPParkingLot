@@ -199,6 +199,11 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
         }
 
+        public Task<DataResponse<ClientDTO>> Login(EmployeeDTO employee)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Response> Update(EmployeeDTO employee)
         {
             Response response = new Response();
@@ -215,6 +220,30 @@ namespace DataAccessLayer.Repositories_EFCore_
                 return response;
 
 
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
+            }
+        }
+
+       public async Task<DataResponse<EmployeeDTO>> GetByEmail(string emailEmployee)
+        {
+            DataResponse<EmployeeDTO> response = new DataResponse<EmployeeDTO>();
+            try
+            {
+                using (var context = _context)
+                {
+                    response.Data.Add(await context.Employees.Where(c => c.Email == emailEmployee).FirstOrDefaultAsync());
+                    if (response.Data != null)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    response.Errors.Add("Funcionário não encontrado");
+                    return response;
+                }
             }
             catch (Exception ex)
             {

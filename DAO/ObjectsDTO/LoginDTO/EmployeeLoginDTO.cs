@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO
+namespace DTO.ObjectsDTO.LoginDTO
 {
-    public class ClientLoginDTO
+    public class EmployeeLoginDTO
     {
-        public ClientLoginDTO(string email, string password)
+        public EmployeeLoginDTO(string email, string password)
         {
             Email = email;
             Password = password;
         }
-        public ClientLoginDTO()
+
+        public EmployeeLoginDTO()
         {
 
         }
 
         public string Email { get; set; }
-        public string Password { get; set; } 
+        public string Password { get; set; }
     }
 }
