@@ -17,7 +17,7 @@ namespace PPParkingLot.Models.Insert
 
         [DisplayName("CPF")]
         [Required(ErrorMessage = "O CPF deve ser informado")]
-        [StringLength(maximumLength: 11, MinimumLength = 11, ErrorMessage = "O CPF deve conter 11 caracteres")]
+        [StringLength(maximumLength: 14, MinimumLength = 14, ErrorMessage = "O CPF deve conter 11 caracteres")]
         public string CPF { get; set; }
 
 
