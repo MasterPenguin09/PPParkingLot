@@ -2,6 +2,7 @@
 using BusinessLogicalLayer.Interfaces;
 using DataTransferObject;
 using Microsoft.AspNetCore.Mvc;
+using PPParkingLot.ControllersView;
 using PPParkingLot.Models.Insert;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using SystemCommons;
 
 namespace PPParkingLot.Controllers
 {
-    public class LocationController: Controller
+    public class LocationController: BaseController
     {
         private ILocationSevice _service;
         public LocationController(ILocationSevice sevice )

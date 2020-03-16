@@ -4,6 +4,7 @@ using BusinessLogicalLayer.Interfaces;
 using DataTransferObject;
 using DTO.ObjectsDTO.LoginDTO;
 using Microsoft.AspNetCore.Mvc;
+using PPParkingLot.ControllersView;
 using PPParkingLot.Models.Insert;
 using PPParkingLot.Models.Login;
 using System;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace PPParkingLot.Controllers
 {
-    public class EmployeeController : Controller
+    public class EmployeeController : BaseController
     {
         IEmployeeService _service;
         public EmployeeController(IEmployeeService service)
@@ -105,7 +106,16 @@ namespace PPParkingLot.Controllers
             {
                 await _service.Login(dto);
 
-
+                Response.Cookies.Append("NomeDoCookie", "1,0");
+                var cookie = Request.Cookies["NomeDoCookie"];
+                if (cookie[2] == '0')
+                {
+                    //nao eh um admin
+                }
+                else
+                {
+                    //EHUMADMIN
+                }
                 //fazer cookies
 
 
