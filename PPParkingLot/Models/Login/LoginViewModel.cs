@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 
 namespace PPParkingLot.Models.Login
 {
-    public class EmployeeLoginViewModel
+    public class LoginViewModel
     {
-        public EmployeeLoginViewModel(string email, string password)
+        public LoginViewModel(string email, string password)
         {
             Email = email;
             Password = password;
         }
 
-        public EmployeeLoginViewModel()
+        public LoginViewModel()
         {
 
         }

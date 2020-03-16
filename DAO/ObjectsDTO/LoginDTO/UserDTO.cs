@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace PPParkingLot.Models.Login
+namespace DTO.ObjectsDTO.LoginDTO
 {
-    public class ClientLoginViewModel
+   public class UserDTO
     {
-        public ClientLoginViewModel(string email, string password)
+        public UserDTO(int iD, string email, string password)
         {
+            ID = iD;
             Email = email;
             Password = password;
         }
-        public ClientLoginViewModel()
+        public UserDTO()
         {
                 
         }
 
+        public int ID { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
 

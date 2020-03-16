@@ -71,6 +71,6 @@ namespace BusinessLogicalLayer.Interfaces
 
         Task<DataResponse<ClientDTO>> GetByEmail(string emailClient);
 
-        Task<DataResponse<ClientDTO>> Login(ClientLoginDTO client);
+        Task<DataResponse<ClientDTO>> Login(string email, string password);
     }
 }

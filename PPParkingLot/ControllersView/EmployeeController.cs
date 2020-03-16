@@ -91,11 +91,11 @@ namespace PPParkingLot.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login(EmployeeLoginViewModel viewModel)
+        public async Task<ActionResult> Login(LoginViewModel viewModel)
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<EmployeeLoginViewModel, EmployeeLoginDTO>();
+                cfg.CreateMap<LoginViewModel, EmployeeLoginDTO>();
             });
             IMapper mapper = configuration.CreateMapper();
 

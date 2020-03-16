@@ -173,22 +173,22 @@ namespace BusinessLogicalLayer.Impl
             }
         }
 
-        public async Task<DataResponse<ClientDTO>> Login(ClientLoginDTO clientLogin)
+        public async Task<DataResponse<ClientDTO>> Login(string email, string password)
         {
             DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
           
-            if (string.IsNullOrEmpty(clientLogin.Email))
+            if (string.IsNullOrEmpty(email))
             {
                 response.Errors.Add("Email inválido");
                 return response;
             }
             else
             {
-               response = await _iClientRepository.GetByEmail(clientLogin.Email);
+               response = await _iClientRepository.GetByEmail(email);
                 if (response.Success)
                 {
                     ClientDTO cli = response.Data[0];
-                    if (HashUtils.HashPassword(clientLogin.Password).Equals(cli.Password))
+                    if (HashUtils.HashPassword(password).Equals(cli.Password))
                     {
                         return response;
                     }
