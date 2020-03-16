@@ -3,8 +3,10 @@ using BusinessLogicalLayer.Impl;
 using BusinessLogicalLayer.Interfaces;
 using DAL.Context_EFCore_;
 using DataTransferObject;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 using PPParkingLot.Models.Insert;
+using PPParkingLot.Models.Login;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,6 +72,37 @@ namespace PPParkingLot.Controllers
             }
             return View();
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Login(ClientInsertViewModel viewModel)
+        {
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ClientLoginViewModel, ClientLoginDTO>();
+            });
+            IMapper mapper = configuration.CreateMapper();
+
+            ClientLoginDTO dto = mapper.Map<ClientLoginDTO>(viewModel);
+
+
+            try
+            {
+                await _service.Login(dto);
+
+
+                //fazer cookies
+
+
+                return RedirectToAction("Index", "Clients");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Erros = ex.Message;
+            }
+            return View();
+        }
+
+
 
 
 
