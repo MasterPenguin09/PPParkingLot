@@ -7,5 +7,6 @@ namespace PPParkingLot.Models.Login
 {
     public class ClientLoginViewModel
     {
+
     }
 }
