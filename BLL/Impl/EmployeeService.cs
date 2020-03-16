@@ -228,7 +228,7 @@ namespace BusinessLogicalLayer.Impl
                 if (response.Success)
                 {
                     EmployeeDTO emp = response.Data[0];
-                    if (emp.Password.Equals(employeeLogin.Password))
+                    if (HashUtils.HashPassword(employeeLogin.Password).Equals(emp.Password))
                     {
                         return response;
                     }
