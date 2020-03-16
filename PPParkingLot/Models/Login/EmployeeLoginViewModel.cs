@@ -5,20 +5,22 @@ using System.Threading.Tasks;
 
 namespace PPParkingLot.Models.Login
 {
-    public class ClientLoginViewModel
+    public class EmployeeLoginViewModel
     {
-        public ClientLoginViewModel(string email, string password)
+        public EmployeeLoginViewModel(string email, string password)
         {
             Email = email;
             Password = password;
         }
-        public ClientLoginViewModel()
+
+        public EmployeeLoginViewModel()
         {
-                
+
         }
 
         public string Email { get; set; }
         public string Password { get; set; }
+
 
     }
 }
