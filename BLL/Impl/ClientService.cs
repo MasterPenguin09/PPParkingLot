@@ -176,7 +176,7 @@ namespace BusinessLogicalLayer.Impl
         public async Task<DataResponse<ClientDTO>> Login(ClientLoginDTO clientLogin)
         {
             DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
-
+          
             if (string.IsNullOrEmpty(clientLogin.Email))
             {
                 response.Errors.Add("Email inválido");
@@ -188,7 +188,7 @@ namespace BusinessLogicalLayer.Impl
                 if (response.Success)
                 {
                     ClientDTO cli = response.Data[0];
-                    if (cli.Password.Equals(clientLogin.Password))
+                    if (HashUtils.HashPassword(clientLogin.Password).Equals(cli.Password))
                     {
                         return response;
                     }

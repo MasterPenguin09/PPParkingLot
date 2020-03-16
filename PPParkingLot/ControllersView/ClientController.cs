@@ -74,7 +74,7 @@ namespace PPParkingLot.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login(ClientInsertViewModel viewModel)
+        public async Task<ActionResult> Login(ClientLoginViewModel viewModel)
         {
             var configuration = new MapperConfiguration(cfg =>
             {
@@ -83,8 +83,6 @@ namespace PPParkingLot.Controllers
             IMapper mapper = configuration.CreateMapper();
 
             ClientLoginDTO dto = mapper.Map<ClientLoginDTO>(viewModel);
-
-
             try
             {
                 await _service.Login(dto);
