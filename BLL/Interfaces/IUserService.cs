@@ -1,4 +1,5 @@
-﻿using DTO.ObjectsDTO.LoginDTO;
+﻿using DataTransferObject.ComplexTypes;
+using DTO.ObjectsDTO.LoginDTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,10 @@ namespace BLL.Interfaces
 {
     public interface IUserService
     {
-        Task<DataResponse<object>> Validate(UserDTO user);
+        Task<DataResponse<UserPattern>> Validate(UserDTO user);
+
+        Task<DataResponse<UserPattern>> LookForEmployee(UserDTO user);
+
+        Task<DataResponse<UserPattern>> LookForClient(UserDTO user);
     }
 }
