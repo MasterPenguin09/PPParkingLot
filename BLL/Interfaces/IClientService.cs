@@ -68,6 +68,9 @@ namespace BusinessLogicalLayer.Interfaces
         /// <param name="clientName"></param>
         /// <returns>DataResponse</returns>
         Task<DataResponse<ClientDTO>> GetByName(string clientName);
-        Task<DataResponse<ClientDTO>> Login(ClientLoginDTO client);
+
+        Task<DataResponse<ClientDTO>> GetByEmail(string emailClient);
+
+        Task<DataResponse<ClientDTO>> Login(string email, string password);
     }
 }

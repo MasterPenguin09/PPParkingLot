@@ -1,7 +1,4 @@
 ﻿
-
-
-
 using BusinessLogicalLayer.Interfaces;
 using BusinessLogicalLayer.Security;
 using BusinessLogicalLayer.Validators;
@@ -12,6 +9,7 @@ using DTO;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using SystemCommons;
 
@@ -158,25 +156,51 @@ namespace BusinessLogicalLayer.Impl
             }
         }
 
-        public async Task<DataResponse<ClientDTO>> Login(ClientLoginDTO client)
+        public async Task<DataResponse<ClientDTO>> GetByEmail(string emailClient) 
         {
             DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
-            using (var db = _context)
+            if (string.IsNullOrEmpty(emailClient))
             {
-                 response.Data = await db.Clients.ToListAsync();
-                foreach (ClientDTO item in response.Data)
-                {
-                    if (item.Email == client.Email && item.Password == client.Password)
-                    {
-                       response.Data.Add(item);
-                        return response;
-                        
-                    }
-                }
-                response.Errors.Add("Usuário ou senha inválidos");
-                
+                response.Errors.Add("Email cliente inválido");
             }
-            return null;
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
+            {
+                return await _iClientRepository.GetByEmail(emailClient);
+            }
+        }
+
+        public async Task<DataResponse<ClientDTO>> Login(string email, string password)
+        {
+            DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
+          
+            if (string.IsNullOrEmpty(email))
+            {
+                response.Errors.Add("Email inválido");
+                return response;
+            }
+            else
+            {
+               response = await _iClientRepository.GetByEmail(email);
+                if (response.Success)
+                {
+                    ClientDTO cli = response.Data[0];
+                    if (HashUtils.HashPassword(password).Equals(cli.Password))
+                    {
+                        return response;
+                    }
+                    response.Success = false;
+                }
+                else
+                {
+                    response.Success = false;
+                    return response; 
+                }
+                return response;
+            }
         }
 
         public async Task<Response> Update(ClientDTO client)

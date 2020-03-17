@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL.Impl;
+using BLL.Interfaces;
 using BusinessLogicalLayer.Impl;
 using BusinessLogicalLayer.Interfaces;
 using DAL.Context_EFCore_;
@@ -53,7 +55,9 @@ namespace PPParkingLot
             services.AddTransient<IBrandService, BrandService>();
             services.AddTransient<IBrandRepository, BrandRepository>();
 
-      
+            services.AddTransient<IUserService, UserService>();
+
+
 
         }
 

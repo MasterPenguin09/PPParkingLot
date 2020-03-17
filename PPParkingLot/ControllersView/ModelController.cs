@@ -2,6 +2,7 @@
 using BusinessLogicalLayer.Interfaces;
 using DataTransferObject;
 using Microsoft.AspNetCore.Mvc;
+using PPParkingLot.ControllersView;
 using PPParkingLot.Models.Insert;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using SystemCommons;
 
 namespace PPParkingLot.Controllers
 {
-    public class ModelController: Controller
+    public class ModelController: BaseController
     {
         private IModelService _service;
 

@@ -70,5 +70,7 @@ namespace DataAccessLayer.Interfaces_EFCore_
         /// <param name="clientName"></param>
         /// <returns>DataResponse</returns>
         Task<DataResponse<ClientDTO>> GetByName(string clientName);
+
+         Task<DataResponse<ClientDTO>> GetByEmail(string emailClient);
     }
 }

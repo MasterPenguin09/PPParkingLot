@@ -1,5 +1,6 @@
 ﻿
 using DataTransferObject;
+using DTO.ObjectsDTO.LoginDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,5 +68,9 @@ namespace BusinessLogicalLayer.Interfaces
         /// <param name="employeeName"></param>
         /// <returns>DataResponse</returns>
         Task<DataResponse<EmployeeDTO>> GetByName(string employeeName);
+
+        Task<DataResponse<EmployeeDTO>> GetByEmail(string emailEmployee);
+
+        Task<DataResponse<EmployeeDTO>> Login(string emailEmployee, string password);
     }
 }

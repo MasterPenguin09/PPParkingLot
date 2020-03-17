@@ -4,6 +4,7 @@ using BusinessLogicalLayer.Validators;
 
 using DataAccessLayer.Interfaces_EFCore_;
 using DataTransferObject;
+using DTO.ObjectsDTO.LoginDTO;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace BusinessLogicalLayer.Impl
         {
             this._iEmployeeRepository = iEmployeeRep;
         }
+
 
         public async Task<Response> Delete(int idEmployee)
         {
@@ -71,6 +73,23 @@ namespace BusinessLogicalLayer.Impl
         {
             return await _iEmployeeRepository.GetAll();
 
+        }
+
+        public async Task<DataResponse<EmployeeDTO>> GetByEmail(string emailEmployee)
+        {
+            DataResponse<EmployeeDTO> response = new DataResponse<EmployeeDTO>();
+            if (string.IsNullOrEmpty(emailEmployee))
+            {
+                response.Errors.Add("Email funcionário inválido");
+            }
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
+            {
+                return await _iEmployeeRepository.GetByEmail(emailEmployee);
+            }
         }
 
         public async Task<DataResponse<EmployeeDTO>> GetByID(int employeeID)
@@ -191,6 +210,36 @@ namespace BusinessLogicalLayer.Impl
             else
             {
                 return await _iEmployeeRepository.Update(employee);
+            }
+        }
+
+       public async Task<DataResponse<EmployeeDTO>> Login(string email, string password)
+        {
+            DataResponse<EmployeeDTO> response = new DataResponse<EmployeeDTO>();
+
+            if (string.IsNullOrEmpty(email))
+            {
+                response.Errors.Add("Email inválido");
+                return response;
+            }
+            else
+            {
+                response = await _iEmployeeRepository.GetByEmail(email);
+                if (response.Success)
+                {
+                    EmployeeDTO emp = response.Data[0];
+                    if (HashUtils.HashPassword(password).Equals(emp.Password))
+                    {
+                        return response;
+                    }
+                    response.Success = false;
+                }
+                else
+                {
+                    response.Success = false;
+                    return response;
+                }
+                return response;
             }
         }
     }
