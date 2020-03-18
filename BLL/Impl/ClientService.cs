@@ -190,14 +190,15 @@ namespace BusinessLogicalLayer.Impl
                     ClientDTO cli = response.Data[0];
                     if (HashUtils.HashPassword(password).Equals(cli.Password))
                     {
+                        response.Success = true;
                         return response;
                     }
-                    response.Success = false;
-                }
-                else
-                {
-                    response.Success = false;
-                    return response; 
+                    else
+                    {
+                        response.Errors.Add("Senha inválida");
+                        response.Success = false;
+                        return response;
+                    }
                 }
                 return response;
             }
