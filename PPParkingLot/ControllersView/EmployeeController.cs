@@ -16,7 +16,7 @@ namespace PPParkingLot.Controllers
 {
     public class EmployeeController : BaseController
     {
-        IEmployeeService _service;
+        private readonly IEmployeeService _service;
         public EmployeeController(IEmployeeService service)
         {
             this._service = service;
@@ -90,42 +90,6 @@ namespace PPParkingLot.Controllers
             return this.View();
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Login(LoginViewModel viewModel)
-        {
-            var configuration = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<LoginViewModel, EmployeeLoginDTO>();
-            });
-            IMapper mapper = configuration.CreateMapper();
 
-            EmployeeLoginDTO dto = mapper.Map<EmployeeLoginDTO>(viewModel);
-
-
-            try
-            {
-                await _service.Login(dto);
-
-                Response.Cookies.Append("NomeDoCookie", "1,0");
-                var cookie = Request.Cookies["NomeDoCookie"];
-                if (cookie[2] == '0')
-                {
-                    //nao eh um admin
-                }
-                else
-                {
-                    //EHUMADMIN
-                }
-                //fazer cookies
-
-
-                return RedirectToAction("Index", "Employees");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Erros = ex.Message;
-            }
-            return View();
-        }
     }
 }

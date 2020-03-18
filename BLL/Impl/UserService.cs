@@ -14,8 +14,8 @@ namespace BLL.Impl
 {
    public class UserService : IUserService
     {
-        private IClientService _clientSrvc;
-        private IEmployeeService _employeeSrvc;
+        private readonly IClientService _clientSrvc;
+        private readonly IEmployeeService _employeeSrvc;
 
 
         public UserService(IClientService clientService, IEmployeeService employeeService)

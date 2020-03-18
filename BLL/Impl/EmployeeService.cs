@@ -15,7 +15,7 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Impl
 {
-   public class EmployeeService : IEmployeeService
+    public class EmployeeService : IEmployeeService
     {
         /// <summary>
         /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
@@ -59,7 +59,7 @@ namespace BusinessLogicalLayer.Impl
                 return response;
             }
             else
-            { 
+            {
                 return await _iEmployeeRepository.Disable(idEmployee);
             }
         }
@@ -213,7 +213,7 @@ namespace BusinessLogicalLayer.Impl
             }
         }
 
-       public async Task<DataResponse<EmployeeDTO>> Login(string email, string password)
+        public async Task<DataResponse<EmployeeDTO>> Login(string email, string password)
         {
             DataResponse<EmployeeDTO> response = new DataResponse<EmployeeDTO>();
 
@@ -230,14 +230,15 @@ namespace BusinessLogicalLayer.Impl
                     EmployeeDTO emp = response.Data[0];
                     if (HashUtils.HashPassword(password).Equals(emp.Password))
                     {
+                        response.Success = true;
                         return response;
                     }
-                    response.Success = false;
-                }
-                else
-                {
-                    response.Success = false;
-                    return response;
+                    else
+                    {
+                        response.Errors.Add("Senha inválida");
+                        response.Success = false;
+                        return response;
+                    }
                 }
                 return response;
             }

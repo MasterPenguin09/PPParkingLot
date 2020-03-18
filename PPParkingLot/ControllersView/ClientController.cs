@@ -18,7 +18,7 @@ namespace PPParkingLot.Controllers
 {
     public class ClientController: BaseController
     {
-        IClientService _service;
+       private readonly IClientService _service;
         public ClientController(IClientService service)
         {
             this._service = service;
@@ -73,38 +73,6 @@ namespace PPParkingLot.Controllers
             }
             return View();
         }
-
-        [HttpPost]
-        public async Task<ActionResult> Login(ClientLoginViewModel viewModel)
-        {
-            var configuration = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<ClientLoginViewModel, ClientLoginDTO>();
-            });
-            IMapper mapper = configuration.CreateMapper();
-
-            ClientLoginDTO dto = mapper.Map<ClientLoginDTO>(viewModel);
-            try
-            {
-                await _service.Login(dto);
-
-
-                //fazer cookies
-
-
-                return RedirectToAction("Index", "Clients");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Erros = ex.Message;
-            }
-            return View();
-        }
-
-
-
-
-
 
     }
 
