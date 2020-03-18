@@ -1,7 +1,28 @@
 ﻿
 @{
-    ViewData["Title"] = "Login";
+    Layout = null;
+
 }
 
-<h1>Login</h1>
+<!DOCTYPE html>
+<link href="~/css/Login.css" rel="stylesheet" />
+<html>
+<head>
+    <link rel="icon" type="image/svg" href="~/css/Photos/IconeCar-removebg-preview.png">
+    <meta name="viewport" content="width=device-width" />
+    <title>Login - SmartParking</title>
+</head>
+<body>
+    <link href="~/css/Login.css" rel="stylesheet" />
+    <div class="login">
+        <h1>Login</h1>
+        <form method="post">
+            <input type="text" name="Email" id="Email" placeholder="Email" required="required" />
+            <input type="password" name="Password" id="Password" placeholder="Password" required="required" />
+            <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
+        </form>
+    </div>
 
+
+</body>
+</html>
