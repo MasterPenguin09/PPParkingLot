@@ -16,7 +16,7 @@ namespace PPParkingLot.ControllersView
 
             if (cookie == null)
             {
-                filterContext.Result = new RedirectResult(Url.Action("Login", "Usuario"));
+                filterContext.Result = new RedirectResult(Url.Action("Login", "Home"));
             }
             base.OnActionExecuting(filterContext);
         }

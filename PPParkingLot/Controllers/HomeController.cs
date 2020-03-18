@@ -43,7 +43,10 @@ namespace PPParkingLot.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
+        public ActionResult Login() 
+        {
+            return View();
+        }
 
         [HttpPost]
         public async Task<ActionResult> Login(LoginViewModel viewModel)
