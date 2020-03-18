@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BLL.Interfaces;
+using DataTransferObject.ComplexTypes;
 using DTO.ObjectsDTO.LoginDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PPParkingLot.ControllersView;
 using PPParkingLot.Models;
 using PPParkingLot.Models.Login;
+using SystemCommons;
 
 namespace PPParkingLot.Controllers
 {
@@ -57,19 +59,34 @@ namespace PPParkingLot.Controllers
 
             try
             {
-                await _userService.Validate(dto);
+               UserPattern loggedUser = new UserPattern();
 
-                Response.Cookies.Append("NomeDoCookie", "1,0");
-                var cookie = Request.Cookies["NomeDoCookie"];
+               DataResponse<UserPattern>  user = new DataResponse<UserPattern>();
+               user = await _userService.Validate(dto);
 
-                if (cookie[2] == '0')
+                if (user.Success)
                 {
-                    //nao eh um admin
+                    loggedUser = user.Data.FirstOrDefault();
+
+                   // var cookie = Request.Cookies["NomeDoCookie", ""];
+
                 }
-                else
-                {
-                    //EHUMADMIN
-                }
+
+             
+
+              //Response.Cookies.Append("NomeDoCookie", "1,0");
+              Response.Cookies.Append("User", "");
+
+              
+
+                //if (cookie[2] == '0')
+                //{
+                //    //nao eh um admin
+                //}
+                //else
+                //{
+                //    //EHUMADMIN
+                //}
                 //fazer cookies
 
 
