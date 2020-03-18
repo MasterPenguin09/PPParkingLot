@@ -1,0 +1,129 @@
+﻿@model PPParkingLot.Models.Insert.LocationInsertViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    @{
+        List<SystemCommons.Error> errors = new List<SystemCommons.Error>();
+        if (ViewBag.Errors != null)
+        {
+            errors = ViewBag.Errors;
+        }
+    }
+    <form method="post">
+        <h4>Client</h4>
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.EntryTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" type="date" name="EntryTime" id="EntryTime" />
+                <span class="text-danger" id="errorEntryTime" name="errorEntryTime"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExitTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" type="date" name="ExitTime" id="ExitTime" />
+                <span class="text-danger" id="errorExitTime" name="errorSystemExitDate"></span>
+            </div>
+        </div>
+
+        @{
+            string[] PayForm = Enum.GetNames(typeof(DataTransferObject.Enums.PayForm));
+        }
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PayForm, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                <select class="form-control" name="AccessLevel" id="AccessLevel">
+                    @for (int i = 0; i < PayForm.Length; i++)
+                    {
+                        <option value="@i">@PayForm[i]</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ClientID, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                <select class="form-control" name="ClientID" id="ClientID">
+                    @foreach (var item in ViewBag.ClientID)
+                    {
+                        <option value="@item.ID">@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VehicleID, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                <select class="form-control" name="VehicleID" id="VehicleID">
+                    @foreach (var item in ViewBag.VehicleID)
+                    {
+                        <option value="@item.ID">@item.CarBoard</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ParkingSpot, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                <select class="form-control" name="ParkingSpotID" id="ParkingSpotID">
+                    @foreach (var item in ViewBag.ParkingSpot)
+                    {
+                        <option value="@item.ID">@item.Type</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+
+        @if (ViewBag.ErroGenerico != null)
+        {
+            <div class="form-group">
+                <div class="col-md-10">
+                    <span class="text-warning">@ViewBag.ErroGenerico</span>
+                </div>
+            </div>
+        }
+    </form>
+</div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

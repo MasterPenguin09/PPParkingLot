@@ -20,7 +20,8 @@ namespace PPParkingLot.Models.Insert
         public int Value { get; set; }
 
 
-        public String Vehicle { get; set; }
+        public int ClientID { get; set; }
+
 
 
         public int VehicleID { get; set; }

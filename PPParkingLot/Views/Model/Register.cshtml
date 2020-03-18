@@ -1,17 +1,17 @@
-﻿@model PPParkingLot.Models.Insert.BrandInsertViewModel
+﻿@model PPParkingLot.Models.Insert.ModelInsertViewModel
+
 @{
     ViewData["Title"] = "Register";
 }
 
 <h1>Register</h1>
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Brand</h4>
+        <h4>Model</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
