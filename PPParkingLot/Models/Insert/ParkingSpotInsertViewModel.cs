@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PPParkingLot.Models.Insert
 {
-    public class ParkingSportInsertViewModel
+    public class ParkingSpotInsertViewModel
     {
         [DisplayName("ValuePerHour")]
         [Required(ErrorMessage = "O vaor por hora deve ser informado")]
