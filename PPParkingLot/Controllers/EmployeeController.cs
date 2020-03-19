@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SystemCommons;
 
 namespace PPParkingLot.Controllers
 {
@@ -22,9 +23,22 @@ namespace PPParkingLot.Controllers
             this._service = service;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return this.View();
+            DataResponse<EmployeeDTO> employee = await _service.GetAll();
+
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<EmployeeDTO, EmployeeInsertViewModel>();
+            });
+
+            IMapper mapper = configuration.CreateMapper();
+
+            List<EmployeeInsertViewModel> empViewModel = mapper.Map<List<EmployeeInsertViewModel>>(employee.Data);
+
+            ViewBag.Employees = empViewModel;
+
+            return View();
         }
 
         public ActionResult Register()
@@ -35,6 +49,7 @@ namespace PPParkingLot.Controllers
         [HttpPost]
         public async Task<ActionResult> Register(EmployeeInsertViewModel viewModel)
         {
+            Response response = new Response();
 
             var configuration = new MapperConfiguration(cfg =>
             {
@@ -42,21 +57,19 @@ namespace PPParkingLot.Controllers
             });
 
             IMapper mapper = configuration.CreateMapper();
-            // new SERService().GetSERByID(4);
-            //Transforma o EmployeeInsertViewModel em um EmployeeDTO
             EmployeeDTO dto = mapper.Map<EmployeeDTO>(viewModel);
-            try
+
+            response = await _service.Insert(dto);
+            //Se funcionou, redireciona pra página inicial
+            if (response.Success)
             {
-                await _service.Insert(dto);
-                //Se funcionou, redireciona pra página inicial
                 return RedirectToAction("Employee", "Index");
             }
-            catch (Exception ex)
+            else
             {
-                //Se caiu aqui, o EmployeeService lançou uma exceção genérica, provavelmente por falha de acesso ao banco
-                ViewBag.ErrorMessage = ex.Message;
+                ViewBag.ErrorMessage = response.Errors;
+                return this.View();
             }
-            return this.View();
         }
 
         public ActionResult Update()
@@ -67,29 +80,57 @@ namespace PPParkingLot.Controllers
         [HttpPost]
         public async Task<ActionResult> Update(EmployeeInsertViewModel viewModel)
         {
+            Response response = new Response();
+
             var configuration = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<EmployeeInsertViewModel, EmployeeDTO>();
             });
 
             IMapper mapper = configuration.CreateMapper();
-            // new SERService().GetSERByID(4);
-            //Transforma o EmployeeInsertViewModel em um EmployeeDTO
             EmployeeDTO dto = mapper.Map<EmployeeDTO>(viewModel);
-            try
+
+            response = await _service.Update(dto);
+            //Se funcionou, redireciona pra página inicial
+            if (response.Success)
             {
-                await _service.Update(dto);
-                //Se funcionou, redireciona pra página inicial
                 return RedirectToAction("Employee", "Index");
             }
-            catch (Exception ex)
+            else
             {
-                //Se caiu aqui, o EmployeeService lançou uma exceção genérica, provavelmente por falha de acesso ao banco
-                ViewBag.ErrorMessage = ex.Message;
+                ViewBag.ErrorMessage = response.Errors;
+                return this.View();
             }
-            return this.View();
         }
 
+        public ActionResult Disable()
+        {
+            return this.View();
+        }
+        public async Task<ActionResult> Disable(EmployeeInsertViewModel viewModel)
+        {
+            Response response = new Response();
 
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<EmployeeInsertViewModel, EmployeeDTO>();
+            });
+
+            IMapper mapper = configuration.CreateMapper();
+
+            EmployeeDTO dto = mapper.Map<EmployeeDTO>(viewModel);
+            response = await _service.Disable(dto.ID);
+            //Se funcionou, redireciona pra página inicial
+            if (response.Success)
+            {
+                return RedirectToAction("Employee", "Index");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = response.Errors;
+                return this.View();
+            }
+
+        }
     }
 }
