@@ -67,7 +67,7 @@ namespace PPParkingLot.Controllers
             //Se funcionou, redireciona pra página inicial
             if (response.Success)
             {
-                return RedirectToAction("ParkingSpot", "Index");
+                return RedirectToAction("Index", "ParkingSpot");
             }
             else
             {
@@ -100,7 +100,7 @@ namespace PPParkingLot.Controllers
             //Se funcionou, redireciona pra página inicial
             if (response.Success)
             {
-                return RedirectToAction("ParkingSpot", "Index");
+                return RedirectToAction("Index", "ParkingSpot");
             }
             else
             {
@@ -131,7 +131,7 @@ namespace PPParkingLot.Controllers
             //Se funcionou, redireciona pra página inicial
             if (response.Success)
             {
-                return RedirectToAction("ParkingSpot", "Index");
+                return RedirectToAction("Index", "ParkingSpot");
             }
             else
             {

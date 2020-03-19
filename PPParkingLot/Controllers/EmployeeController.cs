@@ -63,7 +63,7 @@ namespace PPParkingLot.Controllers
             //Se funcionou, redireciona pra página inicial
             if (response.Success)
             {
-                return RedirectToAction("Employee", "Index");
+                return RedirectToAction("Index", "Employee");
             }
             else
             {
@@ -94,7 +94,7 @@ namespace PPParkingLot.Controllers
             //Se funcionou, redireciona pra página inicial
             if (response.Success)
             {
-                return RedirectToAction("Employee", "Index");
+                return RedirectToAction("Index", "Employee");
             }
             else
             {
@@ -123,7 +123,7 @@ namespace PPParkingLot.Controllers
             //Se funcionou, redireciona pra página inicial
             if (response.Success)
             {
-                return RedirectToAction("Employee", "Index");
+                return RedirectToAction("Index", "Employee");
             }
             else
             {

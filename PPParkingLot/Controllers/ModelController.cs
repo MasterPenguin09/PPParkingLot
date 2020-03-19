@@ -12,7 +12,7 @@ using SystemCommons;
 
 namespace PPParkingLot.Controllers
 {
-    public class ModelController: BaseController
+    public class ModelController : BaseController
     {
         private IModelService _service;
 
@@ -23,8 +23,6 @@ namespace PPParkingLot.Controllers
 
         public async Task<ActionResult> Index()
         {
-
-
             DataResponse<ModelDTO> models = await _service.GetAll();
 
             var configuration = new MapperConfiguration(cfg =>
@@ -34,8 +32,7 @@ namespace PPParkingLot.Controllers
 
             IMapper mapper = configuration.CreateMapper();
 
-            List<ModelInsertViewModel> modelsViewModel =
-                mapper.Map<List<ModelInsertViewModel>>(models.Data);
+            List<ModelInsertViewModel> modelsViewModel = mapper.Map<List<ModelInsertViewModel>>(models.Data);
 
             ViewBag.Models = modelsViewModel;
 
@@ -50,6 +47,8 @@ namespace PPParkingLot.Controllers
         [HttpPost]
         public async Task<ActionResult> Register(ModelInsertViewModel viewModel)
         {
+            Response response = new Response();
+
             var configuration = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<ModelInsertViewModel, ModelDTO>();
@@ -58,17 +57,46 @@ namespace PPParkingLot.Controllers
 
             ModelDTO dto = mapper.Map<ModelDTO>(viewModel);
 
+            response = await _service.Insert(dto);
 
-            try
+            if (response.Success)
             {
-                await _service.Insert(dto);
-                return RedirectToAction("Index", "Models");
+                return RedirectToAction("Index", "Model");
             }
-            catch (Exception ex)
+            else
             {
-                ViewBag.Erros = ex.Message;
+                ViewBag.ErrorMessage = response.Errors;
+                return this.View();
             }
-            return View();
+        }
+
+        public ActionResult Delete()
+        {
+            return this.View();
+        }
+        public async Task<ActionResult> Delete(ModelInsertViewModel viewModel)
+        {
+            Response response = new Response();
+
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ModelInsertViewModel, ModelDTO>();
+            });
+
+            IMapper mapper = configuration.CreateMapper();
+
+            ModelDTO dto = mapper.Map<ModelDTO>(viewModel);
+            response = await _service.Delete(dto.ID);
+            //Se funcionou, redireciona pra página inicial
+            if (response.Success)
+            {
+                return RedirectToAction("Index", "Model");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = response.Errors;
+                return this.View();
+            }
         }
     }
 }
