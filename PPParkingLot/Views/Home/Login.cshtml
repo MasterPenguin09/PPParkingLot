@@ -46,12 +46,6 @@
             });
         </script>*@
 
-    <script>
-        $(document).ready(function () {
-            alert("Test");
-        });
-    </script>
-
 </head>
 
 
@@ -61,10 +55,10 @@
     <div class="login">
         <h1>Login</h1>
         <form method="post">
-            <input type="text" name="Email" id="Email" placeholder="Email" @*required="required"*@ />
+            <input type="text" name="Email" id="Email" placeholder="Email" required="required" />
             <span class="text-danger" id="EmailError" name="EmailError"></span>
 
-            <input type="password" name="Password" id="Password" placeholder="Password" @*required="required"*@ />
+            <input type="password" name="Password" id="Password" placeholder="Password" required="required" />
             <span class="text-danger" id="PasswordError" name="PasswordError"></span>
 
             @* <button type="submit" class="btn btn-primary btn-block btn-large" name="Send" id="Send" value="Send">Sign Up.</button>*@
