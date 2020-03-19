@@ -14,24 +14,92 @@ namespace PPParkingLot.Controllers
 {
     public class BrandController : BaseController
     {
-      
+        private IBrandService _service;
+        public BrandController(IBrandService service)
+        {
+            this._service = service;
+        }
+
+        public async Task<ActionResult> Index()
+        {
+            DataResponse<BrandDTO> brands = await _service.GetAll();
+
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<BrandDTO, BrandInsertViewModel>();
+            });
+
+            IMapper mapper = configuration.CreateMapper();
+
+            List<BrandInsertViewModel> brandsViewModel = mapper.Map<List<BrandInsertViewModel>>(brands.Data);
+
+            ViewBag.Models = brandsViewModel;
+
+            return View();
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Register(BrandInsertViewModel viewModel)
+        {
+            Response response = new Response();
+
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<BrandInsertViewModel, BrandDTO>();
+            });
+            IMapper mapper = configuration.CreateMapper();
+
+            BrandDTO dto = mapper.Map<BrandDTO>(viewModel);
+
+            response = await _service.Insert(dto);
+
+            if (response.Success)
+            {
+                return RedirectToAction("Index", "Brand");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = response.Errors;
+                return this.View();
+            }
+        }
+
+        public ActionResult Delete()
+        {
+            return this.View();
+        }
+        public async Task<ActionResult> Delete(BrandInsertViewModel viewModel)
+        {
+            Response response = new Response();
+
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<BrandInsertViewModel, BrandDTO>();
+            });
+
+            IMapper mapper = configuration.CreateMapper();
+
+            BrandDTO dto = mapper.Map<BrandDTO>(viewModel);
+            response = await _service.Delete(dto.ID);
+            //Se funcionou, redireciona pra página inicial
+            if (response.Success)
+            {
+                return RedirectToAction("Index", "Brand");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = response.Errors;
+                return this.View();
+            }
+        }
 
     }
 }
 
-// Olha o service 
-// Pega um método ex: Delete
-// Vai no controller 
-// Copia um exemplo e troca o nome pra Delete 
-// Ver se precisa de httpPost ou get
-// Fazer o conversor de view pra DTO 
-// Chamar o método (com a interface _service)
-// Jogar o objeto dto convertido dentro do método da interface 
-// Ex: await _service.Delete(dto);
-// Fazer a view bag pra pegar os erros que possam vir do delete 
-// Esses erros estão dentro do objeto Response que ele retorna 
-// Ai é só pegar eles e jogar dentro da viewBag
-// Criar a tela (Empty)
-// Copiar os campos do marcelo 
-// Fazer o JS e tudo mais 
+
 
