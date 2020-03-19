@@ -68,6 +68,8 @@ namespace BusinessLogicalLayer.Interfaces
         /// <returns>DataResponse</returns>
         Task<DataResponse<LocationDTO>> GetByValue(double locationValue);
 
+        Task<DataResponse<LocationDTO>> CalculatePrice(int idLocation);
+
 
     }
 }
