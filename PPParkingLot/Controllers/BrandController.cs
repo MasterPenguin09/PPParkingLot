@@ -14,7 +14,7 @@ namespace PPParkingLot.Controllers
 {
     public class BrandController : BaseController
     {
-        private IBrandService _service;
+        private IBrandService  _service;
         public BrandController(IBrandService service)
         {
             this._service = service;
