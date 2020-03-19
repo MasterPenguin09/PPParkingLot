@@ -80,20 +80,21 @@ namespace PPParkingLot.Controllers
               //Response.Cookies.Append("NomeDoCookie", "1,0");
               Response.Cookies.Append("User", "");
 
-              
+
 
                 //if (cookie[2] == '0')
                 //{
+                //return RedirectToAction("Index", "ClientSpace");
                 //    //nao eh um admin
                 //}
                 //else
                 //{
+                //return RedirectToAction("Index", "EmployeeSpace");
                 //    //EHUMADMIN
                 //}
                 //fazer cookies
 
 
-                return RedirectToAction("Index", "Employees");
             }
             catch (Exception ex)
             {
