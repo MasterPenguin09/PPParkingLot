@@ -10,38 +10,39 @@ namespace DataTransferObject
 
     public class LocationDTO
     {
-        public LocationDTO(int iD, DateTime entryTime, DateTime? exitTime, PayForm payForm, int value, VehicleDTO vehicle, int vehicleID, ParkingSpotDTO parkingSpot, int parkingSpotID, bool isActive)
+
+        public LocationDTO(int iD, DateTime entryTime, DateTime? exitTime, PayForm payForm, double value, int clientID, int vehicleID, int parkingSpotID, bool isActive)
         {
             ID = iD;
             EntryTime = entryTime;
             ExitTime = exitTime;
             PayForm = payForm;
             Value = value;
-            Vehicle = vehicle;
+            ClientID = clientID;
             VehicleID = vehicleID;
-            ParkingSpot = parkingSpot;
             ParkingSpotID = parkingSpotID;
             IsActive = isActive;
-
         }
+
         public LocationDTO()
         {
 
         }
 
+   
         public int ID { get; set; }
         public DateTime EntryTime { get; set; }
         public DateTime? ExitTime { get; set; }
         public PayForm PayForm { get; set; }
         public double Value { get; set; }
 
-        public ClientDTO Client { get; set; }
+        //public ClientDTO Client { get; set; }
         public int ClientID { get; set; }
 
-        public VehicleDTO Vehicle { get; set; }
+        //public VehicleDTO Vehicle { get; set; }
         public int VehicleID { get; set; }
 
-        public ParkingSpotDTO ParkingSpot { get; set; }
+        //public ParkingSpotDTO ParkingSpot { get; set; }
         public int ParkingSpotID { get; set; }
 
         public bool IsActive { get; set; }
