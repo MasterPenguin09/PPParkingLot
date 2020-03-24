@@ -51,7 +51,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
 
             }
@@ -65,7 +65,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             {
                 using (var context = _context)
                 {
-                   EmployeeDTO employee = await context.Employees.FindAsync(idEmployee);
+                    EmployeeDTO employee = await context.Employees.FindAsync(idEmployee);
                     employee.IsActive = false;
                     context.Employees.Update(employee);
                     int nAffectedRows = await context.SaveChangesAsync();
@@ -81,11 +81,11 @@ namespace DataAccessLayer.Repositories_EFCore_
                         return response;
                     }
                 }
-              
+
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
 
             }
@@ -93,28 +93,29 @@ namespace DataAccessLayer.Repositories_EFCore_
 
         public async Task<DataResponse<EmployeeDTO>> GetActives()
         {
-            List<EmployeeDTO> employees = new List<EmployeeDTO>();
-
+            DataResponse<EmployeeDTO> response = new DataResponse<EmployeeDTO>();
             try
             {
                 using (var context = _context)
                 {
-                    employees = await context.Employees.Where(c => c.IsActive == true).ToListAsync();
+                    response.Data = await context.Employees.Where(c => c.IsActive == true).ToListAsync();
 
+                    if (response.Data.Count > 0)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Dados inexisentes");
+                        return response;
+                    }
                 }
-                DataResponse<EmployeeDTO> dataResponse = new DataResponse<EmployeeDTO>();
-                dataResponse.Data = employees;
-                dataResponse.Success = true;
-                return dataResponse;
             }
             catch (Exception ex)
             {
-
-               
-                DataResponse<EmployeeDTO> response = new DataResponse<EmployeeDTO>();
-                response.Success = false;
-                response.Errors.Add("Falha ao acessar o banco de dados, contate o suporte.");
-                return response;
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
             }
         }
 
@@ -128,18 +129,22 @@ namespace DataAccessLayer.Repositories_EFCore_
                 {
                     response.Data = await context.Employees.ToListAsync();
 
-                    if (response.Data != null)
+                    if (response.Data.Count > 0)
                     {
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Funcionários não encontrados");
-                    return response;
+                    else
+                    {
+                        response.Errors.Add("Funcionários não encontrados");
+                        return response;
+                    }
+                 
                 }
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -152,18 +157,22 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     response.Data.Add(await context.Employees.FindAsync(employeeID));
-                    if (response.Data != null)
+                    if (response.Data.Count > 0)
                     {
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Funcionário não encontrado");
-                    return response;
+                    else
+                    {
+                        response.Errors.Add("Funcionário não encontrado");
+                        return response;
+                    }
+                 
                 }
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -176,18 +185,22 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     response.Data.Add(await context.Employees.Where(c => c.Name == employeeName).FirstOrDefaultAsync());
-                    if (response.Data != null)
+                    if (response.Data.Count > 0)
                     {
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Funcionário não encontrado");
-                    return response;
+                    else
+                    {
+                        response.Errors.Add("Funcionário não encontrado");
+                        return response;
+                    }
+                
                 }
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -213,18 +226,13 @@ namespace DataAccessLayer.Repositories_EFCore_
                         return response;
                     }
                 }
-             
+
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
-        }
-
-        public Task<DataResponse<ClientDTO>> Login(EmployeeDTO employee)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<Response> Update(EmployeeDTO employee)
@@ -234,7 +242,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             {
                 using (var context = _context)
                 {
- 
+
                     context.Employees.Update(employee);
                     int nAffectedRows = await context.SaveChangesAsync();
 
@@ -248,16 +256,16 @@ namespace DataAccessLayer.Repositories_EFCore_
                         response.Errors.Add("Edição não executada");
                         return response;
                     }
-                } 
+                }
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
 
-       public async Task<DataResponse<EmployeeDTO>> GetByEmail(string emailEmployee)
+        public async Task<DataResponse<EmployeeDTO>> GetByEmail(string emailEmployee)
         {
             DataResponse<EmployeeDTO> response = new DataResponse<EmployeeDTO>();
             try
@@ -265,18 +273,21 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     response.Data.Add(await context.Employees.Where(c => c.Email == emailEmployee).FirstOrDefaultAsync());
-                    if (response.Data != null)
+                    if (response.Data.Count > 0)
                     {
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Funcionário não encontrado");
-                    return response;
+                    else
+                    {
+                        response.Errors.Add("Funcionário não encontrado");
+                        return response;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }

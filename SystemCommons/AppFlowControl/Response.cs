@@ -6,9 +6,6 @@ namespace SystemCommons
 {
     public class Response
     {
-
-
-
         public Response(bool success, List<string> errors)
         {
             Success = success;

@@ -42,6 +42,7 @@ namespace BusinessLogicalLayer.Impl
                 }
                 catch (Exception ex)
                 {
+                    //_log.Info(response.Errors);
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
                     return response;
                 }

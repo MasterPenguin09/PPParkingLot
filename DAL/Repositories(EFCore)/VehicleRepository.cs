@@ -52,7 +52,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
 
             }
@@ -86,7 +86,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
 
             }
@@ -101,15 +101,23 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     response.Data = await context.Vehicles.Where(c => c.IsActive == true).ToListAsync();
-                    response.Success = true;
-                    return response;
+                    if (response.Data.Count > 0)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Dados inexitentes");
+                        return response;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.Errors.Add("Falha ao acessar o banco de dados, contate o suporte.");
-                return response;
+               
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
             }
         }
 
@@ -123,18 +131,21 @@ namespace DataAccessLayer.Repositories_EFCore_
                 {
                     response.Data = await context.Vehicles.ToListAsync();
 
-                    if (response.Data != null)
+                    if (response.Data.Count > 0)
                     {
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Veículos não encontrados");
-                    return response;
+                    else
+                    {
+                        response.Errors.Add("Veículos não encontrados");
+                        return response;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -147,18 +158,21 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     response.Data.Add(await context.Vehicles.FindAsync(vehicleID));
-                    if (response.Data != null)
+                    if (response.Data.Count > 0)
                     {
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Veículo não encontrado");
-                    return response;
+                    else
+                    {
+                        response.Errors.Add("Veículo não encontrado");
+                        return response;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -171,18 +185,22 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     response.Data.Add(await context.Vehicles.Where(c => c.CarBoard == vehicleBoard).FirstOrDefaultAsync());
-                    if (response.Data != null)
+                    if (response.Data.Count > 0)
                     {
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Veículo não encontrado");
-                    return response;
+                    else
+                    {
+                        response.Errors.Add("Veículo não encontrado");
+                        return response;
+                    }
+                   
                 }
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -211,7 +229,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -242,7 +260,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
