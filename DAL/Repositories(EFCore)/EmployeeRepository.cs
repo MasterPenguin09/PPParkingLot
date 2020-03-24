@@ -235,11 +235,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
         }
 
-        public Task<DataResponse<ClientDTO>> Login(EmployeeDTO employee)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<Response> Update(EmployeeDTO employee)
         {
             Response response = new Response();
