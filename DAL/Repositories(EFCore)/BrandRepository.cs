@@ -52,7 +52,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
 
             }
@@ -67,8 +67,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     response.Data = await context.Brands.ToListAsync();
-
-                    if (response.Data != null)
+                    if (response.Data.Count > 0)
                     {
                         response.Success = true;
                         return response;
@@ -79,7 +78,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -92,7 +91,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     response.Data.Add(await context.Brands.FindAsync(brandID));
-                    if (response.Data != null)
+                    if (response.Data.Count > 0)
                     {
                         response.Success = true;
                         return response;
@@ -103,7 +102,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
 
@@ -117,7 +116,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     response.Data.Add(await context.Brands.Where(c => c.Name == brandName).FirstOrDefaultAsync());
-                    if (response.Data != null)
+                    if (response.Data.Count > 0)
                     {
                         response.Success = true;
                         return response;
@@ -128,7 +127,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -158,7 +157,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -170,24 +169,24 @@ namespace DataAccessLayer.Repositories_EFCore_
             {
                 using (var context = _context)
                 {
-                    //context.Entry(brand).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-
-                    // int nLinhasAfetadas = await context.SaveChangesAsync();
+                  
                     context.Update(brand);
-                    await context.SaveChangesAsync();
-                    //if (nLinhasAfetadas == 1)
-                }  // {
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows == 1)
+                    {
                         response.Success = true;
                         return response;
-                   // }
-
-                   // response.Errors.Add("Edição não executada");
-                    //return response;
-                
+                    }
+                    else
+                    {
+                        response.Errors.Add("Edição não executada");
+                        return response;
+                    }
+                }  
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }

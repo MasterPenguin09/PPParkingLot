@@ -52,8 +52,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
-                return response;
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
 
             }
@@ -85,8 +84,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
-                return response;
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
 
             }
@@ -101,15 +99,23 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     response.Data = await context.ParkingSpots.Where(c => c.IsActive == true).ToListAsync();
-                    response.Success = true;
-                    return response;
+                    if (response.Data.Count > 0)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Dados inexistentes");
+                        return response;
+                    }
+                  
                 }
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.Errors.Add("Falha ao acessar o banco de dados, contate o suporte.");
-                return response;
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
+                throw ex;
             }
         }
 
@@ -123,18 +129,21 @@ namespace DataAccessLayer.Repositories_EFCore_
                 {
                     response.Data = await context.ParkingSpots.ToListAsync();
 
-                    if (response.Data != null)
+                    if (response.Data.Count > 0)
                     {
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Vagas não encontradas");
-                    return response;
+                    else
+                    {
+                        response.Errors.Add("Vagas não encontradas");
+                        return response;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -147,18 +156,22 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     response.Data.Add(await context.ParkingSpots.FindAsync(idPakingSpot));
-                    if (response.Data != null)
+                    if (response.Data.Count > 0)
                     {
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Vaga não encontrada");
-                    return response;
+                    else
+                    {
+                        response.Errors.Add("Vaga não encontrada");
+                        return response;
+                    }
+                  
                 }
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -187,7 +200,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -218,7 +231,7 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                response.Errors.Add("Erro no banco de dados contate o administrador");
+                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
