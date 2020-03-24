@@ -13,6 +13,8 @@ using SystemCommons;
 
 namespace PPParkingLot.Controllers
 {
+
+    //queria entender o motivo pro Gabriel duvidar tento da minha capacidade mental
     public class VehicleController: BaseController
     {
         private readonly IVehicleService _service;
