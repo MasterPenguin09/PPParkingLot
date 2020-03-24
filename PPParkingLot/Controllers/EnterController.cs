@@ -57,7 +57,7 @@ namespace PPParkingLot.Controllers
 
                 var cookie = Request.Cookies["MyAccount_SmartParking"];
 
-                if (cookie == null)
+                if (string.IsNullOrEmpty(cookie))
                 {
                     //Response.Cookies.Append("NomeDoCookie", "1,0");
                     //Response.Cookies.Append("MyAccount_SmartParking_" + data["Name"] + "\n", json);
@@ -67,8 +67,8 @@ namespace PPParkingLot.Controllers
             }
             ViewBag.Erros = user.Errors;
             //Retornar uma página de recepção de clientes 
-            return View("Login", "Enter");
-
+            //return View("Login", "Enter");
+            return this.View();
 
 
 

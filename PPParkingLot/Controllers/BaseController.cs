@@ -5,33 +5,43 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace PPParkingLot.ControllersView
 {
-    public class BaseController : Controller
+    public class BaseController : Controller, IOrderedFilter
     {
         //protected bool IsManager { get; set; }
         //protected bool IsEmployee { get; set; }
         //protected bool IsClient { get; set; }
+        //protected string Cookie { get; set; }
+        //public int Order { get; set; }
 
         ////Antes de qualquer execução de ação, este método é rodado ^_^
         //public override void OnActionExecuting(ActionExecutingContext filterContext)
         //{
         //    //    var cookie = this.Request.Cookies["NomeDoCookie"];
 
-        //    var cookie = this.Request.Cookies["MyAccount_SmartParking"];
+        //  //  var cookie = this.Request.Cookies["MyAccount_SmartParking"];
+        //  this.Cookie = this.Request.Cookies["MyAccount_SmartParking"];
 
 
-        //    if (cookie == null)
+
+
+        //    base.OnActionExecuting(filterContext);
+        //}
+
+        //public override void OnActionExecuted(ActionExecutedContext filterContext)
+        //{
+        //    if (string.IsNullOrEmpty(this.Cookie))
         //    {
         //        filterContext.Result = new RedirectResult(Url.Action("Login", "Enter"));
-
         //    }
         //    else
         //    {
         //        UserPattern userFromCookie = new UserPattern();
-        //        userFromCookie = (UserPattern)JsonConvert.DeserializeObject(cookie);
+        //        userFromCookie = JsonConvert.DeserializeObject<UserPattern>(this.Cookie);
 
         //        if (userFromCookie.AccessLevel.Equals(DataTransferObject.Enums.EAccessLevel.Manager))
         //        {
@@ -46,8 +56,7 @@ namespace PPParkingLot.ControllersView
         //            this.IsClient = true;
         //        }
         //    }
-
-        //    base.OnActionExecuting(filterContext);
+        //    //Codigo  : depois que a action executa 
         //}
     }
 }
