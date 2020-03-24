@@ -35,10 +35,6 @@ namespace BusinessLogicalLayer.Interfaces
         /// <returns>Response</returns>
         Task<Response> Update(BrandDTO brand);
 
-       
-
-       
-
         /// <summary>
         /// Apaga uma marca do banco
         /// </summary>

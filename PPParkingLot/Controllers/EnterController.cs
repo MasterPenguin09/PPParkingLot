@@ -14,12 +14,12 @@ using SystemCommons;
 
 namespace PPParkingLot.Controllers
 {
-    public class LoginController : BaseController
+    public class EnterController : BaseController
     {
 
 
         private readonly IUserService _userService;
-        public LoginController(IUserService userService)
+        public EnterController(IUserService userService)
         {
             this._userService = userService;
         }
@@ -67,7 +67,7 @@ namespace PPParkingLot.Controllers
             }
             ViewBag.Erros = user.Errors;
             //Retornar uma página de recepção de clientes 
-            return View("Login", "Home");
+            return View("Login", "Enter");
 
 
 

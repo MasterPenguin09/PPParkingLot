@@ -37,14 +37,18 @@ namespace DataAccessLayer.Repositories_EFCore_
                 {
                     context.Entry<ClientDTO>(new ClientDTO() { ID = idClient }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
                     int nLinhasAfetadas = await context.SaveChangesAsync();
-                    if (nLinhasAfetadas == 1)
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows == 1)
                     {
                         response.Success = true;
                         return response;
                     }
-
-                    response.Errors.Add("Exclusão não executada");
-                    return response;
+                    else
+                    {
+                        response.Errors.Add("Exclusão não executada");
+                        return response;
+                    }
                 }
             }
             catch (Exception ex)
@@ -66,10 +70,20 @@ namespace DataAccessLayer.Repositories_EFCore_
                     ClientDTO client = await context.Clients.FindAsync(idClient);
                     client.IsActive = false;
                     context.Clients.Update(client);
-                    await context.SaveChangesAsync();
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows == 1)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Desabilitação não executada");
+                        return response;
+                    }
                 }
-                response.Success = true;
-                return response;
+             
             }
             catch (Exception ex)
             {
@@ -207,10 +221,20 @@ namespace DataAccessLayer.Repositories_EFCore_
                 {
                     
                     context.Clients.Add(client);
-                    await context.SaveChangesAsync();
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows > 0)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Inserção não executada");
+                        return response;
+                    }
                 }
-                response.Success = true;
-                return response;
+               
             }
             catch (Exception ex)
             {
@@ -230,16 +254,20 @@ namespace DataAccessLayer.Repositories_EFCore_
 
                     // int nLinhasAfetadas = await context.SaveChangesAsync();
                     context.Clients.Update(client);
-                    await context.SaveChangesAsync();
-                    //if (nLinhasAfetadas == 1)
-                }  // {
-                response.Success = true;
-                return response;
-                // }
+                    int nAffectedRows = await context.SaveChangesAsync();
 
-                // response.Errors.Add("Edição não executada");
-                //return response;
-
+                    if (nAffectedRows == 1)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Edição não executada");
+                        return response;
+                    }
+                    
+                }  
             }
             catch (Exception ex)
             {

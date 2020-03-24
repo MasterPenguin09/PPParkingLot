@@ -1,4 +1,5 @@
 ﻿
+using BLL.Log4net;
 using BusinessLogicalLayer.Interfaces;
 using BusinessLogicalLayer.Security;
 using BusinessLogicalLayer.Validators;
@@ -8,14 +9,16 @@ using DataTransferObject;
 using DTO;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using SystemCommons;
 
 namespace BusinessLogicalLayer.Impl
 {
-   public class ClientService : IClientService
+    public class ClientService : Log4Net_AssemblyInfo, IClientService
     {
         /// <summary>
         /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
@@ -44,7 +47,16 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iClientRepository.Delete(idClient);
+                try
+                {
+                    return response = await _iClientRepository.Delete(idClient);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
+
             }
         }
 
@@ -61,18 +73,47 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iClientRepository.Disable(idClient);
+                try
+                {
+                    return response = await _iClientRepository.Disable(idClient);
+
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
         public async Task<DataResponse<ClientDTO>> GetActives()
         {
-            return await _iClientRepository.GetActives();
+            DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
+            try
+            {
+                return response = await _iClientRepository.GetActives();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                return response;
+            }
+
         }
 
         public async Task<DataResponse<ClientDTO>> GetAll()
         {
-            return await _iClientRepository.GetAll();
+            DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
+            try
+            {
+                return response = await _iClientRepository.GetAll();
+
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                return response;
+            }
         }
 
         public async Task<DataResponse<ClientDTO>> GetByID(int clientID)
@@ -93,7 +134,16 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iClientRepository.GetByID(clientID);
+                try
+                {
+                    return response = await _iClientRepository.GetByID(clientID);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
+
             }
         }
 
@@ -110,7 +160,17 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iClientRepository.GetByName(clientName);
+                try
+                {
+                    return response = await _iClientRepository.GetByName(clientName);
+
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
+
             }
         }
 
@@ -122,7 +182,7 @@ namespace BusinessLogicalLayer.Impl
             ValidationResult result = validate.Validate(client);
 
             Response password = PasswordValidator.CheckPassword(client.Password, client.BirthDate);
-           
+
             //Verifica se a senha está dentro dos padrões, caso esteja, hasheia e ela 
             if (password.HasErrors())
             {
@@ -140,6 +200,7 @@ namespace BusinessLogicalLayer.Impl
             {
                 foreach (var failure in result.Errors)
                 {
+                    //Caso haja erros no validator, serão adicionados na response.Errors do client
                     response.Errors.Add("Property " + failure.PropertyName + " failed validation. Error was: " + "(" + failure.ErrorMessage + ")");
                 }
 
@@ -152,11 +213,23 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iClientRepository.Insert(client);
+                try
+                {
+                    client.SystemEntranceDate = DateTime.Now;
+                    client.IsActive = true;
+
+                    return response = await _iClientRepository.Insert(client);
+
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
-        public async Task<DataResponse<ClientDTO>> GetByEmail(string emailClient) 
+        public async Task<DataResponse<ClientDTO>> GetByEmail(string emailClient)
         {
             DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
             if (string.IsNullOrEmpty(emailClient))
@@ -169,22 +242,32 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iClientRepository.GetByEmail(emailClient);
+                try
+                {
+                    return response = await _iClientRepository.GetByEmail(emailClient);
+
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
         public async Task<DataResponse<ClientDTO>> Login(string email, string password)
         {
             DataResponse<ClientDTO> response = new DataResponse<ClientDTO>();
-          
+
             if (string.IsNullOrEmpty(email))
             {
                 response.Errors.Add("Email inválido");
                 return response;
             }
             else
-            {
-               response = await _iClientRepository.GetByEmail(email);
+            { 
+                response = await GetByEmail(email);
+
                 if (response.Success)
                 {
                     ClientDTO cli = response.Data[0];
@@ -238,7 +321,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iClientRepository.Update(client);
+                try
+                {
+                    return response = await _iClientRepository.Update(client);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using BusinessLogicalLayer.Interfaces;
+﻿using BLL.Log4net;
+using BusinessLogicalLayer.Interfaces;
 using BusinessLogicalLayer.Validator;
 using BusinessLogicalLayer.Validators;
 using DataAccessLayer.Interfaces_EFCore_;
@@ -14,7 +15,7 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Impl
 {
-    public class LocationService : ILocationSevice
+    public class LocationService : Log4Net_AssemblyInfo, ILocationSevice
     {
         /// <summary>
         /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
@@ -39,7 +40,7 @@ namespace BusinessLogicalLayer.Impl
             DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
 
             //Busca a locação pelo id
-            DataResponse<LocationDTO> temp_location = await _iLocationRepository.GetByID(idLocation);
+            DataResponse<LocationDTO> temp_location = await GetByID(idLocation);
 
             //Armazena a locação encontrada 
             LocationDTO location = temp_location.Data.FirstOrDefault();
@@ -55,10 +56,10 @@ namespace BusinessLogicalLayer.Impl
 
             //Adiciona o valor da locação no banco 
             location.Value = valorLocacao;
-            if (_iLocationRepository.Update(location).Result.Success)
+            if (Update(location).Result.Success)
             {
                 //Caso for adicionada com sucesso ela será desabilitada, pois o cliente saiu 
-                if (_iLocationRepository.Disable(location.ID).Result.Success)
+                if (Disable(location.ID).Result.Success)
                 {
                     //Se o disable funcionar, adiociona a locação desse escopo e retorna 
                     response.Success = true;
@@ -78,10 +79,10 @@ namespace BusinessLogicalLayer.Impl
 
         }
 
-        public async Task<Response> Delete(int location)
+        public async Task<Response> Delete(int idLocation)
         {
             Response response = new Response();
-            if (location < 0)
+            if (idLocation < 0)
             {
                 response.Errors.Add("ID Inválido!");
             }
@@ -91,14 +92,23 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iLocationRepository.Delete(location);
+
+                try
+                {
+                    return response = await _iLocationRepository.Delete(idLocation);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
-        public async Task<Response> Disable(int location)
+        public async Task<Response> Disable(int idLocation)
         {
             Response response = new Response();
-            if (location < 0)
+            if (idLocation < 0)
             {
                 response.Errors.Add("ID Inválido!");
             }
@@ -108,18 +118,44 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iLocationRepository.Disable(location);
+                try
+                {
+                    return response = await _iLocationRepository.Disable(idLocation);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
         public async Task<DataResponse<LocationDTO>> GetActives()
         {
-            return await _iLocationRepository.GetActives();
+            DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
+            try
+            {
+                return response = await _iLocationRepository.GetActives();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                return response;
+            }
         }
 
         public async Task<DataResponse<LocationDTO>> GetAll()
         {
-            return await _iLocationRepository.GetAll();
+            DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
+            try
+            {
+                return response = await _iLocationRepository.GetAll();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                return response;
+            }
         }
 
         public async Task<DataResponse<LocationDTO>> GetByID(int location)
@@ -140,13 +176,42 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iLocationRepository.GetByID(location);
+                try
+                {
+                    return response = await _iLocationRepository.GetByID(location);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
-        public Task<DataResponse<LocationDTO>> GetByValue(double locationValue)
+        public async Task<DataResponse<LocationDTO>> GetByValue(double locationValue)
         {
-            throw new NotImplementedException();
+            DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
+            if (locationValue < 0)
+            {
+                response.Errors.Add("Valor inválido!");
+            }
+            if (response.HasErrors())
+            {
+                return response;
+            }
+            else
+            {
+                try
+                {
+                    return response = await _iLocationRepository.GetByValue(locationValue);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
+            }
+
         }
 
         public async Task<Response> Insert(LocationDTO location)
@@ -165,7 +230,18 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iLocationRepository.Insert(location);
+                try
+                {
+                    location.EntryTime = DateTime.Now;
+                    location.IsActive = true;
+                    
+                    return response = await _iLocationRepository.Insert(location);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
@@ -186,13 +262,21 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iLocationRepository.Update(location);
+                try
+                {
+                    return response = await _iLocationRepository.Update(location);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
-      
+
 
 
     }
- }
+}
 

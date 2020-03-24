@@ -1,4 +1,5 @@
-﻿using BusinessLogicalLayer.Interfaces;
+﻿using BLL.Log4net;
+using BusinessLogicalLayer.Interfaces;
 using BusinessLogicalLayer.Validators;
 
 using DataAccessLayer.Interfaces_EFCore_;
@@ -15,7 +16,7 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Impl
 {
-    public class ParkingSpotService : IParkingSpotService
+    public class ParkingSpotService : Log4Net_AssemblyInfo, IParkingSpotService
     {
         /// <summary>
         /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)

@@ -25,7 +25,7 @@ namespace PPParkingLot.ControllersView
 
         //    if (cookie == null)
         //    {
-        //        filterContext.Result = new RedirectResult(Url.Action("Login", "Home"));
+        //        filterContext.Result = new RedirectResult(Url.Action("Login", "Enter"));
 
         //    }
         //    else

@@ -1,4 +1,5 @@
-﻿using BusinessLogicalLayer.Interfaces;
+﻿using BLL.Log4net;
+using BusinessLogicalLayer.Interfaces;
 using BusinessLogicalLayer.Security;
 using BusinessLogicalLayer.Validators;
 
@@ -15,7 +16,7 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Impl
 {
-    public class EmployeeService : IEmployeeService
+    public class EmployeeService : Log4Net_AssemblyInfo, IEmployeeService
     {
         /// <summary>
         /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
@@ -24,11 +25,11 @@ namespace BusinessLogicalLayer.Impl
         /// </summary>
 
         private IEmployeeRepository _iEmployeeRepository;
+
         public EmployeeService(IEmployeeRepository iEmployeeRep)
         {
             this._iEmployeeRepository = iEmployeeRep;
         }
-
 
         public async Task<Response> Delete(int idEmployee)
         {
@@ -43,7 +44,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iEmployeeRepository.Delete(idEmployee);
+                try
+                {
+                    return response = await _iEmployeeRepository.Delete(idEmployee);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
@@ -60,18 +69,45 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iEmployeeRepository.Disable(idEmployee);
+                try
+                {
+                    return response = await _iEmployeeRepository.Disable(idEmployee);
+
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
         public async Task<DataResponse<EmployeeDTO>> GetActives()
         {
-            return await _iEmployeeRepository.GetActives();
+            DataResponse<EmployeeDTO> response = new DataResponse<EmployeeDTO>();
+            try
+            {
+                return response = await _iEmployeeRepository.GetActives();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                return response;
+            }
         }
 
         public async Task<DataResponse<EmployeeDTO>> GetAll()
         {
-            return await _iEmployeeRepository.GetAll();
+            DataResponse<EmployeeDTO> response = new DataResponse<EmployeeDTO>();
+            try
+            {
+                return response = await _iEmployeeRepository.GetAll();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                return response;
+            }
 
         }
 
@@ -88,7 +124,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iEmployeeRepository.GetByEmail(emailEmployee);
+                try
+                {
+                    return response = await _iEmployeeRepository.GetByEmail(emailEmployee);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
@@ -110,7 +154,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iEmployeeRepository.GetByID(employeeID);
+                try
+                {
+                    return response = await _iEmployeeRepository.GetByID(employeeID);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
@@ -168,7 +220,18 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iEmployeeRepository.Insert(employee);
+                try
+                {
+                    employee.SystemEntranceDate = DateTime.Now;
+                    employee.IsActive = true;
+
+                    return response = await _iEmployeeRepository.Insert(employee);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
 
         }
@@ -209,7 +272,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iEmployeeRepository.Update(employee);
+                try
+                {
+                    return response = await _iEmployeeRepository.Update(employee);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
@@ -224,7 +295,8 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                response = await _iEmployeeRepository.GetByEmail(email);
+                response = await GetByEmail(email);
+
                 if (response.Success)
                 {
                     EmployeeDTO emp = response.Data[0];

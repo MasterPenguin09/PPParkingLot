@@ -23,6 +23,7 @@ namespace DataAccessLayer.Repositories_EFCore_
     public class LocationRepository : ILocationRepository
     {
         private SmartParkingContext _context;
+
         public LocationRepository(SmartParkingContext context)
         {
             _context = context;
@@ -37,15 +38,18 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     context.Entry<LocationDTO>(new LocationDTO() { ID = idLocation }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
-                    int nLinhasAfetadas = await context.SaveChangesAsync();
-                    if (nLinhasAfetadas == 1)
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows == 1)
                     {
                         response.Success = true;
                         return response;
                     }
-
-                    response.Errors.Add("Exclusão não executada");
-                    return response;
+                    else
+                    {
+                        response.Errors.Add("Exclusão não executada");
+                        return response;
+                    }
                 }
             }
             catch (Exception ex)
@@ -55,6 +59,7 @@ namespace DataAccessLayer.Repositories_EFCore_
 
             }
         }
+
         public async Task<DataResponse<LocationDTO>> GetActives()
         {
             DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
@@ -85,10 +90,19 @@ namespace DataAccessLayer.Repositories_EFCore_
                     LocationDTO location = await context.Locations.FindAsync(idLocation);
                     location.IsActive = false;
                     context.Locations.Update(location);
-                    await context.SaveChangesAsync();
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows == 1)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Desabilitação não executada");
+                        return response;
+                    }
                 }
-                response.Success = true;
-                return response;
             }
             catch (Exception ex)
             {
@@ -98,7 +112,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
         }
 
-      
         public async Task<DataResponse<LocationDTO>> GetAll()
         {
             DataResponse<LocationDTO> response = new DataResponse<LocationDTO>();
@@ -156,13 +169,13 @@ namespace DataAccessLayer.Repositories_EFCore_
             {
                 using (var context = _context)
                 {
-                    response.Data.Add(await context.Locations.Where(c => c.Value <= locationValue).FirstOrDefaultAsync());
+                    response.Data = (await context.Locations.Where(c => c.Value <= locationValue).ToListAsync());
                     if (response.Data != null)
                     {
                         response.Success = true;
                         return response;
                     }
-                    response.Errors.Add("Locação não encontrada");
+                    response.Errors.Add("Locações não encontradas");
                     return response;
                 }
             }
@@ -181,10 +194,19 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     context.Locations.Add(location);
-                    await context.SaveChangesAsync();
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows > 0)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Inserção não executada");
+                        return response;
+                    }
                 }
-                response.Success = true;
-                return response;
             }
             catch (Exception ex)
             {
@@ -204,16 +226,19 @@ namespace DataAccessLayer.Repositories_EFCore_
 
                     // int nLinhasAfetadas = await context.SaveChangesAsync();
                     context.Update(location);
-                    await context.SaveChangesAsync();
-                    //if (nLinhasAfetadas == 1)
-                }  // {
-                response.Success = true;
-                return response;
-                // }
+                    int nAffectedRows = await context.SaveChangesAsync();
 
-                // response.Errors.Add("Edição não executada");
-                //return response;
-
+                    if (nAffectedRows == 1)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Edição não executada");
+                        return response;
+                    }
+                }  
             }
             catch (Exception ex)
             {
