@@ -1,4 +1,5 @@
-﻿using BusinessLogicalLayer.Interfaces;
+﻿using BLL.Log4net;
+using BusinessLogicalLayer.Interfaces;
 using BusinessLogicalLayer.Validators;
 
 using DataAccessLayer.Interfaces_EFCore_;
@@ -13,7 +14,7 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Impl
 {
-   public class VehicleService : IVehicleService
+   public class VehicleService : Log4Net_AssemblyInfo, IVehicleService
     {
 
         /// <summary>
@@ -41,7 +42,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iVehicleRepository.Delete(idVehicle);
+                try
+                {
+                    return response = await _iVehicleRepository.Delete(idVehicle);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
@@ -58,19 +67,44 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iVehicleRepository.Disable(idVehicle);
+                try
+                {
+                    return response = await _iVehicleRepository.Disable(idVehicle);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
         public async Task<DataResponse<VehicleDTO>> GetActives()
         {
-            return await _iVehicleRepository.GetActives();
-
+            DataResponse<VehicleDTO> response = new DataResponse<VehicleDTO>();
+            try
+            {
+                return response = await _iVehicleRepository.GetActives();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                return response;
+            }
         }
 
         public async Task<DataResponse<VehicleDTO>> GetAll()
         {
-            return await _iVehicleRepository.GetAll();
+            DataResponse<VehicleDTO> response = new DataResponse<VehicleDTO>();
+            try
+            {
+                return response = await _iVehicleRepository.GetAll();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                return response;
+            }
         }
 
         public async Task<DataResponse<VehicleDTO>> GetByID(int vehicleID)
@@ -91,7 +125,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iVehicleRepository.GetByID(vehicleID);
+                try
+                {
+                    return response = await _iVehicleRepository.GetByID(vehicleID);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
@@ -109,7 +151,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iVehicleRepository.GetByVehicleBoard(vehicleBoard);
+                try
+                {
+                    return response = await _iVehicleRepository.GetByVehicleBoard(vehicleBoard);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
@@ -130,7 +180,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iVehicleRepository.Insert(vehicle);
+                try
+                {
+                    return response = await _iVehicleRepository.Insert(vehicle);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
@@ -151,7 +209,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iVehicleRepository.Update(vehicle);
+                try
+                {
+                    return response = await _iVehicleRepository.Update(vehicle);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
     }

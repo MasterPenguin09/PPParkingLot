@@ -1,4 +1,5 @@
-﻿using BusinessLogicalLayer.Interfaces;
+﻿using BLL.Log4net;
+using BusinessLogicalLayer.Interfaces;
 using BusinessLogicalLayer.Validators;
 using DataAccessLayer.Interfaces_EFCore_;
 using DataTransferObject;
@@ -12,9 +13,10 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Impl
 {
-   public class BrandService : IBrandService
+    public class BrandService : Log4Net_AssemblyInfo, IBrandService
     {
         private IBrandRepository _iBrandRepository;
+
         public BrandService(IBrandRepository iBrandRep)
         {
             this._iBrandRepository = iBrandRep;
@@ -23,7 +25,7 @@ namespace BusinessLogicalLayer.Impl
         public async Task<Response> Delete(int idBrand)
         {
             Response response = new Response();
-            if (idBrand<0)
+            if (idBrand < 0)
             {
                 response.Errors.Add("ID Inválido!");
             }
@@ -33,42 +35,33 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                response = await _iBrandRepository.Delete(idBrand);
-                if (!response.Success)
+                try
                 {
-                    return response;
+                    return response = await _iBrandRepository.Delete(idBrand);
+
                 }
-                else
+                catch (Exception ex)
                 {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
                     return response;
-                  
-                 //Logger
                 }
             }
         }
 
-        
-
-        //public async Task<Response> Disable(int idBrand)
-        //{
-        //    Response response = new Response();
-        //    if (idBrand < 0)
-        //    {
-        //        response.Errors.Add("ID Inválido!");
-        //    }
-        //    if (response.HasErrors())
-        //    {
-        //        return response;
-        //    }
-        //    else
-        //{
-        //    return await _iBrandRepository.Disable(idBrand);
-        //}
-        //}
-
         public async Task<DataResponse<BrandDTO>> GetAll()
         {
-            return await _iBrandRepository.GetAll();
+            DataResponse<BrandDTO> response = new DataResponse<BrandDTO>();
+            try
+            {
+                return response = await _iBrandRepository.GetAll();
+
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                return response;
+            }
+
         }
 
         public async Task<DataResponse<BrandDTO>> GetByID(int brandID)
@@ -78,7 +71,7 @@ namespace BusinessLogicalLayer.Impl
             {
                 response.Errors.Add("ID marca inválido");
             }
-            if(brandID.Equals(null))
+            if (brandID.Equals(null))
             {
                 response.Errors.Add("ID marca nulo");
             }
@@ -89,7 +82,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iBrandRepository.GetByID(brandID);
+                try
+                {
+                    return response = await _iBrandRepository.GetByID(brandID);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
@@ -111,7 +112,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iBrandRepository.GetByName(brandName);
+                try
+                {
+                    return response = await _iBrandRepository.GetByName(brandName);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
@@ -132,7 +141,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iBrandRepository.Insert(brand);
+                try
+                { 
+                    return response = await _iBrandRepository.Insert(brand);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
 
 
@@ -155,7 +172,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iBrandRepository.Update(brand);
+                try
+                {
+                    return response = await _iBrandRepository.Update(brand);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
     }

@@ -8,8 +8,8 @@ namespace DataTransferObject.Enums
 {
     public enum EAccessLevel
     {
-        DefaultUser,
+        Client,
         Employee,
-        Administrator,
+        Manager,
     }
 }

@@ -9,6 +9,8 @@ using DataTransferObject.ComplexTypes;
 using DTO.ObjectsDTO.LoginDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Nancy.Json;
+using Newtonsoft.Json;
 using PPParkingLot.ControllersView;
 using PPParkingLot.Models;
 using PPParkingLot.Models.Login;
@@ -18,14 +20,14 @@ namespace PPParkingLot.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly IUserService _userService;
+        //private readonly ILogger<HomeController> _logger;
+        //private readonly IUserService _userService;
 
-        public HomeController(ILogger<HomeController> logger, IUserService userService)
-        {
-            this._logger = logger;
-            this._userService = userService;
-        }
+        //public HomeController(ILogger<HomeController> logger, IUserService userService)
+        //{
+        //    this._logger = logger;
+        //    this._userService = userService;
+        //}
 
         public IActionResult Index()
         {
@@ -43,65 +45,72 @@ namespace PPParkingLot.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public ActionResult Login()
-        {
-            return View();
-        }
+        //public ActionResult Login()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
-        public async Task<ActionResult> Login(LoginViewModel viewModel)
-        {
-            var configuration = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<LoginViewModel, UserDTO>();
-            });
-            IMapper mapper = configuration.CreateMapper();
+        //[HttpPost]
+        //public async Task<ActionResult> Login(LoginViewModel viewModel)
+        //{
 
-            UserDTO dto = mapper.Map<UserDTO>(viewModel);
-
-
-            try
-            {
-                UserPattern loggedUser = new UserPattern();
-
-                DataResponse<UserPattern> user = new DataResponse<UserPattern>();
-                user = await _userService.Validate(dto);
-
-                if (user.Success)
-                {
-                    loggedUser = user.Data.FirstOrDefault();
-
-                    // var cookie = Request.Cookies["NomeDoCookie", ""];
-
-                }
+        //    JavaScriptSerializer jSerializer = new JavaScriptSerializer();
+           
+        //    //Mapper
+        //    var configuration = new MapperConfiguration(cfg =>
+        //    {
+        //        cfg.CreateMap<LoginViewModel, UserDTO>();
+        //    });
+        //    IMapper mapper = configuration.CreateMapper();
+        //    //Objeto mapeado
+        //    UserDTO dto = mapper.Map<UserDTO>(viewModel);
 
 
+        //    DataResponse<UserPattern> user = await _userService.Validate(dto);
 
-                //Response.Cookies.Append("NomeDoCookie", "1,0");
-                Response.Cookies.Append("User", "");
+        //    if (user.Success)
+        //    {
+        //        UserPattern loggedUser = user.Data.FirstOrDefault();
 
+        //        string json = jSerializer.Serialize(loggedUser);
 
+        //        // var cookie = Request.Cookies["NomeDoCookie", ""];
 
-                //if (cookie[2] == '0')
-                //{
-                //return RedirectToAction("Index", "ClientSpace");
-                //    //nao eh um admin
-                //}
-                //else
-                //{
-                //return RedirectToAction("Index", "EmployeeSpace");
-                //    //EHUMADMIN
-                //}
-                //fazer cookies
+        //        var cookie = Request.Cookies["MyAccount_SmartParking"];
 
 
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Erros = ex.Message;
-            }
-            return View(); //Retornar uma página de recepção de clientes 
-        }
+        //        if (cookie == null)
+        //        {
+        //            //Response.Cookies.Append("NomeDoCookie", "1,0");
+        //            //Response.Cookies.Append("MyAccount_SmartParking_" + data["Name"] + "\n", json);
+        //            Response.Cookies.Append("MyAccount_SmartParking", json);
+        //        }
+
+        //    }
+        //    ViewBag.Erros = user.Errors;
+        //    //Retornar uma página de recepção de clientes 
+        //    return View("Login", "Home");
+
+
+
+
+
+        //    //if (cookie[2] == '0')
+        //    //{
+        //    //return RedirectToAction("Index", "ClientSpace");
+        //    //    //nao eh um admin
+        //    //}
+        //    //else
+        //    //{
+        //    //return RedirectToAction("Index", "EmployeeSpace");
+        //    //    //EHUMADMIN
+        //    //}
+
+        //    //fazer cookies
+
+
+
+        //}
 
     }
 }

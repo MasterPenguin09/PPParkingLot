@@ -36,15 +36,18 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     context.Entry<VehicleDTO>(new VehicleDTO() { ID = idVehicle }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
-                    int nLinhasAfetadas = await context.SaveChangesAsync();
-                    if (nLinhasAfetadas == 1)
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows == 1)
                     {
                         response.Success = true;
-                        return  response;
+                        return response;
                     }
-
-                    response.Errors.Add("Exclusão não executada");
-                    return response;
+                    else
+                    {
+                        response.Errors.Add("Exclusão não executada");
+                        return response;
+                    }
                 }
             }
             catch (Exception ex)
@@ -66,10 +69,20 @@ namespace DataAccessLayer.Repositories_EFCore_
                     VehicleDTO vehicle = await context.Vehicles.FindAsync(idVehicle);
                     vehicle.IsActive = false;
                     context.Vehicles.Update(vehicle);
-                    await context.SaveChangesAsync();
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows == 1)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Desabilitação não executada");
+                        return response;
+                    }
                 }
-                response.Success = true;
-                return response;
+               
             }
             catch (Exception ex)
             {
@@ -182,10 +195,19 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     context.Vehicles.Add(vehicle);
-                    await context.SaveChangesAsync();
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows > 0)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Inserção não executada");
+                        return response;
+                    }
                 }
-                response.Success = true;
-                return response;
             }
             catch (Exception ex)
             {
@@ -201,20 +223,22 @@ namespace DataAccessLayer.Repositories_EFCore_
             {
                 using (var context = _context)
                 {
-                    //context.Entry(brand).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-
-                    // int nLinhasAfetadas = await context.SaveChangesAsync();
+                    //context.Entry(brand).State = Microsoft.EntityFrameworkCore.EntityState.Modified
                     context.Vehicles.Update(vehicle);
-                    await context.SaveChangesAsync();
-                    //if (nLinhasAfetadas == 1)
-                }  // {
-                response.Success = true;
-                return response;
-                // }
+                    int nAffectedRows = await context.SaveChangesAsync();
 
-                // response.Errors.Add("Edição não executada");
-                //return response;
-
+                    if (nAffectedRows == 1)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Edição não executada");
+                        return response;
+                    }
+                }  
+             
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
-﻿using BusinessLogicalLayer.Interfaces;
+﻿using BLL.Log4net;
+using BusinessLogicalLayer.Interfaces;
 using BusinessLogicalLayer.Validators;
 
 using DataAccessLayer.Interfaces_EFCore_;
@@ -13,7 +14,7 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Impl
 {
-   public class ModelService : IModelService
+   public class ModelService : Log4Net_AssemblyInfo, IModelService
     {
         /// <summary>
         /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
@@ -40,17 +41,31 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iModelRepository.Delete(idModel);
+                try
+                {
+                    return response = await _iModelRepository.Delete(idModel);
+
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
-       
-
-      
-
         public async Task<DataResponse<ModelDTO>> GetAll()
         {
-            return await _iModelRepository.GetAll();
+            DataResponse<ModelDTO> response = new DataResponse<ModelDTO>();
+            try
+            {
+                return response = await _iModelRepository.GetAll();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                return response;
+            }
         }
 
         public async Task<DataResponse<ModelDTO>> GetByID(int modelID)
@@ -71,7 +86,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iModelRepository.GetByID(modelID);
+                try
+                {
+                    return response = await _iModelRepository.GetByID(modelID);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
@@ -92,7 +115,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iModelRepository.Insert(model);
+                try
+                {
+                    return response = await _iModelRepository.Insert(model);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
 
         }
@@ -114,7 +145,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iModelRepository.Update(model);
+                try
+                {
+                    return response = await _iModelRepository.Update(model);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
     }

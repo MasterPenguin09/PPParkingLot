@@ -12,14 +12,16 @@ using SystemCommons;
 
 namespace PPParkingLot.Controllers
 {
+
     public class BrandController : BaseController
     {
+    
         private IBrandService  _service;
         public BrandController(IBrandService service)
         {
             this._service = service;
         }
-
+  
         public async Task<ActionResult> Index()
         {
             DataResponse<BrandDTO> brands = await _service.GetAll();
@@ -46,27 +48,31 @@ namespace PPParkingLot.Controllers
         [HttpPost]
         public async Task<ActionResult> Register(BrandInsertViewModel viewModel)
         {
-            Response response = new Response();
+        
+                Response response = new Response();
 
-            var configuration = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<BrandInsertViewModel, BrandDTO>();
-            });
-            IMapper mapper = configuration.CreateMapper();
+                var configuration = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<BrandInsertViewModel, BrandDTO>();
+                });
+                IMapper mapper = configuration.CreateMapper();
 
-            BrandDTO dto = mapper.Map<BrandDTO>(viewModel);
+                BrandDTO dto = mapper.Map<BrandDTO>(viewModel);
 
-            response = await _service.Insert(dto);
+                response = await _service.Insert(dto);
 
-            if (response.Success)
-            {
-                return RedirectToAction("Index", "Brand");
-            }
-            else
-            {
-                ViewBag.ErrorMessage = response.Errors;
-                return this.View();
-            }
+                if (response.Success)
+                {
+                    return RedirectToAction("Index", "Brand");
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = response.Errors;
+                    return this.View();
+                }
+        
+
+
         }
 
         public ActionResult Delete()

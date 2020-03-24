@@ -35,15 +35,18 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     context.Entry<ModelDTO>(new ModelDTO() { ID = idModel }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
-                    int nLinhasAfetadas = await context.SaveChangesAsync();
-                    if (nLinhasAfetadas == 1)
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows == 1)
                     {
                         response.Success = true;
                         return response;
                     }
-
-                    response.Errors.Add("Exclusão não executada");
-                    return response;
+                    else
+                    {
+                        response.Errors.Add("Exclusão não executada");
+                        return response;
+                    }
                 }
             }
             catch (Exception ex)
@@ -112,10 +115,20 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     context.Models.Add(model);
-                    await context.SaveChangesAsync();
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows > 0)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Inserção não executada");
+                        return response;
+                    }
                 }
-                response.Success = true;
-                return response;
+           
             }
             catch (Exception ex)
             {
@@ -133,10 +146,19 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {                       
                     context.Models.Update(model);
-                    await context.SaveChangesAsync();
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows == 1)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Edição não executada");
+                        return response;
+                    }
                 }
-                response.Success = true;
-                return response;
             }
             catch (Exception ex)
             {

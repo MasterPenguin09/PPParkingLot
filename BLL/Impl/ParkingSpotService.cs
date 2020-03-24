@@ -1,4 +1,5 @@
-﻿using BusinessLogicalLayer.Interfaces;
+﻿using BLL.Log4net;
+using BusinessLogicalLayer.Interfaces;
 using BusinessLogicalLayer.Validators;
 
 using DataAccessLayer.Interfaces_EFCore_;
@@ -15,7 +16,7 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Impl
 {
-    public class ParkingSpotService : IParkingSpotService
+    public class ParkingSpotService : Log4Net_AssemblyInfo, IParkingSpotService
     {
         /// <summary>
         /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
@@ -42,7 +43,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iParkingSpotRepository.Delete(idPakingSpot);
+                try
+                {
+                    return response = await _iParkingSpotRepository.Delete(idPakingSpot);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
@@ -59,19 +68,44 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iParkingSpotRepository.Disable(idPakingSpot);
+                try
+                {
+                    return response = await _iParkingSpotRepository.Disable(idPakingSpot);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
         public async Task<DataResponse<ParkingSpotDTO>> GetActives()
         {
-            return await _iParkingSpotRepository.GetActives();
+            DataResponse<ParkingSpotDTO> response = new DataResponse<ParkingSpotDTO>();
+            try
+            {
+                return response = await _iParkingSpotRepository.GetActives();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                return response;
+            }
         }
 
         public async Task<DataResponse<ParkingSpotDTO>> GetAll()
         {
-            return await _iParkingSpotRepository.GetAll();
-
+            DataResponse<ParkingSpotDTO> response = new DataResponse<ParkingSpotDTO>();
+            try
+            {
+                return response = await _iParkingSpotRepository.GetAll();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                return response;
+            }
         }
 
         public async Task<DataResponse<ParkingSpotDTO>> GetByID(int idPakingSpot)
@@ -113,7 +147,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iParkingSpotRepository.Insert(pakingSpot);
+                try
+                {
+                    return response = await _iParkingSpotRepository.Insert(pakingSpot);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
 
@@ -134,7 +176,15 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iParkingSpotRepository.Update(pakingSpot);
+                try
+                {
+                    return response = await _iParkingSpotRepository.Update(pakingSpot);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    return response;
+                }
             }
         }
     }

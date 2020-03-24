@@ -35,15 +35,18 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     context.Entry<EmployeeDTO>(new EmployeeDTO() { ID = idEmployee }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
-                    int nLinhasAfetadas = await context.SaveChangesAsync();
-                    if (nLinhasAfetadas == 1)
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows == 1)
                     {
                         response.Success = true;
                         return response;
                     }
-                    
-                    response.Errors.Add("Exclusão não executada");
-                    return response;
+                    else
+                    {
+                        response.Errors.Add("Exclusão não executada");
+                        return response;
+                    }
                 }
             }
             catch (Exception ex)
@@ -65,10 +68,20 @@ namespace DataAccessLayer.Repositories_EFCore_
                    EmployeeDTO employee = await context.Employees.FindAsync(idEmployee);
                     employee.IsActive = false;
                     context.Employees.Update(employee);
-                    await context.SaveChangesAsync();
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows == 1)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Desabilitação não executada");
+                        return response;
+                    }
                 }
-                response.Success = true;
-                return response;
+              
             }
             catch (Exception ex)
             {
@@ -187,10 +200,20 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     context.Employees.Add(employee);
-                    await context.SaveChangesAsync();
+                    int nAffectedRows = await context.SaveChangesAsync();
+
+                    if (nAffectedRows > 0)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Inserção não executada");
+                        return response;
+                    }
                 }
-                response.Success = true;
-                return response;
+             
             }
             catch (Exception ex)
             {
@@ -213,13 +236,19 @@ namespace DataAccessLayer.Repositories_EFCore_
                 {
  
                     context.Employees.Update(employee);
-                    await context.SaveChangesAsync();
+                    int nAffectedRows = await context.SaveChangesAsync();
 
+                    if (nAffectedRows == 1)
+                    {
+                        response.Success = true;
+                        return response;
+                    }
+                    else
+                    {
+                        response.Errors.Add("Edição não executada");
+                        return response;
+                    }
                 } 
-                response.Success = true;
-                return response;
-
-
             }
             catch (Exception ex)
             {
