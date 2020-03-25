@@ -1,7 +1,61 @@
 ﻿
+@model PPParkingLot.Models.Insert.ParkingSpotInsertViewModel
+
+
 @{
     ViewData["Title"] = "RegisterParkingSpot";
 }
 
 <h1>RegisterParkingSpot</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Brand</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.ValuePerHour, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ValuePerHour, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ValuePerHour, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+
+
+
+    @{
+        string[] Type = Enum.GetNames(typeof(DataTransferObject.Enums.EParkSpotType));
+    }
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+
+        <div class="col-md-10">
+            <select class="form-control" name="AccessLevel" id="AccessLevel">
+                @for (int i = 0; i < Type.Length; i++)
+                {
+                    <option value="@i">@Type[i]</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
 
