@@ -21,7 +21,7 @@ namespace DataTransferObject
         {
              
         }
-
+    
         public int ID { get; set; }
         public double ValuePerHour { get; set; }
         public EParkSpotType Type { get; set; }

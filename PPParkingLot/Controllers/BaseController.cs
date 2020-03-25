@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PPParkingLot.ControllersView
 {
-    public class BaseController : Controller, IOrderedFilter
+    public class BaseController : Controller /* IOrderedFilter*/
     {
         //protected bool IsManager { get; set; }
         //protected bool IsEmployee { get; set; }
@@ -23,12 +23,8 @@ namespace PPParkingLot.ControllersView
         //{
         //    //    var cookie = this.Request.Cookies["NomeDoCookie"];
 
-        //  //  var cookie = this.Request.Cookies["MyAccount_SmartParking"];
-        //  this.Cookie = this.Request.Cookies["MyAccount_SmartParking"];
-
-
-
-
+        //    //  var cookie = this.Request.Cookies["MyAccount_SmartParking"];
+        //    this.Cookie = this.Request.Cookies["MyAccount_SmartParking"];
         //    base.OnActionExecuting(filterContext);
         //}
 
@@ -40,8 +36,7 @@ namespace PPParkingLot.ControllersView
         //    }
         //    else
         //    {
-        //        UserPattern userFromCookie = new UserPattern();
-        //        userFromCookie = JsonConvert.DeserializeObject<UserPattern>(this.Cookie);
+        //        UserPattern userFromCookie = JsonConvert.DeserializeObject<UserPattern>(this.Cookie);
 
         //        if (userFromCookie.AccessLevel.Equals(DataTransferObject.Enums.EAccessLevel.Manager))
         //        {

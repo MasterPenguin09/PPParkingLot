@@ -26,8 +26,7 @@ namespace DataTransferObject
         public string CarBoard { get; set; }
         public EVehicleType Type { get; set; }
         public bool IsActive { get; set; }
-
-        //public ModelDTO Model { get; set; }
+        public ModelDTO Model { get; set; }
         public int ModelID { get; set; }
     }
 }

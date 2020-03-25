@@ -1,6 +1,7 @@
 ﻿using DataTransferObject.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,20 +30,20 @@ namespace DataTransferObject
 
         }
 
-   
+        [Key]
         public int ID { get; set; }
         public DateTime EntryTime { get; set; }
         public DateTime? ExitTime { get; set; }
         public PayForm PayForm { get; set; }
         public double Value { get; set; }
 
-        //public ClientDTO Client { get; set; }
+        public ClientDTO Client { get; set; }
         public int ClientID { get; set; }
 
-        //public VehicleDTO Vehicle { get; set; }
+        public VehicleDTO Vehicle { get; set; }
         public int VehicleID { get; set; }
 
-        //public ParkingSpotDTO ParkingSpot { get; set; }
+        public ParkingSpotDTO ParkingSpot { get; set; }
         public int ParkingSpotID { get; set; }
 
         public bool IsActive { get; set; }

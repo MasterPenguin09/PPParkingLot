@@ -32,6 +32,8 @@ namespace PPParkingLot
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<SmartParkingContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
+            //services.AddDbContextPool<SmartParkingContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+
             services.AddControllersWithViews();
 
             services.AddTransient<IClientService, ClientService>();
