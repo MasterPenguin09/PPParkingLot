@@ -52,7 +52,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
 
             }
@@ -82,11 +81,9 @@ namespace DataAccessLayer.Repositories_EFCore_
                         return response;
                     }
                 }
-               
             }
             catch (Exception ex)
             {
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
 
             }
@@ -114,9 +111,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                 }
             }
             catch (Exception ex)
-            {
-               
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
+            { 
                 throw ex;
             }
         }
@@ -145,7 +140,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -172,7 +166,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -200,7 +193,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -229,7 +221,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }

@@ -1,0 +1,13 @@
+__________________________Dicas__________________________
+
+(1) - Antes de executar, verificar a connection string [PPParkingLot/appsettings.json]
+(2) - Caso o projeto apresente erros, limpe a solução e reconstrua os projetos na seguinte ordem SystemCommons > DTO > DAL > BLL > PPParkingLot
+(3) - Atualizar banco de dados, Tools > Nuget Package... > Console. Selecionar o DAL, digitar Update-Database
+
+__________________________Sobre__________________________
+ Projeto criado em 17/02/2020 por:
+
+ Arthur
+ Gabriel Arno 
+ Jony
+ Nathalie Pfau

@@ -28,11 +28,10 @@ namespace PPParkingLot
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method is called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<SmartParkingContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
-            //services.AddDbContextPool<SmartParkingContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
                 
             services.AddControllersWithViews();
 

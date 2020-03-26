@@ -4,6 +4,7 @@ using DataTransferObject;
 using Microsoft.AspNetCore.Mvc;
 using PPParkingLot.ControllersView;
 using PPParkingLot.Models.Insert;
+using PPParkingLot.Models.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using SystemCommons;
 
 namespace PPParkingLot.Controllers
 {
-    public class ParkingSpotController: BaseController
+    public class ParkingSpotController : BaseController
     {
         private readonly IParkingSpotService _service;
         public ParkingSpotController(IParkingSpotService service)
@@ -27,22 +28,17 @@ namespace PPParkingLot.Controllers
 
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<ParkingSpotDTO, ParkingSpotInsertViewModel>();
+                cfg.CreateMap<ParkingSpotDTO, ParkingSpotQueryViewModel>();
             });
 
             IMapper mapper = configuration.CreateMapper();
 
-            if (parkingSpot.Success)
-            {
-                List<ParkingSpotInsertViewModel> ParkingSpotsViewModel = mapper.Map<List<ParkingSpotInsertViewModel>>(parkingSpot.Data);
-                ViewBag.ParkingSpots = ParkingSpotsViewModel;
-            }
-            else
-            {
-                ViewBag.ParkingSpots = parkingSpot;
 
-            }
-            return View();
+            List<ParkingSpotQueryViewModel> ParkingSpotsViewModel = mapper.Map<List<ParkingSpotQueryViewModel>>(parkingSpot.Data);
+        
+            ViewBag.ParkingSpots = ParkingSpotsViewModel;
+            IEnumerable<PPParkingLot.Models.Query.ParkingSpotQueryViewModel> returning = ParkingSpotsViewModel;
+            return View(returning);
         }
 
         public ActionResult Register()
@@ -140,6 +136,6 @@ namespace PPParkingLot.Controllers
             }
 
         }
-    }        
-    
+    }
+
 }

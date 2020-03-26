@@ -49,11 +49,6 @@ namespace PPParkingLot.Models.Insert
         public DateTime BirthDate { get; set; }
 
 
-        //[DisplayName("Password")]
-        //[Required(ErrorMessage = "A senha deve ser informada")]
-        //public string Password { get; set; }
-
-
         [Required(ErrorMessage = "Email is required")]
         [RegularExpression(@"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|"
                 + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)"

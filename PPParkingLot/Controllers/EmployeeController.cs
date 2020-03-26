@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using PPParkingLot.ControllersView;
 using PPParkingLot.Models.Insert;
 using PPParkingLot.Models.Login;
+using PPParkingLot.Models.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,16 +30,17 @@ namespace PPParkingLot.Controllers
 
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<EmployeeDTO, EmployeeInsertViewModel>();
+                cfg.CreateMap<EmployeeDTO, EmployeeQueryViewModel>();
             });
 
             IMapper mapper = configuration.CreateMapper();
 
-            List<EmployeeInsertViewModel> empViewModel = mapper.Map<List<EmployeeInsertViewModel>>(employee.Data);
+            List<EmployeeQueryViewModel> empViewModel = mapper.Map<List<EmployeeQueryViewModel>>(employee.Data);
 
             ViewBag.Employees = empViewModel;
-
-            return View();
+            IEnumerable<PPParkingLot.Models.Query.EmployeeQueryViewModel> returning = empViewModel;
+            return View(returning);
+          
         }
 
         public ActionResult Register()
@@ -49,21 +51,7 @@ namespace PPParkingLot.Controllers
         [HttpPost]
         public async Task<ActionResult> Register(EmployeeInsertViewModel viewModel)
         {
-            //EmployeeDTO adm = new EmployeeDTO();
-            //adm.BirthDate = new DateTime(1990, 1, 1, 4, 0, 15);
-            //adm.CPF = "586.414.440-17";
-            //adm.Email = "gabrie_a_voltolini@estudante.sc.senai.br";
-            //adm.AccessLevel = DataTransferObject.Enums.EAccessLevel.Manager;
-            //adm.Password = "repolho";
-            //adm.Wage = 33231;
-
-            //var response = await _service.Insert(adm);
-
-            //if (!response.Success)
-            //{
-            //    Console.WriteLine(response.Errors.ToString());
-            //}
-
+          
             Response response = new Response();
 
             var configuration = new MapperConfiguration(cfg =>

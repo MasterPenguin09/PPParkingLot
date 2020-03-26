@@ -124,8 +124,6 @@ namespace PPParkingLot.Controllers
             //    return this.View();
             //}
 
-
-
         }
 
         public ActionResult Disable()
@@ -144,6 +142,7 @@ namespace PPParkingLot.Controllers
             IMapper mapper = configuration.CreateMapper();
 
             ClientDTO dto = mapper.Map<ClientDTO>(viewModel);
+
             response = await _service.Disable(dto.ID);
             //Se funcionou, redireciona pra página inicial
             if (response.Success)

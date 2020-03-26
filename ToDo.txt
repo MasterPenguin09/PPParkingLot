@@ -1,0 +1,6 @@
+ - Fazer as views Update de todas as entidades 
+ - Resolver bug dos cookies 
+ - Bug log4net (Não gera o .log na pasta bin)
+
+ - Implantar a verificação de acesso nos controllers
+ - Melhoras no front (Principalmente nas telas Index)
