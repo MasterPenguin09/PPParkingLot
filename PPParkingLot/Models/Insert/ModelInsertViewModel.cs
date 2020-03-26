@@ -9,14 +9,23 @@ namespace PPParkingLot.Models.Insert
 {
     public class ModelInsertViewModel
     {
+        public ModelInsertViewModel(string name, int brandID)
+        {
+            Name = name;
+            BrandID = brandID;
+        }
 
-        [DisplayName("Name")]
-        [Required(ErrorMessage = "O nome deve ser informado")]
-        [StringLength(maximumLength: 200, MinimumLength = 3, ErrorMessage = "O nome deve conter 3 e 200 caracteres")]
+        public ModelInsertViewModel()
+        {
+
+        }
+
+        [Required(ErrorMessage = "Name is required")]
+        [StringLength(maximumLength: 200, MinimumLength = 3, ErrorMessage = "The name must contain 3 and 200 characters")]
         public string Name { get; set; }
 
-        [DisplayName("BrandID")]
-        [Required(ErrorMessage = "O ID da placa deve ser informado")]
+        [DisplayName("Brand ID")]
+        [Required(ErrorMessage = "Brand ID must be informed")]
         public int BrandID { get; set; }
     }
 }

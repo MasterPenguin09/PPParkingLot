@@ -9,40 +9,41 @@ namespace PPParkingLot.Models.Insert
 {
     public class LocationInsertViewModel
     {
+        public LocationInsertViewModel(DateTime entryTime, DateTime? exitTime, string payForm, int value, int vehicleID, int parkingSpotID)
+        {
+            EntryTime = entryTime;
+            ExitTime = exitTime;
+            PayForm = payForm;
+            Value = value;
+            VehicleID = vehicleID;
+            ParkingSpotID = parkingSpotID;
+        }
+        public LocationInsertViewModel()
+        {
 
-        [DisplayName("EntryTime")]
+        }
+
+        [DisplayName("Entry Time")]
         public DateTime EntryTime { get; set; }
 
 
-        [DisplayName("ExitTime")]
+        [DisplayName("Exit Time")]
         public DateTime? ExitTime { get; set; }
 
-        [DisplayName("PayForm")]
-        [Required(ErrorMessage = "A forma do pagamento deve ser informado")]
+        [DisplayName("Pay Form")]
+        [Required(ErrorMessage = "The payment form must be informed")]
         public String PayForm { get; set; }
 
-        [DisplayName("Value")]
-        [Required(ErrorMessage = "O valor deve ser informado")]
+        [Required(ErrorMessage = "Value is required")]
         public int Value { get; set; }
 
 
-        [DisplayName("PayForm")]
-        [Required(ErrorMessage = "A forma do pagamento deve ser informado")]
-        public String Vehicle { get; set; }
-
-
-        [DisplayName("VehicleID")]
-        [Required(ErrorMessage = "O ID do veiculo deve ser informado")]
+        [Required(ErrorMessage = "Vehicle ID must be informed")]
         public int VehicleID { get; set; }
 
 
-        [DisplayName("ParkingSpot")]
-        [Required(ErrorMessage = "A vaga deve ser informado")]
-        public String ParkingSpot { get; set; }
-
-
-        [DisplayName("ParkingSpotID")]
-        [Required(ErrorMessage = "O ID da vaga deve ser informado")]
+        [DisplayName("Parking Spot ID")]
+        [Required(ErrorMessage = "Parking Spot ID must be informed")]
         public int ParkingSpotID { get; set; }
     }
 }

@@ -9,13 +9,22 @@ namespace PPParkingLot.Models.Insert
 {
     public class ParkingSpotInsertViewModel
     {
-        [DisplayName("ValuePerHour")]
-        [Required(ErrorMessage = "O vaor por hora deve ser informado")]
+        public ParkingSpotInsertViewModel(double valuePerHour, string type)
+        {
+            ValuePerHour = valuePerHour;
+            Type = type;
+        }
+        public ParkingSpotInsertViewModel()
+        {
+
+        }
+
+        [DisplayName("Hour Price")]
+        [Required(ErrorMessage = "Hour price is required")]
         public double ValuePerHour { get; set; }
 
-        [DisplayName("Type")]
-        [Required(ErrorMessage = "O Tipo deve ser informado")]
-        [StringLength(maximumLength: 200, MinimumLength = 3, ErrorMessage = "O tipo deve conter 3 e 200 caracteres")]
+     
+        [Required(ErrorMessage = "Type is required")]
         public string Type { get; set; }
     }
 }
