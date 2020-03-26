@@ -8,8 +8,17 @@ namespace PPParkingLot.Models.Insert
 {
     public class BrandInsertViewModel
     {
-        [Required(ErrorMessage = "O nome deve ser informado.")]
-        [StringLength(maximumLength: 70, ErrorMessage = "O nome deve ter entre 2 e 70 caracteres", MinimumLength = 2)]
+        public BrandInsertViewModel(string name)
+        {
+            Name = name;
+        }
+        public BrandInsertViewModel()
+        {
+
+        }
+
+        [Required(ErrorMessage = "Name is required.")]
+        [StringLength(maximumLength: 70, ErrorMessage = "Must be between 2 and 70 characters", MinimumLength = 2)]
         public string Name { get; set; }
     }
 }

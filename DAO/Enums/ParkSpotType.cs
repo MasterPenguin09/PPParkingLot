@@ -8,11 +8,12 @@ namespace DataTransferObject.Enums
 {
     public enum EParkSpotType
     {
-        Simples,
-        Dupla,
+        Simple,
+        Double,
         Extra,
-        SimplesCoberta,
-        DuplaCoberta,
-        ExtraCoberta
+        SimpleCovered,
+        DoubleCovered,
+        ExtraCovered,
+        Monitored24H
     }
 }

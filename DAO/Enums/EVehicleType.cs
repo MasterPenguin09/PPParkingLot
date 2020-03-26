@@ -13,6 +13,5 @@ namespace DataTransferObject.Enums
     Bike,
     Motorcycle,
     MicroBus
-
     }
 }

@@ -17,14 +17,14 @@ using SystemCommons;
 
 namespace PPParkingLot.Controllers
 {
-    public class ClientController: BaseController
+    public class ClientController : BaseController
     {
         private readonly IClientService _service;
         public ClientController(IClientService service)
         {
             this._service = service;
         }
-       
+
         public async Task<ActionResult> Index()
         {
             DataResponse<ClientDTO> client = await _service.GetAll();
@@ -36,22 +36,11 @@ namespace PPParkingLot.Controllers
 
             IMapper mapper = configuration.CreateMapper();
 
-            //List<ClientQueryViewModel> clientViewModel = mapper.Map<List<ClientQueryViewModel>>(client.Data);
-            DataResponse<ClientQueryViewModel> cliQueryDataResponse = new DataResponse<ClientQueryViewModel>();
-            ClientQueryViewModel query = new ClientQueryViewModel();
-            if (client.Success)
-            {
-                foreach (ClientDTO dto in client.Data)
-                {
-                     query = mapper.Map<ClientQueryViewModel>(dto);
-                    cliQueryDataResponse.Data.Add(query);
-                }
-                ViewBag.Clients = cliQueryDataResponse;
-            }
-            cliQueryDataResponse.Errors = client.Errors;
-            ViewBag.Clients = cliQueryDataResponse;
+            List<ClientQueryViewModel> clientViewModel = mapper.Map<List<ClientQueryViewModel>>(client.Data);
 
-            return View();
+            ViewBag.Clients = clientViewModel;
+            IEnumerable<PPParkingLot.Models.Query.ClientQueryViewModel> clientsReturning = clientViewModel;
+            return View(clientsReturning);
         }
 
         public ActionResult Register()
@@ -99,29 +88,44 @@ namespace PPParkingLot.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Update(ClientInsertViewModel viewModel)
+        public async Task<ActionResult> Update(int id = 0)
         {
             Response response = new Response();
 
-            var configuration = new MapperConfiguration(cfg =>
+            if (id == 0)
             {
-                cfg.CreateMap<ClientInsertViewModel, ClientDTO>();
-            });
-
-            IMapper mapper = configuration.CreateMapper();
-            ClientDTO dto = mapper.Map<ClientDTO>(viewModel);
-
-            response = await _service.Update(dto);
-            //Se funcionou, redireciona pra página inicial
-            if (response.Success)
-            {
-                return RedirectToAction("Index", "Client");
+                return View(new ClientInsertViewModel());
             }
             else
             {
-                ViewBag.ErrorMessage = response.Errors;
-                return this.View();
+                DataResponse<ClientDTO> clientDTO = await _service.GetByID(id);
+                ClientDTO dto = clientDTO.Data.FirstOrDefault();
+
+                var configuration = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ClientDTO, ClientInsertViewModel>();
+                });
+
+                IMapper mapper = configuration.CreateMapper();
+                ClientInsertViewModel insertViewModel = mapper.Map<ClientInsertViewModel>(dto);
+                return View(insertViewModel);
             }
+
+
+            //response = await _service.Update(dto);
+            ////Se funcionou, redireciona pra página inicial
+            //if (response.Success)
+            //{
+            //    return RedirectToAction("Index", "Client");
+            //}
+            //else
+            //{
+            //    ViewBag.ErrorMessage = response.Errors;
+            //    return this.View();
+            //}
+
+
+
         }
 
         public ActionResult Disable()

@@ -4,12 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Clients</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+
+<table class="table table-hover">
     <thead>
         <tr>
             <th>
@@ -37,16 +35,15 @@
                 @Html.DisplayNameFor(model => model.SystemExitDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AccessLevel)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.IsActive)
             </th>
-            <th></th>
+            <th>  
+                <a asp-action="Register" class="btn btn-outline-success"><i class="far fa-plus-square"></i>Add</a>
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (PPParkingLot.Models.Query.ClientQueryViewModel item in ViewBag.Clients.Data) {
+@foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ID)
@@ -73,13 +70,10 @@
                 @Html.DisplayFor(modelItem => item.SystemExitDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AccessLevel)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Edit", "Update", new {  id=item.ID }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
