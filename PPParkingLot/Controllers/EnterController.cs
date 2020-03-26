@@ -2,6 +2,7 @@
 using BLL.Interfaces;
 using DataTransferObject.ComplexTypes;
 using DTO.ObjectsDTO.LoginDTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nancy.Json;
 using PPParkingLot.ControllersView;
@@ -49,10 +50,6 @@ namespace PPParkingLot.Controllers
 
             if (user.Success)
             {
-                UserPattern loggedUser = user.Data.FirstOrDefault();
-
-                string json = jSerializer.Serialize(loggedUser);
-
                 // var cookie = Request.Cookies["NomeDoCookie", ""];
 
                 var cookie = Request.Cookies["MyAccount_SmartParking"];
@@ -61,7 +58,13 @@ namespace PPParkingLot.Controllers
                 {
                     //Response.Cookies.Append("NomeDoCookie", "1,0");
                     //Response.Cookies.Append("MyAccount_SmartParking_" + data["Name"] + "\n", json);
-                    Response.Cookies.Append("MyAccount_SmartParking", json);
+                    UserPattern loggedUser = user.Data.FirstOrDefault();
+                    string json = jSerializer.Serialize(loggedUser);
+
+                    CookieOptions option = new CookieOptions();
+                    option.Expires = DateTime.MaxValue;
+                    
+                    Response.Cookies.Append("MyAccount_SmartParking", json, option);
                 }
 
             }
@@ -71,7 +74,7 @@ namespace PPParkingLot.Controllers
             return this.View();
 
 
-
+            
 
             //if (cookie[2] == '0')
             //{

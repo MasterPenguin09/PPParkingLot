@@ -32,6 +32,8 @@ namespace PPParkingLot
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<SmartParkingContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
+            //services.AddDbContextPool<SmartParkingContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+                
             services.AddControllersWithViews();
 
             services.AddTransient<IClientService, ClientService>();
@@ -57,7 +59,7 @@ namespace PPParkingLot
 
             services.AddTransient<IUserService, UserService>();
 
-
+            
 
         }
 
@@ -74,6 +76,7 @@ namespace PPParkingLot
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();

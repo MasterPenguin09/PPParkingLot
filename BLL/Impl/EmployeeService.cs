@@ -16,13 +16,14 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Impl
 {
-    public class EmployeeService : Log4Net_AssemblyInfo, IEmployeeService
+    public class EmployeeService : IEmployeeService
     {
         /// <summary>
         /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
         /// Sua função é trazer os serviços do Employee ligadas a logica dos negocios, com auxilio de
         /// uma interface privada que traz as regras do Banco de Dados ligada a Employee
         /// </summary>
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(typeof(EmployeeService));
 
         private IEmployeeRepository _iEmployeeRepository;
 
@@ -51,6 +52,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -77,6 +79,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -92,6 +95,7 @@ namespace BusinessLogicalLayer.Impl
             catch (Exception ex)
             {
                 _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                response.Errors.Add("DataBase error, contact the system owner");
                 return response;
             }
         }
@@ -106,6 +110,7 @@ namespace BusinessLogicalLayer.Impl
             catch (Exception ex)
             {
                 _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                response.Errors.Add("DataBase error, contact the system owner");
                 return response;
             }
 
@@ -131,6 +136,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -161,6 +167,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -180,7 +187,16 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iEmployeeRepository.GetByName(employeeName);
+                try
+                {
+                    return await _iEmployeeRepository.GetByName(employeeName);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
+                    return response;
+                }
             }
         }
 
@@ -230,6 +246,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -279,6 +296,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }

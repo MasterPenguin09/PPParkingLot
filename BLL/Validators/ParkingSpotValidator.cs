@@ -24,7 +24,7 @@ namespace BusinessLogicalLayer.Validators
 
             RuleFor(c => c.ID).Empty();
 
-            RuleFor(c => c.IsActive).Equal(true);
+            RuleFor(c => c.IsActive);
         }
     }
 }

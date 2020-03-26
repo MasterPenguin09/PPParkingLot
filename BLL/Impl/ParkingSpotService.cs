@@ -16,13 +16,14 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Impl
 {
-    public class ParkingSpotService : Log4Net_AssemblyInfo, IParkingSpotService
+    public class ParkingSpotService : IParkingSpotService
     {
         /// <summary>
         /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
         /// Sua função é trazer os serviços do ParkingSpot ligadas a logica dos negocios, com auxilio de
         /// uma interface privada que traz as regras do Banco de Dados ligada a ParingSpot
         /// </summary>
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(typeof(ParkingSpotService));
 
         private IParkingSpotRepository _iParkingSpotRepository;
         public ParkingSpotService(IParkingSpotRepository iParkingRep)
@@ -50,6 +51,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -75,6 +77,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -90,6 +93,7 @@ namespace BusinessLogicalLayer.Impl
             catch (Exception ex)
             {
                 _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                response.Errors.Add("DataBase error, contact the system owner");
                 return response;
             }
         }
@@ -104,6 +108,7 @@ namespace BusinessLogicalLayer.Impl
             catch (Exception ex)
             {
                 _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                response.Errors.Add("DataBase error, contact the system owner");
                 return response;
             }
         }
@@ -126,7 +131,17 @@ namespace BusinessLogicalLayer.Impl
             }
             else
             {
-                return await _iParkingSpotRepository.GetByID(idPakingSpot);
+                try
+                {
+                    return await _iParkingSpotRepository.GetByID(idPakingSpot);
+
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
+                    return response;
+                }
             }
         }
 
@@ -154,6 +169,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -183,6 +199,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }

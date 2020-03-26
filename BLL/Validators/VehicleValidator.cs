@@ -22,7 +22,7 @@ namespace BusinessLogicalLayer.Validators
 
             RuleFor(c => c.ModelID).NotEmpty();
 
-            //TODO: Fazer uma validação decente para a placa
+            //TODO: Fazer uma validação decente para a placa, com serviço externo detran...
         }
     }
 }

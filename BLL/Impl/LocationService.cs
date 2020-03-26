@@ -1,6 +1,5 @@
 ﻿using BLL.Log4net;
 using BusinessLogicalLayer.Interfaces;
-using BusinessLogicalLayer.Validator;
 using BusinessLogicalLayer.Validators;
 using DataAccessLayer.Interfaces_EFCore_;
 using DataAccessLayer.Repositories_EFCore_;
@@ -15,13 +14,14 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Impl
 {
-    public class LocationService : Log4Net_AssemblyInfo, ILocationSevice
+    public class LocationService : ILocationSevice
     {
         /// <summary>
         /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
         /// Sua função é trazer os serviços do Location ligadas a logica dos negocios, com auxilio de
         /// uma interface privada que traz as regras do Banco de Dados ligada a Location
         /// </summary>
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(typeof(LocationService));
 
         private ILocationRepository _iLocationRepository;
 
@@ -100,6 +100,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -125,6 +126,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -140,6 +142,7 @@ namespace BusinessLogicalLayer.Impl
             catch (Exception ex)
             {
                 _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                response.Errors.Add("DataBase error, contact the system owner");
                 return response;
             }
         }
@@ -154,6 +157,7 @@ namespace BusinessLogicalLayer.Impl
             catch (Exception ex)
             {
                 _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                response.Errors.Add("DataBase error, contact the system owner");
                 return response;
             }
         }
@@ -183,6 +187,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -208,6 +213,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -234,12 +240,13 @@ namespace BusinessLogicalLayer.Impl
                 {
                     location.EntryTime = DateTime.Now;
                     location.IsActive = true;
-                    
+
                     return response = await _iLocationRepository.Insert(location);
                 }
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -269,6 +276,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }

@@ -140,7 +140,7 @@ namespace DataAccessLayer.Repositories_EFCore_
                     }
                     else
                     {
-                        response.Errors.Add("Clientes não encontradas");
+                        response.Errors.Add("Clientes não encontrados");
                         return response;
                     }
                  
