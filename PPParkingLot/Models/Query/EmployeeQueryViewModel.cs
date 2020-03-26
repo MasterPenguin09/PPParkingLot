@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,13 +36,16 @@ namespace PPParkingLot.Models.Query
         public string Number { get; set; }
 
         [DisplayName("Birth Date")]
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
         public string Email { get; set; }
 
         [DisplayName("System Entrance Date")]
+        [DataType(DataType.Date)]
         public DateTime SystemEntranceDate { get; set; }
 
         [DisplayName("System Exit Date")]
+        [DataType(DataType.Date)]
         public DateTime? SystemExitDate { get; set; }
 
         [DisplayName("Position")]

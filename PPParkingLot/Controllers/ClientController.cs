@@ -36,22 +36,23 @@ namespace PPParkingLot.Controllers
 
             IMapper mapper = configuration.CreateMapper();
 
-            //List<ClientQueryViewModel> clientViewModel = mapper.Map<List<ClientQueryViewModel>>(client.Data);
-            DataResponse<ClientQueryViewModel> cliQueryDataResponse = new DataResponse<ClientQueryViewModel>();
-            ClientQueryViewModel query = new ClientQueryViewModel();
-            if (client.Success)
-            {
-                foreach (ClientDTO dto in client.Data)
-                {
-                     query = mapper.Map<ClientQueryViewModel>(dto);
-                    cliQueryDataResponse.Data.Add(query);
-                }
-                ViewBag.Clients = cliQueryDataResponse;
-            }
-            cliQueryDataResponse.Errors = client.Errors;
-            ViewBag.Clients = cliQueryDataResponse;
+            List<ClientQueryViewModel> clientViewModel = mapper.Map<List<ClientQueryViewModel>>(client.Data);
+            //DataResponse<ClientQueryViewModel> cliQueryDataResponse = new DataResponse<ClientQueryViewModel>();
+            //ClientQueryViewModel query = new ClientQueryViewModel();
+            //if (client.Success)
+            //{
+            //    //foreach (ClientDTO dto in client.Data)
+            //{
+            //     query = mapper.Map<ClientQueryViewModel>(dto);
+            //    cliQueryDataResponse.Data.Add(query);
+            //}
+            //ViewBag.Clients = cliQueryDataResponse;
+            //}
+            //cliQueryDataResponse.Errors = client.Errors;
 
-            return View();
+            ViewBag.Clients = clientViewModel;
+            IEnumerable<PPParkingLot.Models.Query.ClientQueryViewModel> clientsReturning = clientViewModel;
+            return View(clientsReturning);
         }
 
         public ActionResult Register()
