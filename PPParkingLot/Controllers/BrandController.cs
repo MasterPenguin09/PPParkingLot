@@ -4,6 +4,7 @@ using DataTransferObject;
 using Microsoft.AspNetCore.Mvc;
 using PPParkingLot.ControllersView;
 using PPParkingLot.Models.Insert;
+using PPParkingLot.Models.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,16 +29,16 @@ namespace PPParkingLot.Controllers
 
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<BrandDTO, BrandInsertViewModel>();
+                cfg.CreateMap<BrandDTO, BrandQueryViewModel>();
             });
 
             IMapper mapper = configuration.CreateMapper();
 
-            List<BrandInsertViewModel> brandsViewModel = mapper.Map<List<BrandInsertViewModel>>(brands.Data);
+            List<BrandQueryViewModel> brandsViewModel = mapper.Map<List<BrandQueryViewModel>>(brands.Data);
 
             ViewBag.Models = brandsViewModel;
-
-            return View();
+            IEnumerable<PPParkingLot.Models.Query.BrandQueryViewModel> returning = brandsViewModel;
+            return View(returning);
         }
 
         public ActionResult Register()

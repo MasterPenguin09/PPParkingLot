@@ -19,6 +19,8 @@ namespace PPParkingLot.Models.Insert
 
         [Required(ErrorMessage = "Name is required.")]
         [StringLength(maximumLength: 70, ErrorMessage = "Must be between 2 and 70 characters", MinimumLength = 2)]
+        [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage =
+            "Invalid name")]
         public string Name { get; set; }
     }
 }

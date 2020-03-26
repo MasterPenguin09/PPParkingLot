@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using PPParkingLot.ControllersView;
 using PPParkingLot.Models.Insert;
 using PPParkingLot.Models.Login;
+using PPParkingLot.Models.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,16 +30,17 @@ namespace PPParkingLot.Controllers
 
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<EmployeeDTO, EmployeeInsertViewModel>();
+                cfg.CreateMap<EmployeeDTO, EmployeeQueryViewModel>();
             });
 
             IMapper mapper = configuration.CreateMapper();
 
-            List<EmployeeInsertViewModel> empViewModel = mapper.Map<List<EmployeeInsertViewModel>>(employee.Data);
+            List<EmployeeQueryViewModel> empViewModel = mapper.Map<List<EmployeeQueryViewModel>>(employee.Data);
 
             ViewBag.Employees = empViewModel;
-
-            return View();
+            IEnumerable<PPParkingLot.Models.Query.EmployeeQueryViewModel> returning = empViewModel;
+            return View(returning);
+          
         }
 
         public ActionResult Register()
