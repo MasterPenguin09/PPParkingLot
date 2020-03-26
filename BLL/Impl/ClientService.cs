@@ -201,8 +201,6 @@ namespace BusinessLogicalLayer.Impl
                 client.Password = HashUtils.HashPassword(client.Password);
             }
 
-            //result.MergeValidationErrors(response);
-
             if (!result.IsValid)
             {
                 foreach (var failure in result.Errors)

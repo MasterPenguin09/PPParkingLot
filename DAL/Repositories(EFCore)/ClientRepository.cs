@@ -53,7 +53,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
 
             }
@@ -87,7 +86,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
 
             }
@@ -118,7 +116,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             catch (Exception ex)
             {
                 
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -148,7 +145,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -172,7 +168,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -196,7 +191,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -220,7 +214,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -251,7 +244,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }
@@ -264,7 +256,6 @@ namespace DataAccessLayer.Repositories_EFCore_
                 using (var context = _context)
                 {
                     //context.Entry(brand).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-
                     // int nLinhasAfetadas = await context.SaveChangesAsync();
                     context.Clients.Update(client);
                     int nAffectedRows = await context.SaveChangesAsync();
@@ -284,7 +275,6 @@ namespace DataAccessLayer.Repositories_EFCore_
             }
             catch (Exception ex)
             {
-                //response.Errors.Add("Erro no banco de dados contate o administrador");
                 throw ex;
             }
         }

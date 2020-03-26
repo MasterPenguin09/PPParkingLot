@@ -50,14 +50,10 @@ namespace PPParkingLot.Controllers
 
             if (user.Success)
             {
-                // var cookie = Request.Cookies["NomeDoCookie", ""];
-
                 var cookie = Request.Cookies["MyAccount_SmartParking"];
 
                 if (string.IsNullOrEmpty(cookie))
                 {
-                    //Response.Cookies.Append("NomeDoCookie", "1,0");
-                    //Response.Cookies.Append("MyAccount_SmartParking_" + data["Name"] + "\n", json);
                     UserPattern loggedUser = user.Data.FirstOrDefault();
                     string json = jSerializer.Serialize(loggedUser);
 
@@ -69,28 +65,7 @@ namespace PPParkingLot.Controllers
 
             }
             ViewBag.Erros = user.Errors;
-            //Retornar uma página de recepção de clientes 
-            //return View("Login", "Enter");
             return this.View();
-
-
-            
-
-            //if (cookie[2] == '0')
-            //{
-            //return RedirectToAction("Index", "ClientSpace");
-            //    //nao eh um admin
-            //}
-            //else
-            //{
-            //return RedirectToAction("Index", "EmployeeSpace");
-            //    //EHUMADMIN
-            //}
-
-            //fazer cookies
-
-
-
         }
     }
 }

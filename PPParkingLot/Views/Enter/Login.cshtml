@@ -11,50 +11,15 @@
     <link rel="icon" type="image/svg" href="~/css/Photos/IconeCar-removebg-preview.png">
     <meta name="viewport" content="width=device-width" />
     <title>Login - SmartParking</title>
-    @*<script type="text/javascript">
-
-            //Este evento será disparado quando todo o DOM (Document Object Model) for carregado.
-            $(document).ready(function () {
-                //alert("Funciona");
-                $("#Send").click(function (e) {
-
-                    var success = true;
-                    var email = $("#Email").val();
-                    var password = $("#Password").val();
-
-                    if (email == "") {
-                        $("#EmailError").html("Email must be informed!");
-                        success = false;
-                    }
-                    else {
-                        $("#EmailError").html("");
-                    }
-
-
-                    if (password.length == 0) {
-                        $("#PasswordError").html("Password must be informed!");
-                        success = false;
-                    }
-
-
-
-                    if (!success) {
-                        e.preventDefault();
-                    }
-
-                });
-            });
-        </script>*@
-
 </head>
 
 
 
-<body style="background-image: url('../css/Photos/dark-car-vehicle-Nissan-Mercedes-Benz-Mercedes-Benz-E-Class-233198-wallhere.com.jpg'); 
+<body style="background-image: url('../css/Photos/dark-car-vehicle-Nissan-Mercedes-Benz-Mercedes-Benz-E-Class-233198-wallhere.com.jpg');
 background-repeat:no-repeat;
 background-size:cover;
 background-position:center;">
-    
+
     <div class="login">
         <h1>Login</h1>
         <form method="post">
@@ -64,14 +29,9 @@ background-position:center;">
             <input type="password" name="Password" id="Password" placeholder="Password" required="required" />
             <span class="text-danger" id="PasswordError" name="PasswordError"></span>
 
-            @* <button type="submit" class="btn btn-primary btn-block btn-large" name="Send" id="Send" value="Send">Sign Up.</button>*@
             <input type="submit" class="btn btn-primary btn-block btn-large" name="Send" id="Send" value="Sign Up" />
         </form>
     </div>
-
-
-
-
 
 </body>
 </html>
