@@ -17,7 +17,7 @@ namespace BusinessLogicalLayer.Validators
         /// </summary>
         public ClientValidator()
         {
-            RuleFor(c => c.BirthDate).GreaterThan(DateTime.Now);
+            RuleFor(c => c.BirthDate).LessThan(DateTime.Now);
 
             RuleFor(c => c.Name).Length(4,128);
 
@@ -25,9 +25,9 @@ namespace BusinessLogicalLayer.Validators
 
             RuleFor(c => c.AccessLevel).IsInEnum();
 
-            RuleFor(c => c.Email.EmailIsValid()).Equal(true);
+            RuleFor(c => c.Email.EmailIsValid());
 
-            RuleFor(c => c.CPF.IsCpf()).Equal(true);
+            RuleFor(c => c.CPF.IsCpf());
 
            
 

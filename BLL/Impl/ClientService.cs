@@ -18,13 +18,15 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Impl
 {
-    public class ClientService : Log4Net_AssemblyInfo, IClientService
+    public class ClientService : IClientService
     {
         /// <summary>
         /// É uma classe publica que herda de uma interface interna de mesmo nome (+I no começo)
         /// Sua função é trazer os serviços do Client ligadas a logica dos negocios, com auxilio de
         /// uma interface privada que traz as regras do Banco de Dados ligada ao CLient
         /// </summary>
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(typeof(ClientService));
+
 
         private IClientRepository _iClientRepository;
         private SmartParkingContext _context;
@@ -54,6 +56,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
 
@@ -81,6 +84,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -96,6 +100,7 @@ namespace BusinessLogicalLayer.Impl
             catch (Exception ex)
             {
                 _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                response.Errors.Add("DataBase error, contact the system owner");
                 return response;
             }
 
@@ -112,6 +117,7 @@ namespace BusinessLogicalLayer.Impl
             catch (Exception ex)
             {
                 _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                response.Errors.Add("DataBase error, contact the system owner");
                 return response;
             }
         }
@@ -141,6 +147,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
 
@@ -168,6 +175,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
 
@@ -195,7 +203,6 @@ namespace BusinessLogicalLayer.Impl
 
             //result.MergeValidationErrors(response);
 
-
             if (!result.IsValid)
             {
                 foreach (var failure in result.Errors)
@@ -215,6 +222,7 @@ namespace BusinessLogicalLayer.Impl
             {
                 try
                 {
+                    client.AccessLevel = DataTransferObject.Enums.EAccessLevel.Client;
                     client.SystemEntranceDate = DateTime.Now;
                     client.IsActive = true;
 
@@ -224,6 +232,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -250,6 +259,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -265,7 +275,7 @@ namespace BusinessLogicalLayer.Impl
                 return response;
             }
             else
-            { 
+            {
                 response = await GetByEmail(email);
 
                 if (response.Success)
@@ -328,6 +338,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }

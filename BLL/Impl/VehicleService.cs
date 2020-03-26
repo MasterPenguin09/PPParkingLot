@@ -14,7 +14,7 @@ using SystemCommons;
 
 namespace BusinessLogicalLayer.Impl
 {
-   public class VehicleService : Log4Net_AssemblyInfo, IVehicleService
+    public class VehicleService : IVehicleService
     {
 
         /// <summary>
@@ -23,6 +23,9 @@ namespace BusinessLogicalLayer.Impl
         /// uma interface privada que traz as regras do Banco de Dados ligada a Vehicle
         /// </summary>
         /// 
+
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(typeof(VehicleService));
+
         private IVehicleRepository _iVehicleRepository;
         public VehicleService(IVehicleRepository iVehicleRep)
         {
@@ -49,6 +52,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -74,6 +78,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -89,6 +94,7 @@ namespace BusinessLogicalLayer.Impl
             catch (Exception ex)
             {
                 _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                response.Errors.Add("DataBase error, contact the system owner");
                 return response;
             }
         }
@@ -103,6 +109,7 @@ namespace BusinessLogicalLayer.Impl
             catch (Exception ex)
             {
                 _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                response.Errors.Add("DataBase error, contact the system owner");
                 return response;
             }
         }
@@ -132,6 +139,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -158,6 +166,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -187,6 +196,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }
@@ -216,6 +226,7 @@ namespace BusinessLogicalLayer.Impl
                 catch (Exception ex)
                 {
                     _log.Error(ex + "\nStackTrace: " + ex.StackTrace);
+                    response.Errors.Add("DataBase error, contact the system owner");
                     return response;
                 }
             }

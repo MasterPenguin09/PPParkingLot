@@ -128,6 +128,9 @@ namespace DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ClientID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("EntryTime")
                         .HasColumnType("datetime2");
 
@@ -151,6 +154,8 @@ namespace DAL.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("ClientID");
+
                     b.HasIndex("ParkingSpotID");
 
                     b.HasIndex("VehicleID");
@@ -165,9 +170,6 @@ namespace DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BrandDTOID")
-                        .HasColumnType("int");
-
                     b.Property<int>("BrandID")
                         .HasColumnType("int");
 
@@ -176,7 +178,7 @@ namespace DAL.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("BrandDTOID");
+                    b.HasIndex("BrandID");
 
                     b.ToTable("Models");
                 });
@@ -230,6 +232,12 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DataTransferObject.LocationDTO", b =>
                 {
+                    b.HasOne("DataTransferObject.ClientDTO", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DataTransferObject.ParkingSpotDTO", "ParkingSpot")
                         .WithMany()
                         .HasForeignKey("ParkingSpotID")
@@ -245,9 +253,11 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DataTransferObject.ModelDTO", b =>
                 {
-                    b.HasOne("DataTransferObject.BrandDTO", "BrandDTO")
+                    b.HasOne("DataTransferObject.BrandDTO", "Brand")
                         .WithMany()
-                        .HasForeignKey("BrandDTOID");
+                        .HasForeignKey("BrandID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DataTransferObject.VehicleDTO", b =>

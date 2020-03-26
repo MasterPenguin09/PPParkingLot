@@ -21,18 +21,12 @@ namespace PPParkingLot.ControllersView
         ////Antes de qualquer execução de ação, este método é rodado ^_^
         //public override void OnActionExecuting(ActionExecutingContext filterContext)
         //{
-        //    //    var cookie = this.Request.Cookies["NomeDoCookie"];
-
         //    //  var cookie = this.Request.Cookies["MyAccount_SmartParking"];
         //    this.Cookie = this.Request.Cookies["MyAccount_SmartParking"];
-        //    base.OnActionExecuting(filterContext);
-        //}
 
-        //public override void OnActionExecuted(ActionExecutedContext filterContext)
-        //{
-        //    if (string.IsNullOrEmpty(this.Cookie))
+        //    if (Cookie == null)
         //    {
-        //        filterContext.Result = new RedirectResult(Url.Action("Login", "Enter"));
+        //        filterContext.Result = new RedirectResult(Url.Action("Login", "Usuario"));
         //    }
         //    else
         //    {
@@ -49,10 +43,9 @@ namespace PPParkingLot.ControllersView
         //        else if (userFromCookie.AccessLevel.Equals(DataTransferObject.Enums.EAccessLevel.Client))
         //        {
         //            this.IsClient = true;
-        //        }
+        //        }   
         //    }
-        //    //Codigo  : depois que a action executa 
-        //}
+        //    base.OnActionExecuting(filterContext);
+        }
     }
-}
 

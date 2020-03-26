@@ -13,7 +13,7 @@ namespace DAL.Context_EFCore_
        
         public SmartParkingContext(DbContextOptions<SmartParkingContext> options) : base(options)
         {
-
+            
         }
 
        
@@ -26,7 +26,7 @@ namespace DAL.Context_EFCore_
         public DbSet<ParkingSpotDTO> ParkingSpots { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+        
         }
     }
 }

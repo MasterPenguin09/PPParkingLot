@@ -6,7 +6,10 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="InputMask" Version="5.0.2" />
+    <PackageReference Include="jQuery.InputMask" Version="5.0.2" />
     <PackageReference Include="jQuery.Validation" Version="1.19.1" />
+    <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>
@@ -17,6 +20,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="Nancy" Version="2.0.0" />
   </ItemGroup>
