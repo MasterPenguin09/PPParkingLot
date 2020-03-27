@@ -37,9 +37,8 @@ namespace DataAccessLayer.Repositories_EFCore_
                 {
                     context.Entry<ClientDTO>(new ClientDTO() { ID = idClient }).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
                     int nLinhasAfetadas = await context.SaveChangesAsync();
-                    int nAffectedRows = await context.SaveChangesAsync();
 
-                    if (nAffectedRows == 1)
+                    if (nLinhasAfetadas == 1)
                     {
                         response.Success = true;
                         return response;
