@@ -88,7 +88,7 @@ namespace PPParkingLot.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Update(int id = 0)
+        public async Task<ActionResult> Update(int id)
         {
             Response response = new Response();
 
@@ -126,25 +126,24 @@ namespace PPParkingLot.Controllers
 
         }
 
-        public ActionResult Disable()
-        {
-            return this.View();
-        }
-        public async Task<ActionResult> Disable(ClientInsertViewModel viewModel)
+    
+        public async Task<ActionResult> Delete(int cliID)
         {
             Response response = new Response();
 
-            var configuration = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<ClientInsertViewModel, ClientDTO>();
-            });
+            //var configuration = new MapperConfiguration(cfg =>
+            //{
+            //    cfg.CreateMap<ClientInsertViewModel, ClientDTO>();
+            //});
 
-            IMapper mapper = configuration.CreateMapper();
+            //IMapper mapper = configuration.CreateMapper();
 
-            ClientDTO dto = mapper.Map<ClientDTO>(viewModel);
+            //ClientDTO dto = mapper.Map<ClientDTO>(viewModel);
 
-            response = await _service.Disable(dto.ID);
+            //response = await _service.Disable(dto.ID);
             //Se funcionou, redireciona pra página inicial
+
+            response = await _service.Delete(cliID);
             if (response.Success)
             {
                 return RedirectToAction("Index", "Client");
@@ -152,9 +151,8 @@ namespace PPParkingLot.Controllers
             else
             {
                 ViewBag.ErrorMessage = response.Errors;
-                return this.View();
+                return RedirectToAction("Index", "Client");
             }
-
         }
 
     }

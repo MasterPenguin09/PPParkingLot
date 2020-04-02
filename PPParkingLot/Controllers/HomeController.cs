@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ using SystemCommons;
 
 namespace PPParkingLot.Controllers
 {
-   
+   [DisplayName("Home")]
     public class HomeController : BaseController
     {
         //private readonly ILogger<HomeController> _logger;

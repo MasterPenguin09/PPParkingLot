@@ -39,7 +39,7 @@ namespace BusinessLogicalLayer.Impl
         public async Task<Response> Delete(int idClient)
         {
             Response response = new Response();
-            if (idClient < 0)
+            if (idClient <= 0)
             {
                 response.Errors.Add("ID Inválido!");
             }

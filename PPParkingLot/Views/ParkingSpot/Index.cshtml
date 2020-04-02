@@ -6,9 +6,6 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Register">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -24,7 +21,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.IsActive)
             </th>
-            <th></th>
+            <th> <a asp-action="Register" class="btn btn-outline-success"><i class="far fa-plus-square"></i>Add</a></th>
         </tr>
     </thead>
     <tbody>
