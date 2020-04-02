@@ -4,6 +4,7 @@ using DataTransferObject.ComplexTypes;
 using DTO.ObjectsDTO.LoginDTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Nancy;
 using Nancy.Json;
 using PPParkingLot.ControllersView;
 using PPParkingLot.Models.Login;
@@ -13,12 +14,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using SystemCommons;
 
+
 namespace PPParkingLot.Controllers
 {
-    public class EnterController : BaseController
+    public class EnterController : Controller
     {
-
-
         private readonly IUserService _userService;
         public EnterController(IUserService userService)
         {
@@ -27,7 +27,7 @@ namespace PPParkingLot.Controllers
 
         public ActionResult Login()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
@@ -45,8 +45,10 @@ namespace PPParkingLot.Controllers
             //Objeto mapeado
             UserDTO dto = mapper.Map<UserDTO>(viewModel);
 
-
+            LoginViewModel login = new LoginViewModel();
             DataResponse<UserPattern> user = await _userService.Validate(dto);
+            BaseController baseController = new BaseController();
+            baseController.SectionUser = user;
 
             if (user.Success)
             {
@@ -55,16 +57,21 @@ namespace PPParkingLot.Controllers
                 if (string.IsNullOrEmpty(cookie))
                 {
                     UserPattern loggedUser = user.Data.FirstOrDefault();
-                    string json = jSerializer.Serialize(loggedUser);
+                    login.ID = loggedUser.ID;
+                    login.Name = loggedUser.Name;
+                    login.Email = loggedUser.Email;
+                    login.Level = loggedUser.AccessLevel;
+
+                    string json = jSerializer.Serialize(login);
 
                     CookieOptions option = new CookieOptions();
                     option.Expires = DateTime.MaxValue;
-                    
+
                     Response.Cookies.Append("MyAccount_SmartParking", json, option);
                 }
 
             }
-            ViewBag.Erros = user.Errors;
+            //ViewBag.Erros = user.Errors;
             return this.View();
         }
     }

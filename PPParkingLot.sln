@@ -19,6 +19,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items LEIA", "Solu
 		ToDo.txt = ToDo.txt
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7EB06157-8884-4E94-914F-807F295CA944}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FCCC41E2-ACDE-4002-B7D4-CD167C173A5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartParking.UnitTests", "SmartParking.UnitTests\SmartParking.UnitTests.csproj", "{0EC78A73-797E-43A0-B73F-2AE5CCD77F34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,9 +51,20 @@ Global
 		{2C312874-1B4F-406E-B082-77E059394E20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C312874-1B4F-406E-B082-77E059394E20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C312874-1B4F-406E-B082-77E059394E20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EC78A73-797E-43A0-B73F-2AE5CCD77F34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EC78A73-797E-43A0-B73F-2AE5CCD77F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EC78A73-797E-43A0-B73F-2AE5CCD77F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EC78A73-797E-43A0-B73F-2AE5CCD77F34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{52545571-9B15-4B11-B32A-1831A459569D} = {7EB06157-8884-4E94-914F-807F295CA944}
+		{3D40F38F-8DDD-43B0-907E-38DF0CB583E0} = {7EB06157-8884-4E94-914F-807F295CA944}
+		{7D0D7674-62BA-4DF0-AD8F-06E16C6ACEAA} = {7EB06157-8884-4E94-914F-807F295CA944}
+		{2C312874-1B4F-406E-B082-77E059394E20} = {7EB06157-8884-4E94-914F-807F295CA944}
+		{0EC78A73-797E-43A0-B73F-2AE5CCD77F34} = {FCCC41E2-ACDE-4002-B7D4-CD167C173A5D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EBA1B0B1-F332-4278-B436-98ACC97AE67E}

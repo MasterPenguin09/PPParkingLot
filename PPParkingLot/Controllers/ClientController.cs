@@ -127,7 +127,7 @@ namespace PPParkingLot.Controllers
         }
 
     
-        public async Task<ActionResult> Delete(int cliID = 6)
+        public async Task<ActionResult> Delete(int cliID)
         {
             Response response = new Response();
 
